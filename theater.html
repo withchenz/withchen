@@ -4,6 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>心理探险家 · withchen</title>
+  <meta name="description" content="心理学田野调查、IP动画卡片、AI小工具、读书笔记与影视推荐。存在人本取向心理咨询师 ChenChen 的创作空间。" />
+  <meta property="og:title" content="心理探险家 · withchen" />
+  <meta property="og:description" content="心理学田野调查、IP动画卡片、AI小工具、读书笔记与影视推荐。存在人本取向心理咨询师 ChenChen 的创作空间。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://withchen.com/theater.html" />
+  <meta property="og:image" content="https://withchen.com/og-cover.jpg" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="withchen" />
   <link rel="preconnect" href="https://fonts.loli.net" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.loli.net/css2?family=Caveat:wght@400;600&family=Noto+Sans+SC:wght@300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
@@ -28,7 +36,7 @@
     }
 
     /* ── 导航 ── */
-    nav {
+    nav.top-nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       padding: 1.25rem 2rem;
       display: flex; justify-content: space-between; align-items: center;
@@ -409,8 +417,10 @@
 
     /* ── bottom nav ── */
     .site-nav {
-      position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+      position: fixed; bottom: 1.5rem; left: 50%; right: auto;
+      transform: translateX(-50%);
       z-index: 50; display: flex; align-items: center;
+      width: fit-content; justify-content: flex-start;
       background: rgba(255,255,255,0.88); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
       border-radius: 3rem; padding: 0.3rem; gap: 0.1rem;
       box-shadow: 0 4px 28px rgba(44,44,44,0.1);
@@ -445,7 +455,7 @@
     <span class="sparkle">✦</span><span class="sparkle">✦</span>
   </div>
 
-  <nav>
+  <nav class="top-nav">
     <a href="index.html" class="nav-logo">withchen</a>
     <a href="index.html" class="nav-back">← 回到首页</a>
   </nav>
@@ -515,8 +525,9 @@
   <footer>星星与七便士 · -小心思- · 存在人本取向咨询师</footer>
   <nav class="site-nav">
     <a href="index.html"><span class="nn">01</span> 首页</a>
-    <a href="podcast.html"><span class="nn">02</span> 小心思</a>
+    <a href="podcast.html"><span class="nn">02</span> 播客-小心思-</a>
     <a href="theater.html" class="active"><span class="nn">03</span> 心理探险家</a>
+    <a href="about.html"><span class="nn">04</span> 关于我</a>
   </nav>
 
   <!-- 密码弹窗 -->
