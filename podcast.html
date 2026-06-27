@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>小心思 · 心理学播客 | withchen</title>
   <meta name="description" content="小心思 · 一档心理学播客。在读书、观影、旅途中停下来的瞬间，用心理学的方式看一看。主播 ChenChen，存在人本取向心理咨询师。" />
-
-  <!-- Open Graph -->
   <meta property="og:title" content="小心思 · 心理学播客 | withchen" />
   <meta property="og:description" content="在读书、观影、旅途中停下来的瞬间，用心理学的方式看一看。存在人本取向心理咨询师 ChenChen 的播客，聊影视、读书、旅行与心理咨询师的存在。" />
   <meta property="og:type" content="website" />
@@ -18,7 +16,6 @@
   <meta name="twitter:title" content="小心思 · 心理学播客 | withchen" />
   <meta name="twitter:description" content="在读书、观影、旅途中停下来的瞬间，用心理学的方式看一看。" />
   <meta name="twitter:image" content="https://withchen.com/xiaoxinsi.png" />
-
   <link rel="preconnect" href="https://fonts.loli.net" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.loli.net/css2?family=Caveat:wght@400;600&family=Noto+Sans+SC:wght@300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
@@ -34,14 +31,11 @@
       --purple:     #9B8BC4;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
-      background: var(--cream);
-      color: var(--ink);
+      background: var(--cream); color: var(--ink);
       min-height: 100vh;
       font-family: 'Inter', 'Noto Sans SC', sans-serif;
-      font-weight: 300;
-      overflow-x: hidden;
+      font-weight: 300; overflow-x: hidden;
     }
 
     /* ── NAV ── */
@@ -73,245 +67,184 @@
 
     /* ── PAGE HEADER ── */
     .page-header {
-      text-align: center;
-      padding: 0 1.5rem 2.25rem;
+      text-align: center; padding: 0 1.5rem 2.75rem;
       opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s;
     }
-    .logo-img {
-      height: 68px; width: auto; object-fit: contain;
-      display: block; margin: 0 auto 0.85rem;
-    }
+    .logo-img { height: 64px; width: auto; display: block; margin: 0 auto 0.7rem; }
     .podcast-name {
       font-family: 'Noto Sans SC', sans-serif;
       font-size: 0.72rem; font-weight: 300;
-      letter-spacing: 0.4em; color: var(--ink);
-      opacity: 0.3; margin-bottom: 0.6rem;
+      letter-spacing: 0.4em; color: var(--ink); opacity: 0.3; margin-bottom: 0.55rem;
     }
     .page-desc {
       font-size: 0.85rem; font-weight: 300;
-      color: var(--ink); opacity: 0.45;
-      line-height: 1.8; letter-spacing: 0.03em;
+      color: var(--ink); opacity: 0.45; line-height: 1.8; letter-spacing: 0.03em;
       font-family: 'Noto Sans SC', sans-serif;
     }
 
-    /* ── SECTION HEADER (label + line) ── */
+    /* ── SECTION LABEL ── */
     .section-header {
       display: flex; align-items: center; gap: 0.75rem;
-      max-width: 680px; margin: 0 auto; padding: 0 1.5rem;
+      max-width: 540px; margin: 0 auto; padding: 0 1.5rem;
     }
     .section-label {
-      font-family: 'Noto Sans SC', sans-serif;
-      font-size: 0.72rem; font-weight: 400;
-      letter-spacing: 0.22em; color: var(--ink);
-      opacity: 0.55; white-space: nowrap;
+      font-family: 'Noto Sans SC', sans-serif; font-size: 0.72rem; font-weight: 400;
+      letter-spacing: 0.22em; color: var(--ink); opacity: 0.55; white-space: nowrap;
     }
     .section-line { flex: 1; height: 1px; background: rgba(44,44,44,0.1); }
 
-    /* ── FEATURED GRID ── */
-    .featured-wrap {
+    /* ── HERO SECTION ── */
+    .hero-section {
+      padding: 0 0 5rem; position: relative;
       opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s;
-      margin-bottom: 3.5rem;
     }
-    .featured-wrap .section-header { margin-bottom: 1.5rem; }
+    .hero-section::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 45%, rgba(116,185,232,0.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-section .section-header { margin-bottom: 2rem; }
 
-    .featured-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.25rem;
-      max-width: 600px; margin: 0 auto;
-      padding: 0 1.5rem;
+    .hero-inner {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1.5rem; padding: 0 1rem;
     }
-    @media (max-width: 380px) {
-      .featured-grid { grid-template-columns: 1fr; }
+    .hero-arrow {
+      width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(255,255,255,0.75); border: 1px solid rgba(44,44,44,0.1);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--ink); opacity: 0.45; font-size: 1.25rem;
+      transition: opacity 0.2s, transform 0.15s, background 0.2s;
+      backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
     }
+    .hero-arrow:hover { opacity: 1; background: #fff; transform: scale(1.1); }
+
+    .hero-card {
+      width: 300px; flex-shrink: 0;
+      background: #fff; border-radius: 1.5rem; overflow: hidden;
+      box-shadow: 0 16px 56px rgba(44,44,44,0.13);
+      text-decoration: none; color: var(--ink); display: block;
+      transition: box-shadow 0.3s ease;
+    }
+    .hero-card:hover { box-shadow: 0 24px 72px rgba(44,44,44,0.2); }
+
+    .hero-thumb {
+      width: 100%; aspect-ratio: 1 / 1; overflow: hidden; position: relative;
+    }
+    .hero-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top; display: block;
+    }
+    .hero-thumb-grad {
+      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+    }
+    .color-coral .hero-thumb-grad, .hero-thumb-grad.color-coral { background: linear-gradient(145deg, #D9614A, #E8734A, #F0956E); }
+    .color-green .hero-thumb-grad, .hero-thumb-grad.color-green  { background: linear-gradient(145deg, #5A9E78, #7AB890, #8BBF9F); }
+    .color-blue  .hero-thumb-grad, .hero-thumb-grad.color-blue   { background: linear-gradient(145deg, #3A8DC4, #5AAEE0, #74B9E8); }
+    .color-purple .hero-thumb-grad, .hero-thumb-grad.color-purple { background: linear-gradient(145deg, #6A5A9E, #8878BE, #9B8BC4); }
+    .hero-thumb-num {
+      font-family: 'Caveat', cursive; font-size: 5rem; font-weight: 600;
+      color: rgba(255,255,255,0.28); user-select: none;
+    }
+
+    .hero-body { padding: 1.25rem 1.25rem 1rem; }
+    .hero-ep-label {
+      font-family: 'Caveat', cursive; font-size: 0.85rem; font-weight: 600;
+      color: var(--ink); opacity: 0.35; margin-bottom: 0.4rem; letter-spacing: 0.08em;
+    }
+    .hero-title {
+      font-family: 'Noto Sans SC', sans-serif; font-size: 0.92rem; font-weight: 400;
+      color: var(--ink); line-height: 1.65; margin-bottom: 0.8rem;
+    }
+    .hero-meta {
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(44,44,44,0.07); padding-top: 0.6rem;
+    }
+    .hero-dur    { font-size: 0.72rem; color: var(--ink); opacity: 0.35; }
+    .hero-listen { font-size: 0.72rem; color: var(--blue-deep); opacity: 0.7; letter-spacing: 0.03em; }
+
+    /* ── HERO DOTS ── */
+    .hero-dots { display: flex; justify-content: center; gap: 7px; margin-top: 1.75rem; }
+    .hero-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--ink); opacity: 0.15; cursor: pointer; transition: all 0.3s;
+    }
+    .hero-dot.active { opacity: 0.55; transform: scale(1.35); }
+
+    /* ── ALL EPISODES ── */
+    .all-section {
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s;
+    }
+    .all-section .section-header { margin-bottom: 1.1rem; }
 
     /* ── PILLS ── */
-    .pills-wrap {
-      opacity: 0; animation: fadeUp 0.8s ease forwards 0.55s;
-      max-width: 600px; margin: 0 auto;
-    }
     .pills-row {
-      display: flex; gap: 0.5rem;
-      overflow-x: auto; scrollbar-width: none;
-      padding: 0 1.5rem 1.25rem;
+      display: flex; gap: 0.5rem; overflow-x: auto; scrollbar-width: none;
+      padding: 0 1.5rem 1.25rem; max-width: 540px; margin: 0 auto;
     }
     .pills-row::-webkit-scrollbar { display: none; }
     .pill {
-      flex: 0 0 auto;
-      font-family: 'Noto Sans SC', sans-serif;
-      font-size: 0.78rem; font-weight: 300;
-      color: var(--ink); opacity: 0.45;
-      background: transparent;
-      border: 1px solid rgba(44,44,44,0.18);
+      flex: 0 0 auto; font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.78rem; font-weight: 300; color: var(--ink); opacity: 0.45;
+      background: transparent; border: 1px solid rgba(44,44,44,0.18);
       border-radius: 2rem; padding: 0.38rem 1.05rem;
-      cursor: pointer; white-space: nowrap;
-      transition: all 0.2s; outline: none;
+      cursor: pointer; white-space: nowrap; transition: all 0.2s; outline: none;
     }
     .pill:hover { opacity: 0.75; }
-    .pill.active {
-      background: var(--ink); color: var(--cream);
-      opacity: 1; border-color: var(--ink);
+    .pill.active { background: var(--ink); color: var(--cream); opacity: 1; border-color: var(--ink); }
+
+    /* ── CATEGORY HEADER ── */
+    .cat-header {
+      max-width: 500px; margin: 0 auto 1.5rem;
+      padding: 1.4rem 1.75rem; background: #fff;
+      border-radius: 1rem; box-shadow: 0 2px 14px rgba(44,44,44,0.06);
+    }
+    .cat-title {
+      font-family: 'Caveat', cursive; font-size: 1.35rem; font-weight: 600;
+      color: var(--ink); line-height: 1.3; margin-bottom: 0.65rem;
+    }
+    .cat-desc {
+      font-family: 'Noto Sans SC', sans-serif; font-size: 0.82rem; font-weight: 300;
+      color: var(--ink); opacity: 0.62; line-height: 1.95; letter-spacing: 0.01em;
     }
 
     /* ── EPISODE LIST ── */
-    .ep-list-wrap {
-      max-width: 680px; margin: 0 auto;
-      padding: 0 1.5rem;
-      opacity: 0; animation: fadeUp 0.8s ease forwards 0.65s;
-    }
+    .ep-list-wrap { max-width: 540px; margin: 0 auto; padding: 0 1.5rem; }
     .ep-list { list-style: none; }
     .ep-row {
       display: flex; align-items: center; gap: 1rem;
-      padding: 0.9rem 1rem;
-      border-radius: 0.875rem;
-      text-decoration: none; color: var(--ink);
-      transition: background 0.18s;
-      cursor: pointer;
+      padding: 0.9rem 0.75rem; border-radius: 0.875rem;
+      text-decoration: none; color: var(--ink); transition: background 0.18s;
     }
     .ep-row:hover { background: rgba(44,44,44,0.05); }
-    .ep-row.hidden { display: none; }
-
     .ep-num {
-      flex: 0 0 2.6rem; height: 2.6rem;
-      border-radius: 0.6rem;
+      flex: 0 0 2.6rem; height: 2.6rem; border-radius: 0.6rem;
       display: flex; align-items: center; justify-content: center;
-      font-family: 'Caveat', cursive;
-      font-size: 1rem; font-weight: 600;
+      font-family: 'Caveat', cursive; font-size: 1rem; font-weight: 600;
       color: #fff; letter-spacing: 0.02em;
     }
     .ep-row.color-coral  .ep-num { background: linear-gradient(135deg, #D9614A, #E8734A); }
     .ep-row.color-green  .ep-num { background: linear-gradient(135deg, #5A9E78, #8BBF9F); }
     .ep-row.color-blue   .ep-num { background: linear-gradient(135deg, #3A8DC4, #74B9E8); }
     .ep-row.color-purple .ep-num { background: linear-gradient(135deg, #7A6AAA, #9B8BC4); }
-
     .ep-info { flex: 1; min-width: 0; }
     .ep-list-title {
-      font-family: 'Noto Sans SC', sans-serif;
-      font-size: 0.88rem; font-weight: 400;
+      font-family: 'Noto Sans SC', sans-serif; font-size: 0.88rem; font-weight: 400;
       color: var(--ink); line-height: 1.5;
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
-    .ep-list-dur {
-      font-size: 0.7rem; color: var(--ink); opacity: 0.35;
-      margin-top: 0.2rem;
-    }
+    .ep-list-dur { font-size: 0.7rem; color: var(--ink); opacity: 0.35; margin-top: 0.2rem; }
     .ep-arrow {
-      flex: 0 0 auto;
-      font-size: 0.75rem; color: var(--blue-deep); opacity: 0.6;
+      flex: 0 0 auto; font-size: 0.75rem; color: var(--blue-deep); opacity: 0.6;
       letter-spacing: 0.03em; white-space: nowrap;
     }
+    .ep-divider { height: 1px; background: rgba(44,44,44,0.06); margin: 0 0.75rem; }
 
-    .ep-divider {
-      height: 1px; background: rgba(44,44,44,0.06);
-      margin: 0 1rem;
-    }
-    .ep-divider.hidden { display: none; }
-
-    /* ── EP CARD (featured grid only) ── */
-    .ep-card {
-      background: #fff;
-      border-radius: 1.25rem;
-      overflow: hidden;
-      text-decoration: none;
-      display: block;
-      transform: scale(1); opacity: 1;
-      box-shadow: 0 4px 20px rgba(44,44,44,0.08);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-    .ep-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(44,44,44,0.13);
-    }
-
-    /* ── THUMBNAIL COLORS ── */
-    .color-coral  .ep-thumb { background: linear-gradient(145deg, #D9614A 0%, #E8734A 60%, #F0956E 100%); }
-    .color-green  .ep-thumb { background: linear-gradient(145deg, #5A9E78 0%, #7AB890 60%, #8BBF9F 100%); }
-    .color-blue   .ep-thumb { background: linear-gradient(145deg, #3A8DC4 0%, #5AAEE0 60%, #74B9E8 100%); }
-    .color-purple .ep-thumb { background: linear-gradient(145deg, #6A5A9E 0%, #8878BE 60%, #9B8BC4 100%); }
-
-    .ep-thumb {
-      position: relative;
-      width: 100%; aspect-ratio: 1 / 1;
-      overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .ep-thumb-num {
-      font-family: 'Caveat', cursive;
-      font-size: clamp(4rem, 15vw, 5.5rem);
-      font-weight: 600;
-      color: rgba(255,255,255,0.22);
-      line-height: 1; user-select: none;
-      letter-spacing: -0.02em;
-    }
-    .ep-watermark {
-      position: absolute; bottom: 10px; right: 10px;
-      width: 44%; object-fit: contain; opacity: 0.82;
-    }
-    .ep-badge {
-      position: absolute; top: 10px; left: 10px;
-      background: rgba(255,255,255,0.88);
-      color: var(--ink);
-      font-family: 'Caveat', cursive;
-      font-size: 0.9rem; font-weight: 600;
-      padding: 0.18rem 0.6rem; border-radius: 2rem;
-      letter-spacing: 0.05em;
-    }
-    .feat-badge {
-      position: absolute; top: 10px; right: 10px;
-      background: rgba(255,224,80,0.92);
-      color: #5A3800;
-      font-family: 'Noto Sans SC', sans-serif;
-      font-size: 0.65rem; font-weight: 400;
-      padding: 0.15rem 0.5rem; border-radius: 2rem;
-      letter-spacing: 0.1em;
-    }
-
-    /* ── CARD BODY ── */
-    .ep-body { padding: 0.9rem 1rem 0.85rem; }
-    .ep-title {
-      font-family: 'Noto Sans SC', sans-serif;
-      font-size: 0.88rem; font-weight: 400;
-      color: var(--ink); line-height: 1.6;
-      margin-bottom: 0.5rem;
-    }
-    .ep-meta-row {
-      display: flex; justify-content: space-between; align-items: center;
-      border-top: 1px solid rgba(44,44,44,0.07);
-      padding-top: 0.5rem;
-    }
-    .ep-dur    { font-size: 0.72rem; color: var(--ink); opacity: 0.35; }
-    .ep-listen { font-size: 0.72rem; color: var(--blue-deep); opacity: 0.7; letter-spacing: 0.03em; }
-
-
-    /* ── CATEGORY HEADER ── */
-    .cat-header {
-      max-width: 600px; margin: 0 auto 1.5rem;
-      padding: 1.4rem 1.75rem;
-      background: #fff;
-      border-radius: 1rem;
-      box-shadow: 0 2px 14px rgba(44,44,44,0.06);
-      animation: fadeUp 0.35s ease forwards;
-    }
-    .cat-title {
-      font-family: 'Caveat', cursive;
-      font-size: 1.35rem; font-weight: 600;
-      color: var(--ink); line-height: 1.3;
-      margin-bottom: 0.65rem;
-    }
-    .cat-desc {
-      font-family: 'Noto Sans SC', sans-serif;
-      font-size: 0.82rem; font-weight: 300;
-      color: var(--ink); opacity: 0.62;
-      line-height: 1.95; letter-spacing: 0.01em;
-    }
-
-    /* ── SUBSCRIBE BUTTON ── */
+    /* ── SUBSCRIBE ── */
     .sub-btn {
-      display: block; width: fit-content; margin: 0.5rem auto 3rem;
-      font-size: 0.82rem; font-weight: 300;
-      color: var(--ink); text-decoration: none;
-      letter-spacing: 0.1em;
-      border: 1px solid rgba(44,44,44,0.25);
+      display: block; width: fit-content; margin: 2.5rem auto 3rem;
+      font-size: 0.82rem; font-weight: 300; color: var(--ink); text-decoration: none;
+      letter-spacing: 0.1em; border: 1px solid rgba(44,44,44,0.25);
       padding: 0.6rem 1.6rem; border-radius: 2rem;
       font-family: 'Noto Sans SC', sans-serif;
       opacity: 0; animation: fadeUp 0.8s ease forwards 0.9s;
@@ -320,10 +253,8 @@
     .sub-btn:hover { background: rgba(44,44,44,0.06); opacity: 1 !important; }
 
     footer {
-      position: relative; z-index: 1;
-      text-align: center; padding: 0 1rem 1.5rem;
-      font-size: 0.7rem; color: var(--ink);
-      opacity: 0.2; letter-spacing: 0.1em;
+      position: relative; z-index: 1; text-align: center; padding: 0 1rem 1.5rem;
+      font-size: 0.7rem; color: var(--ink); opacity: 0.2; letter-spacing: 0.1em;
       font-family: 'Noto Sans SC', sans-serif;
     }
 
@@ -333,7 +264,13 @@
     }
 
     @media (max-width: 480px) {
-      :root { --card-w: 240px; }
+      .hero-card { width: 258px; }
+      .hero-inner { gap: 0.75rem; }
+      .hero-arrow { width: 34px; height: 34px; font-size: 1rem; }
+    }
+    @media (max-width: 360px) {
+      .hero-card { width: 220px; }
+      .hero-arrow { display: none; }
     }
   </style>
 </head>
@@ -355,21 +292,41 @@
       <p class="page-desc">在读书、观影、旅途中停下来的瞬间<br/>用心理学的方式看一看</p>
     </div>
 
-    <!-- Featured section -->
-    <div class="featured-wrap">
+    <!-- Hero featured -->
+    <div class="hero-section">
       <div class="section-header">
         <span class="section-label">✦ 最受欢迎</span>
         <span class="section-line"></span>
       </div>
-      <div class="featured-grid" id="featured-grid"></div>
+      <div class="hero-inner">
+        <button class="hero-arrow" id="hero-prev">‹</button>
+        <a class="hero-card" id="hero-card" href="#" target="_blank">
+          <div class="hero-thumb" id="hero-thumb"></div>
+          <div class="hero-body">
+            <div class="hero-ep-label" id="hero-ep"></div>
+            <div class="hero-title" id="hero-title"></div>
+            <div class="hero-meta">
+              <span class="hero-dur" id="hero-dur"></span>
+              <span class="hero-listen">小宇宙收听 →</span>
+            </div>
+          </div>
+        </a>
+        <button class="hero-arrow" id="hero-next">›</button>
+      </div>
+      <div class="hero-dots" id="hero-dots">
+        <div class="hero-dot active"></div>
+        <div class="hero-dot"></div>
+        <div class="hero-dot"></div>
+        <div class="hero-dot"></div>
+      </div>
     </div>
 
     <!-- All episodes -->
-    <div class="section-header" style="margin-bottom: 1.1rem;">
-      <span class="section-label">全部集数</span>
-      <span class="section-line"></span>
-    </div>
-    <div class="pills-wrap">
+    <div class="all-section">
+      <div class="section-header">
+        <span class="section-label">全部集数</span>
+        <span class="section-line"></span>
+      </div>
       <div class="pills-row" id="pills-row">
         <button class="pill active" data-cat="all">全部</button>
         <button class="pill" data-cat="film">🎬 影视</button>
@@ -377,15 +334,13 @@
         <button class="pill" data-cat="travel">✈️ 旅行</button>
         <button class="pill" data-cat="psych">🧠 心理咨询师</button>
       </div>
-    </div>
-
-    <div id="cat-header" class="cat-header" style="display:none;">
-      <div class="cat-title" id="cat-title"></div>
-      <p class="cat-desc" id="cat-desc"></p>
-    </div>
-
-    <div class="ep-list-wrap">
-      <ul class="ep-list" id="ep-list"></ul>
+      <div id="cat-header" class="cat-header" style="display:none;">
+        <div class="cat-title" id="cat-title"></div>
+        <p class="cat-desc" id="cat-desc"></p>
+      </div>
+      <div class="ep-list-wrap">
+        <ul class="ep-list" id="ep-list"></ul>
+      </div>
     </div>
 
     <a class="sub-btn" href="https://www.xiaoyuzhoufm.com/podcast/6957a0327b15305d297ac33e" target="_blank">
@@ -396,85 +351,76 @@
   <footer>星星与七便士 · -小心思- · 存在人本取向咨询师</footer>
 
   <script>
-    const CAT_COLORS = {
-      film:   'color-blue',
-      book:   'color-green',
-      travel: 'color-coral',
-      psych:  'color-purple',
-    };
+    const CAT_COLORS = { film:'color-blue', book:'color-green', travel:'color-coral', psych:'color-purple' };
 
     const CATEGORIES = {
-      film: {
-        title: '影视作品里的心灵奇旅',
-        desc:  '每一部好的电影或剧集，都是一次对人类内心世界的探索。在这个栏目里，我带着心理学的眼睛重新走进那些让我们落泪、困惑或久久无法释怀的故事，借助银幕，更诚实地看见自己。',
-      },
-      book: {
-        title: '书页里的心理学灵感',
-        desc:  '有些书读完之后，会觉得有人把你说中了。在这里，我分享那些在阅读中忽然停下来的瞬间——一段话、一个概念、一个角色的选择，让我用心理学的方式重新理解它，也重新理解我们自己。',
-      },
-      travel: {
-        title: '旅途中的自我相遇',
-        desc:  '旅行最打动我的，是那些只有离开熟悉的地方之后才会冒出来的感受。这个栏目记录在路上的心理时刻——关于陌生与熟悉、距离与靠近，以及那个你在家里不会遇见的自己。',
-      },
-      psych: {
-        title: '心理咨询师的存在与思考',
-        desc:  'AI正在改变一切，包括心理咨询这个行业。当机器可以倾听、可以分析、可以24小时在线，一个人类咨询师的价值究竟在哪里？这个栏目是我对这个问题持续的探索——关于在AI时代，心理咨询师如何找到自己的位置，如何与来访者保持真实的连接，以及作为一个存在人本取向的咨询师，我如何理解「人」这件事。',
-      },
+      film:   { title:'影视作品里的心灵奇旅',      desc:'每一部好的电影或剧集，都是一次对人类内心世界的探索。在这个栏目里，我带着心理学的眼睛重新走进那些让我们落泪、困惑或久久无法释怀的故事，借助银幕，更诚实地看见自己。' },
+      book:   { title:'书页里的心理学灵感',        desc:'有些书读完之后，会觉得有人把你说中了。在这里，我分享那些在阅读中忽然停下来的瞬间——一段话、一个概念、一个角色的选择，让我用心理学的方式重新理解它，也重新理解我们自己。' },
+      travel: { title:'旅途中的自我相遇',          desc:'旅行最打动我的，是那些只有离开熟悉的地方之后才会冒出来的感受。这个栏目记录在路上的心理时刻——关于陌生与熟悉、距离与靠近，以及那个你在家里不会遇见的自己。' },
+      psych:  { title:'心理咨询师的存在与思考',    desc:'AI正在改变一切，包括心理咨询这个行业。当机器可以倾听、可以分析、可以24小时在线，一个人类咨询师的价值究竟在哪里？这个栏目是我对这个问题持续的探索——关于在AI时代，心理咨询师如何找到自己的位置，如何与来访者保持真实的连接，以及作为一个存在人本取向的咨询师，我如何理解「人」这件事。' },
     };
 
     const EPISODES = [
-      { num: 16, title: '心理咨询师会如何用AI给自己解梦？',                              dur: '41 分钟', url: 'https://www.xiaoyuzhoufm.com/episode/6a3ab2329d2f5743683cc03e', cat: 'psych'  },
-      { num: 15, title: '《给阿嬷的情书》：侨批、写信佬，和成人世界的阿贝贝',            dur: '32 分钟', url: 'https://www.xiaoyuzhoufm.com/episode/6a171d9d7460cabdeb56dff0', cat: 'film'   },
-      { num: 14, title: '我在越南会安古镇，和十年前的自己相遇了',                         dur: '20 分钟', url: 'https://www.xiaoyuzhoufm.com/episode/69ea482f1e94ae6921018c54', cat: 'travel' },
-      { num: 13, title: '《危险关系》里，颜聆是如何一步步把自己找回来的？',               dur: '28 分钟', url: 'https://www.xiaoyuzhoufm.com/episode/69dbcc79e2c8be315507bd9b', cat: 'film'   },
-      { num: 12, title: '就纯粹地做个人吧，聊聊AI时代的爱与怕',                          dur: '31 分钟', url: 'https://www.xiaoyuzhoufm.com/episode/69cfb47eb977fb2c4709dda9', cat: 'psych'  },
-      { num: 11, title: '人生不只是朝前走，也可以四处走走：聊聊电影《心灵奇旅》',        dur: '41 分钟', url: 'https://www.xiaoyuzhoufm.com/episode/69c91795e2c8be3155ce20d6', cat: 'film'   },
-      { num: 10, title: '巴厘岛安宁日：从《美食、祈祷和恋爱》理解不敢暂停的我们',        dur: '26 分钟', url: 'https://www.xiaoyuzhoufm.com/episode/69bc19ba3c625cc5ae30d230', cat: 'travel' },
-      { num:  9, title: '《幸福终点站》启示录：别让临时感，耗尽你的人生',                 dur: '36 分钟', url: 'https://www.xiaoyuzhoufm.com/episode/69b4364c772ac2295b154f26', cat: 'film'   },
-      { num:  8, title: '《德龄与慈禧》：从宫墙里的清风与枷锁，谈谈女性真实的自我',      dur: '28 分钟', url: 'https://www.xiaoyuzhoufm.com/episode/69ad1418c8cdeb38c26b908a', cat: 'film'   },
-      { num:  7, title: '是紧张还是害怕？从姜文电影《你行！你上！》聊聊上场前那一刻',    dur: '49 分钟', url: 'https://www.xiaoyuzhoufm.com/episode/69a45be066e2c30377e45732', cat: 'film'   },
-      { num:  6, title: '陈鲁豫和章小蕙为什么都爱她？从《奇想之年》里看哀伤和复原力',    dur: '54 分钟', url: 'https://www.xiaoyuzhoufm.com/episode/6995618fde29766da9d8fdf3', cat: 'book'   },
-      { num:  5, title: '35岁崩溃后，心理咨询师会如何救自己？',                          dur: '60 分钟', url: 'https://www.xiaoyuzhoufm.com/episode/698eae5666e2c303774fbcdb', cat: 'psych'  },
-      { num:  4, title: '摘下《滤镜》，像变色龙一样多姿多彩地活着',                      dur: '33 分钟', url: 'https://www.xiaoyuzhoufm.com/episode/6981fbc473b838887f905aae', cat: 'film'   },
-      { num:  3, title: '为什么我们会对穿越题材上头？看《寻秦记》和《Sore》有感',        dur: '42 分钟', url: 'https://www.xiaoyuzhoufm.com/episode/697c0879b4be4c149b3267ba', cat: 'film'   },
-      { num:  2, title: '为什么有些记忆会反复闯入？从越南小说《战争哀歌》聊 PTSD',       dur: '35 分钟', url: 'https://www.xiaoyuzhoufm.com/episode/696f5d2b109824f9e18c53fe', cat: 'book'   },
-      { num:  1, title: '《疯狂动物城2》不到3分钟的心理咨询戏里藏了多少小心思？',        dur: '36 分钟', url: 'https://www.xiaoyuzhoufm.com/episode/6968ca5fef1cf272a78b436e', cat: 'film'   },
+      { num:16, title:'心理咨询师会如何用AI给自己解梦？',                            dur:'41 分钟', url:'https://www.xiaoyuzhoufm.com/episode/6a3ab2329d2f5743683cc03e', cat:'psych'  },
+      { num:15, title:'《给阿嬷的情书》：侨批、写信佬，和成人世界的阿贝贝',          dur:'32 分钟', url:'https://www.xiaoyuzhoufm.com/episode/6a171d9d7460cabdeb56dff0', cat:'film'   },
+      { num:14, title:'我在越南会安古镇，和十年前的自己相遇了',                       dur:'20 分钟', url:'https://www.xiaoyuzhoufm.com/episode/69ea482f1e94ae6921018c54', cat:'travel' },
+      { num:13, title:'《危险关系》里，颜聆是如何一步步把自己找回来的？',             dur:'28 分钟', url:'https://www.xiaoyuzhoufm.com/episode/69dbcc79e2c8be315507bd9b', cat:'film'   },
+      { num:12, title:'就纯粹地做个人吧，聊聊AI时代的爱与怕',                        dur:'31 分钟', url:'https://www.xiaoyuzhoufm.com/episode/69cfb47eb977fb2c4709dda9', cat:'psych'  },
+      { num:11, title:'人生不只是朝前走，也可以四处走走：聊聊电影《心灵奇旅》',      dur:'41 分钟', url:'https://www.xiaoyuzhoufm.com/episode/69c91795e2c8be3155ce20d6', cat:'film'   },
+      { num:10, title:'巴厘岛安宁日：从《美食、祈祷和恋爱》理解不敢暂停的我们',      dur:'26 分钟', url:'https://www.xiaoyuzhoufm.com/episode/69bc19ba3c625cc5ae30d230', cat:'travel' },
+      { num: 9, title:'《幸福终点站》启示录：别让临时感，耗尽你的人生',               dur:'36 分钟', url:'https://www.xiaoyuzhoufm.com/episode/69b4364c772ac2295b154f26', cat:'film'   },
+      { num: 8, title:'《德龄与慈禧》：从宫墙里的清风与枷锁，谈谈女性真实的自我',    dur:'28 分钟', url:'https://www.xiaoyuzhoufm.com/episode/69ad1418c8cdeb38c26b908a', cat:'film'   },
+      { num: 7, title:'是紧张还是害怕？从姜文电影《你行！你上！》聊聊上场前那一刻',  dur:'49 分钟', url:'https://www.xiaoyuzhoufm.com/episode/69a45be066e2c30377e45732', cat:'film'   },
+      { num: 6, title:'陈鲁豫和章小蕙为什么都爱她？从《奇想之年》里看哀伤和复原力',  dur:'54 分钟', url:'https://www.xiaoyuzhoufm.com/episode/6995618fde29766da9d8fdf3', cat:'book'   },
+      { num: 5, title:'35岁崩溃后，心理咨询师会如何救自己？',                        dur:'60 分钟', url:'https://www.xiaoyuzhoufm.com/episode/698eae5666e2c303774fbcdb', cat:'psych'  },
+      { num: 4, title:'摘下《滤镜》，像变色龙一样多姿多彩地活着',                    dur:'33 分钟', url:'https://www.xiaoyuzhoufm.com/episode/6981fbc473b838887f905aae', cat:'film'   },
+      { num: 3, title:'为什么我们会对穿越题材上头？看《寻秦记》和《Sore》有感',      dur:'42 分钟', url:'https://www.xiaoyuzhoufm.com/episode/697c0879b4be4c149b3267ba', cat:'film'   },
+      { num: 2, title:'为什么有些记忆会反复闯入？从越南小说《战争哀歌》聊 PTSD',     dur:'35 分钟', url:'https://www.xiaoyuzhoufm.com/episode/696f5d2b109824f9e18c53fe', cat:'book'   },
+      { num: 1, title:'《疯狂动物城2》不到3分钟的心理咨询戏里藏了多少小心思？',      dur:'36 分钟', url:'https://www.xiaoyuzhoufm.com/episode/6968ca5fef1cf272a78b436e', cat:'film'   },
     ];
 
-    const FEATURED_NUMS = [5, 6, 10, 16];
+    const FEATURED_NUMS = [16, 5, 6, 10];
+    let featIdx = 0;
 
     function numStr(n) { return n < 10 ? '0' + n : '' + n; }
 
-    function makeCard(ep, colorIdx, isFeatured) {
-      const color = CAT_COLORS[ep.cat] || 'color-blue';
-      const ns = numStr(ep.num);
-      const card = document.createElement('a');
-      card.className = 'ep-card ' + color;
-      card.href = ep.url;
-      card.target = '_blank';
-      card.innerHTML = `
-        <div class="ep-thumb">
-          <span class="ep-thumb-num">${ns}</span>
-          <img class="ep-watermark" src="xiaoxinsi.png" alt="" />
-          <span class="ep-badge">EP ${ns}</span>
-          ${isFeatured ? '<span class="feat-badge">✦ 精选</span>' : ''}
-        </div>
-        <div class="ep-body">
-          <p class="ep-title">${ep.title}</p>
-          <div class="ep-meta-row">
-            <span class="ep-dur">${ep.dur}</span>
-            <span class="ep-listen">小宇宙收听 →</span>
-          </div>
-        </div>`;
-      return card;
+    /* ── Hero ── */
+    function renderHero() {
+      const ep    = EPISODES.find(e => e.num === FEATURED_NUMS[featIdx]);
+      const ns    = numStr(ep.num);
+      const card  = document.getElementById('hero-card');
+      const thumb = document.getElementById('hero-thumb');
+
+      card.style.opacity = '0';
+      setTimeout(() => {
+        card.href = ep.url;
+        if (ep.num >= 4) {
+          thumb.innerHTML = `<img src="podcastsimg/EP${ns}.jpg" alt="EP${ns}" />`;
+        } else {
+          const col = CAT_COLORS[ep.cat] || 'color-blue';
+          thumb.innerHTML = `<div class="hero-thumb-grad ${col}"><span class="hero-thumb-num">${ns}</span></div>`;
+        }
+        document.getElementById('hero-ep').textContent    = `EP ${ns}`;
+        document.getElementById('hero-title').textContent = ep.title;
+        document.getElementById('hero-dur').textContent   = ep.dur;
+        document.querySelectorAll('.hero-dot').forEach((d, i) => d.classList.toggle('active', i === featIdx));
+        card.style.transition = 'opacity 0.25s ease';
+        card.style.opacity = '1';
+      }, 150);
     }
 
-    /* ── Featured grid ── */
-    function buildFeatured() {
-      const grid = document.getElementById('featured-grid');
-      FEATURED_NUMS.forEach((n, i) => {
-        const ep = EPISODES.find(e => e.num === n);
-        grid.appendChild(makeCard(ep, i, true));
+    function initHero() {
+      renderHero();
+      document.getElementById('hero-prev').addEventListener('click', () => {
+        featIdx = (featIdx - 1 + FEATURED_NUMS.length) % FEATURED_NUMS.length;
+        renderHero();
+      });
+      document.getElementById('hero-next').addEventListener('click', () => {
+        featIdx = (featIdx + 1) % FEATURED_NUMS.length;
+        renderHero();
+      });
+      document.querySelectorAll('.hero-dot').forEach((d, i) => {
+        d.addEventListener('click', () => { featIdx = i; renderHero(); });
       });
     }
 
@@ -485,7 +431,6 @@
       episodes.forEach((ep, i) => {
         const color = CAT_COLORS[ep.cat] || 'color-blue';
         const ns = numStr(ep.num);
-
         const li = document.createElement('li');
         li.innerHTML = `
           <a class="ep-row ${color}" href="${ep.url}" target="_blank">
@@ -503,15 +448,10 @@
 
     /* ── Category header ── */
     function updateCatHeader(cat) {
-      const header  = document.getElementById('cat-header');
-      const titleEl = document.getElementById('cat-title');
-      const descEl  = document.getElementById('cat-desc');
-      if (!cat || cat === 'all' || !CATEGORIES[cat]) {
-        header.style.display = 'none';
-        return;
-      }
-      titleEl.textContent = CATEGORIES[cat].title;
-      descEl.textContent  = CATEGORIES[cat].desc;
+      const header = document.getElementById('cat-header');
+      if (!cat || cat === 'all' || !CATEGORIES[cat]) { header.style.display = 'none'; return; }
+      document.getElementById('cat-title').textContent = CATEGORIES[cat].title;
+      document.getElementById('cat-desc').textContent  = CATEGORIES[cat].desc;
       header.style.display = 'block';
     }
 
@@ -522,15 +462,14 @@
           document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
           pill.classList.add('active');
           const cat = pill.dataset.cat;
-          const filtered = cat === 'all' ? EPISODES : EPISODES.filter(e => e.cat === cat);
           updateCatHeader(cat);
-          buildList(filtered);
+          buildList(cat === 'all' ? EPISODES : EPISODES.filter(e => e.cat === cat));
         });
       });
     }
 
     window.addEventListener('load', () => {
-      buildFeatured();
+      initHero();
       buildList(EPISODES);
       initPills();
     });
