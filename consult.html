@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>咨询预约 · withchen</title>
+  <meta name="description" content="存在人本取向心理咨询师 ChenChen。我曾经因为绝望和孤独走进咨询室，所以我知道这需要多大的勇气。" />
+  <meta property="og:title" content="咨询预约 · withchen" />
+  <meta property="og:description" content="存在人本取向心理咨询。两条小船靠近、并肩航行的一段时间。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://withchen.com/consult.html" />
+  <meta property="og:image" content="https://withchen.com/og-cover.jpg" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="withchen" />
+  <link rel="preconnect" href="https://fonts.loli.net" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.loli.net/css2?family=Caveat:wght@400;600&family=Noto+Sans+SC:wght@300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue:       #74B9E8;
+      --blue-deep:  #4A9BD4;
+      --blue-light: #D0E9F7;
+      --cream:      #F7F3EC;
+      --green:      #8BBF9F;
+      --coral:      #E8734A;
+      --ink:        #2C2C2C;
+      --purple:     #9B8BC4;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--cream); color: var(--ink);
+      min-height: 100vh;
+      font-family: 'Noto Sans SC', 'Inter', sans-serif;
+      font-weight: 300; overflow-x: hidden;
+    }
+
+    nav.top-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+      padding: 1.25rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(247,243,236,0.88);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    }
+    .nav-logo { font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--ink); text-decoration: none; opacity: 0.55; transition: opacity 0.2s; }
+    .nav-logo:hover { opacity: 0.9; }
+    .nav-back { font-size: 0.75rem; color: var(--ink); text-decoration: none; opacity: 0.35; letter-spacing: 0.15em; transition: opacity 0.2s; }
+    .nav-back:hover { opacity: 0.7; }
+
+    .bg-sparkles { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .sparkle { position: absolute; color: var(--blue); animation: twinkle 3s ease-in-out infinite; }
+    .sparkle:nth-child(1) { top: 10%; left:  8%; font-size: 0.9rem; animation-delay: 0s; }
+    .sparkle:nth-child(2) { top: 20%; left: 90%; font-size: 0.6rem; animation-delay: 1.1s; }
+    .sparkle:nth-child(3) { top: 58%; left:  4%; font-size: 0.7rem; animation-delay: 1.8s; }
+    .sparkle:nth-child(4) { top: 75%; left: 92%; font-size: 0.8rem; animation-delay: 0.5s; }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.12; transform: scale(0.85) rotate(0deg); }
+      50%       { opacity: 0.4;  transform: scale(1.25) rotate(12deg); }
+    }
+
+    main {
+      position: relative; z-index: 1;
+      max-width: 560px; margin: 0 auto;
+      padding: 7rem 1.75rem 7rem;
+    }
+
+    /* ── 入场动效 ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade { opacity: 0; animation: fadeUp 0.8s ease forwards; }
+    .d1{animation-delay:0.12s} .d2{animation-delay:0.26s} .d3{animation-delay:0.40s}
+    .d4{animation-delay:0.54s} .d5{animation-delay:0.68s} .d6{animation-delay:0.82s}
+    .d7{animation-delay:0.96s} .d8{animation-delay:1.10s} .d9{animation-delay:1.24s}
+
+    /* ── 章节标记 ── */
+    .chapter-tag {
+      font-family: 'Caveat', cursive; font-size: 0.85rem; font-weight: 600;
+      color: var(--blue-deep); letter-spacing: 0.1em;
+      margin-bottom: 1.6rem; display: block;
+    }
+
+    /* ── 大标题 ── */
+    .letter-title {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: clamp(1.4rem, 4.2vw, 1.78rem);
+      font-weight: 400; line-height: 1.6;
+      color: var(--ink); margin-bottom: 2rem;
+    }
+
+    /* ── 段落 ── */
+    .letter-p {
+      font-size: 0.93rem; font-weight: 300;
+      color: var(--ink); opacity: 0.82;
+      line-height: 2.08; letter-spacing: 0.025em;
+      margin-bottom: 1.1rem;
+    }
+    .letter-p em { font-style: normal; font-weight: 400; }
+
+    /* ── 亚隆引言 + 驶入动效 ── */
+    @keyframes sailIn {
+      from { transform: translateX(26px); }
+      to   { transform: translateX(0); }
+    }
+    .yalom-quote {
+      margin: 1.75rem 0;
+      padding: 1.15rem 1.4rem 1.15rem 1.2rem;
+      border-left: 2px solid rgba(116,185,232,0.45);
+      animation: sailIn 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: 0.55s;
+    }
+    .yalom-quote p {
+      font-size: 0.88rem; font-weight: 300;
+      color: var(--ink); opacity: 0.62;
+      line-height: 1.95; font-style: italic;
+    }
+    .yalom-quote cite {
+      display: block; margin-top: 0.5rem;
+      font-size: 0.7rem; color: var(--blue-deep); opacity: 0.65;
+      font-style: normal; letter-spacing: 0.08em;
+    }
+
+    /* ── 比喻卡片 ── */
+    .metaphor-card {
+      background: #fff; border-radius: 1.25rem;
+      padding: 1.5rem 1.6rem; margin: 1.75rem 0;
+      box-shadow: 0 4px 24px rgba(44,44,44,0.07);
+    }
+    .metaphor-card p {
+      font-size: 0.91rem; font-weight: 300;
+      color: var(--ink); line-height: 2.05; letter-spacing: 0.025em;
+    }
+    .metaphor-card p + p { margin-top: 0.9rem; }
+
+    /* ── 来访者画像 ── */
+    .for-you-label {
+      font-size: 0.68rem; font-weight: 400;
+      letter-spacing: 0.28em; color: var(--ink); opacity: 0.35;
+      margin-bottom: 1rem; display: block;
+    }
+    .for-you-list { list-style: none; display: flex; flex-direction: column; gap: 0.62rem; }
+    .for-you-list li {
+      font-size: 0.88rem; font-weight: 300;
+      color: var(--ink); line-height: 1.75;
+      display: flex; align-items: flex-start; gap: 0.62rem;
+    }
+    .for-you-list .emoji {
+      flex-shrink: 0; font-size: 0.88rem; margin-top: 0.08em;
+    }
+
+    /* ── 存在人本取向区块 ── */
+    .orient-block {
+      background: #fff; border-radius: 1.25rem;
+      padding: 1.5rem 1.6rem; margin-top: 1.75rem;
+      box-shadow: 0 4px 24px rgba(44,44,44,0.07);
+    }
+    .orient-title {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.88rem; font-weight: 400;
+      color: var(--ink); margin-bottom: 0.9rem;
+    }
+    .orient-p {
+      font-size: 0.88rem; font-weight: 300;
+      color: var(--ink); opacity: 0.75;
+      line-height: 2.0; letter-spacing: 0.02em;
+      margin-bottom: 0.9rem;
+    }
+    .orient-p em { font-style: normal; font-weight: 400; color: var(--ink); opacity: 1; }
+    .orient-themes {
+      display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.3rem;
+    }
+    .orient-tag {
+      font-size: 0.75rem; font-weight: 300;
+      color: var(--purple); border: 1px solid rgba(155,139,196,0.3);
+      border-radius: 2rem; padding: 0.28rem 0.8rem;
+      background: rgba(155,139,196,0.06);
+    }
+
+    /* ── 分隔线 ── */
+    .divider {
+      display: flex; align-items: center; gap: 0.6rem;
+      margin: 3rem 0;
+    }
+    .divider-line { flex: 1; height: 1px; background: rgba(44,44,44,0.1); }
+    .divider-star { font-size: 0.55rem; color: var(--blue); opacity: 0.5; }
+
+    /* ── 使用手册 ── */
+    .manual-title {
+      font-family: 'Caveat', cursive; font-size: 1.55rem; font-weight: 600;
+      color: var(--ink); display: block; margin-bottom: 0.3rem;
+    }
+    .manual-sub {
+      font-size: 0.78rem; font-weight: 300;
+      color: var(--ink); opacity: 0.38;
+      letter-spacing: 0.05em; margin-bottom: 2rem; display: block;
+    }
+
+    .section-label {
+      display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.1rem;
+    }
+    .section-label-text {
+      font-size: 0.66rem; font-weight: 400;
+      letter-spacing: 0.25em; color: var(--ink); opacity: 0.35; white-space: nowrap;
+    }
+    .section-label-line { flex: 1; height: 1px; background: rgba(44,44,44,0.1); }
+
+    /* 设置四格 */
+    .info-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0.65rem; margin-bottom: 0.85rem;
+    }
+    .info-card {
+      background: #fff; border-radius: 1rem;
+      padding: 1rem 1.15rem;
+      box-shadow: 0 2px 12px rgba(44,44,44,0.06);
+    }
+    .info-card-label {
+      font-size: 0.64rem; font-weight: 300;
+      color: var(--ink); opacity: 0.32;
+      letter-spacing: 0.2em; margin-bottom: 0.38rem;
+    }
+    .info-card-value {
+      font-size: 0.9rem; font-weight: 400;
+      color: var(--ink); line-height: 1.45;
+    }
+    .info-card-note {
+      font-size: 0.7rem; font-weight: 300;
+      color: var(--ink); opacity: 0.35;
+      margin-top: 0.2rem; line-height: 1.4;
+    }
+
+    /* 督导注记 */
+    .supervisor-note {
+      font-size: 0.72rem; font-weight: 300;
+      color: var(--blue-deep); opacity: 0.6;
+      text-align: center; margin-bottom: 2rem;
+      letter-spacing: 0.08em;
+    }
+
+    /* Q&A 条目 */
+    .qa-list { display: flex; flex-direction: column; gap: 1.1rem; margin-bottom: 1.5rem; }
+    .qa-item {
+      background: #fff; border-radius: 1rem;
+      padding: 1.1rem 1.25rem;
+      box-shadow: 0 2px 12px rgba(44,44,44,0.06);
+    }
+    .qa-q {
+      font-size: 0.88rem; font-weight: 400;
+      color: var(--ink); margin-bottom: 0.55rem;
+      display: flex; align-items: flex-start; gap: 0.5rem;
+    }
+    .qa-q::before {
+      content: 'Q';
+      font-family: 'Caveat', cursive; font-size: 0.9rem; font-weight: 600;
+      color: var(--blue-deep); flex-shrink: 0;
+    }
+    .qa-a {
+      font-size: 0.84rem; font-weight: 300;
+      color: var(--ink); opacity: 0.68;
+      line-height: 1.9; letter-spacing: 0.02em;
+      padding-left: 1.2rem;
+    }
+
+    /* 暂不接待 */
+    .no-intake-box {
+      border: 1px solid rgba(44,44,44,0.1);
+      border-radius: 1rem; padding: 1.1rem 1.3rem;
+      margin-bottom: 2rem;
+    }
+    .no-intake-title {
+      font-size: 0.65rem; font-weight: 400;
+      letter-spacing: 0.22em; color: var(--ink); opacity: 0.32;
+      margin-bottom: 0.65rem; display: block;
+    }
+    .no-intake-box p {
+      font-size: 0.8rem; font-weight: 300;
+      color: var(--ink); opacity: 0.52;
+      line-height: 1.9; margin-bottom: 0.55rem;
+    }
+    .no-intake-box p:last-child { margin-bottom: 0; }
+    .hotline-list { list-style: none; margin-top: 0.3rem; display: flex; flex-direction: column; gap: 0.3rem; }
+    .hotline-list li {
+      font-size: 0.78rem; font-weight: 300;
+      color: var(--ink); opacity: 0.45;
+      line-height: 1.75;
+      display: flex; align-items: flex-start; gap: 0.5rem;
+    }
+    .hotline-list li::before { content: '·'; color: var(--blue-deep); opacity: 0.7; flex-shrink: 0; }
+
+    /* ── 简历 ── */
+    .stats-row { display: flex; gap: 0.6rem; margin-bottom: 1.75rem; }
+    .stat-card {
+      flex: 1; background: #fff; border-radius: 1rem;
+      padding: 0.9rem 0.6rem; text-align: center;
+      box-shadow: 0 2px 12px rgba(44,44,44,0.06);
+    }
+    .stat-num {
+      font-family: 'Caveat', cursive; font-size: 1.45rem; font-weight: 600;
+      color: var(--blue-deep); display: block; line-height: 1; margin-bottom: 0.28rem;
+    }
+    .stat-label {
+      font-size: 0.62rem; font-weight: 300;
+      color: var(--ink); opacity: 0.38; letter-spacing: 0.04em; line-height: 1.45;
+    }
+
+    .training-block { margin-bottom: 1.5rem; }
+    .training-group-title {
+      font-size: 0.65rem; font-weight: 400;
+      letter-spacing: 0.2em; color: var(--ink); opacity: 0.3;
+      margin-bottom: 0.65rem; display: block;
+    }
+    .training-list { list-style: none; display: flex; flex-direction: column; gap: 0.44rem; }
+    .training-list li {
+      font-size: 0.83rem; font-weight: 300;
+      color: var(--ink); line-height: 1.65;
+      display: flex; gap: 0.75rem; align-items: flex-start;
+    }
+    .training-list .yr {
+      font-family: 'Caveat', cursive; font-size: 0.77rem;
+      color: var(--blue-deep); opacity: 0.6;
+      flex-shrink: 0; width: 5.2rem; padding-top: 0.08em;
+    }
+
+    /* ── 英雄结语 ── */
+    @keyframes heroReveal {
+      from { opacity: 0; transform: translateY(10px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .hero-closing {
+      text-align: center; margin: 3.5rem 0 2.5rem;
+      padding: 2.8rem 1.8rem;
+      background: linear-gradient(135deg,
+        rgba(116,185,232,0.09) 0%,
+        rgba(247,243,236,0) 55%,
+        rgba(155,139,196,0.07) 100%);
+      border-radius: 1.75rem;
+      opacity: 0;
+      animation: heroReveal 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: 1.3s;
+    }
+    .hero-closing-deco {
+      display: block; font-size: 0.55rem; color: var(--blue);
+      opacity: 0.4; letter-spacing: 0.8em; margin-bottom: 1.4rem;
+    }
+    .hero-closing-text {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: clamp(1rem, 3.2vw, 1.18rem);
+      font-weight: 400; line-height: 2.4; color: var(--ink);
+    }
+    .hero-closing em {
+      font-style: normal; color: var(--blue-deep);
+    }
+    .hero-closing-deco-bottom {
+      display: block; font-size: 0.55rem; color: var(--blue);
+      opacity: 0.4; letter-spacing: 0.8em; margin-top: 1.4rem;
+    }
+
+    /* ── 预约占位 ── */
+    .booking-placeholder {
+      text-align: center; padding: 1.2rem 1rem 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .booking-placeholder-title {
+      font-family: 'Caveat', cursive; font-size: 0.88rem;
+      color: var(--ink); opacity: 0.28; letter-spacing: 0.18em;
+    }
+    .booking-placeholder-note {
+      font-size: 0.7rem; font-weight: 300;
+      color: var(--ink); opacity: 0.18;
+      margin-top: 0.28rem; letter-spacing: 0.08em;
+    }
+
+    /* ── BOTTOM NAV ── */
+    .site-nav {
+      position: fixed; bottom: 1.5rem; left: 50%; right: auto;
+      transform: translateX(-50%);
+      z-index: 50; display: flex; align-items: center;
+      width: fit-content; justify-content: flex-start;
+      background: rgba(255,255,255,0.88); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-radius: 3rem; padding: 0.3rem; gap: 0.1rem;
+      box-shadow: 0 4px 28px rgba(44,44,44,0.1);
+    }
+    .site-nav a {
+      display: flex; align-items: center; gap: 0.25rem;
+      padding: 0.4rem 0.85rem; border-radius: 2.5rem;
+      text-decoration: none; color: var(--ink); opacity: 0.45;
+      font-family: 'Noto Sans SC', sans-serif; font-size: 0.75rem; font-weight: 300;
+      letter-spacing: 0.02em; white-space: nowrap; transition: all 0.2s;
+    }
+    .site-nav a:hover { opacity: 0.8; }
+    .site-nav a.active { background: var(--ink); color: var(--cream); opacity: 1; }
+    .site-nav .nn { font-family: 'Caveat', cursive; font-size: 0.65rem; opacity: 0.55; }
+    .site-nav a.active .nn { opacity: 0.45; }
+
+    footer {
+      position: relative; z-index: 1; text-align: center;
+      padding: 1rem 1rem 6rem;
+      font-size: 0.7rem; color: var(--ink); opacity: 0.18; letter-spacing: 0.1em;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-sparkles">
+    <span class="sparkle">✦</span><span class="sparkle">✦</span>
+    <span class="sparkle">✦</span><span class="sparkle">✦</span>
+  </div>
+  <nav class="top-nav">
+    <a href="index.html" class="nav-logo">withchen</a>
+    <a href="index.html" class="nav-back">← 回到首页</a>
+  </nav>
+
+  <main>
+
+    <!-- ══════════ 前半：写给你 ══════════ -->
+
+    <span class="chapter-tag fade d1">写给你</span>
+
+    <h1 class="letter-title fade d2">
+      我曾经因为绝望和孤独走进咨询室，<br/>所以我知道这需要多大的勇气。
+    </h1>
+
+    <div class="fade d3">
+      <p class="letter-p">
+        在成为咨询师之前，我在市场营销领域工作了十年——在4A广告公司做过广告，也在 Google 和 IHG 担任市场经理。那十年里，我经历过一种很具体的窒息：<em>明明做了很多，却没有人看见。</em>在一段很难离开的职场关系里，我开始怀疑，问题究竟出在自己身上，还是出在那个环境里。
+      </p>
+      <p class="letter-p">
+        后来我做了两年多的咨询。在咨询室里哭过、骂过，也在深深的黑暗里绝望过。那段来访的经历，成了我后来成为咨询师最重要的底色。
+      </p>
+
+      <blockquote class="yalom-quote">
+        <p>我们都是行走在大海上的孤舟，而咨询，是两条小船靠近、并肩航行的一段时间。</p>
+        <cite>—— 欧文·亚隆</cite>
+      </blockquote>
+
+      <p class="letter-p">
+        这句话深深地影响着我对咨询的理解。我不是空白屏幕——当这段对话里有什么真实地触动了我，我会告诉你。因为我相信，只有我真实地在这里，我们才能真正地相遇。
+      </p>
+    </div>
+
+    <div class="metaphor-card fade d4">
+      <p>我有时候会觉得，我的咨询室有点像<em>雪地里的一座小房子</em>。</p>
+      <p>外面很茫茫，你也许不太确定自己走到哪里了。这里有灯，有热汤，可以暖暖身子，好好喘口气。我们一起坐下来，不需要知道答案，只是好好看一看现在的你。</p>
+    </div>
+
+    <div class="fade d5">
+      <span class="for-you-label">也许你正在经历</span>
+      <ul class="for-you-list">
+        <li><span class="emoji">🎓</span>刚从学校走进社会，还不太确定自己是谁</li>
+        <li><span class="emoji">🤱</span>刚成为新手妈妈，感觉有一部分熟悉的自己正在消失</li>
+        <li><span class="emoji">🌿</span>在职业的十字路口，不确定下一步走向哪里</li>
+        <li><span class="emoji">✈️</span>换了城市或者去了国外，在陌生的地方重新安放自己</li>
+        <li><span class="emoji">🌙</span>身体和情绪都变得有些陌生，你不确定那还是不是自己</li>
+        <li><span class="emoji">🫧</span>在生活中感到格格不入，有一种说不清楚的孤独</li>
+        <li><span class="emoji">💭</span>说不清楚哪里不对，只是有点撑不住</li>
+        <li><span class="emoji">✨</span>想更认识自己，但不知道从哪里开始</li>
+      </ul>
+    </div>
+
+    <!-- 存在人本取向 -->
+    <div class="orient-block fade d5">
+      <p class="orient-title">关于存在-人本取向</p>
+      <p class="orient-p">
+        存在-人本取向相信，每一个人都有能力为自己的生命负责，也都在以自己的方式寻找意义。它不把你的困扰当作"症状"去修复，而是把它理解为——你正在经历人类共同面对的存在性课题。
+      </p>
+      <p class="orient-p" style="margin-bottom: 0.5rem;">
+        这个取向关注：我们各自独处的<em>孤独</em>，寻找支撑的<em>意义</em>，面对无常的<em>有限性</em>，以及如何在这一切里做出真实的<em>选择</em>。咨询不是"专家帮你解决问题"，而是我们一起，真实地坐在这些课题面前。
+      </p>
+      <div class="orient-themes">
+        <span class="orient-tag">孤独与连接</span>
+        <span class="orient-tag">意义与无意义</span>
+        <span class="orient-tag">自由与责任</span>
+        <span class="orient-tag">有限性与无常</span>
+        <span class="orient-tag">真实的自我</span>
+        <span class="orient-tag">存在性焦虑</span>
+      </div>
+    </div>
+
+    <!-- 分隔线 -->
+    <div class="divider fade d6">
+      <span class="divider-line"></span><span class="divider-star">✦</span><span class="divider-line"></span>
+    </div>
+
+    <!-- ══════════ 使用手册 ══════════ -->
+
+    <div class="fade d6">
+      <span class="manual-title">关于我的使用手册</span>
+      <span class="manual-sub">一些你可能想知道的事</span>
+    </div>
+
+    <!-- 设置四格 -->
+    <div class="fade d7">
+      <div class="section-label">
+        <span class="section-label-text">咨询设置</span>
+        <span class="section-label-line"></span>
+      </div>
+      <div class="info-grid">
+        <div class="info-card">
+          <p class="info-card-label">时长</p>
+          <p class="info-card-value">50 分钟 / 次</p>
+        </div>
+        <div class="info-card">
+          <p class="info-card-label">形式</p>
+          <p class="info-card-value">视频咨询</p>
+          <p class="info-card-note">腾讯会议</p>
+        </div>
+        <div class="info-card">
+          <p class="info-card-label">频率</p>
+          <p class="info-card-value">建议每周一次</p>
+        </div>
+        <div class="info-card">
+          <p class="info-card-label">收费</p>
+          <p class="info-card-value">300 元 / 次</p>
+        </div>
+      </div>
+      <p class="supervisor-note">✦ 所有个案均在督导下进行</p>
+    </div>
+
+    <!-- Q&A -->
+    <div class="fade d7">
+      <div class="section-label">
+        <span class="section-label-text">常见问题</span>
+        <span class="section-label-line"></span>
+      </div>
+      <div class="qa-list">
+
+        <div class="qa-item">
+          <p class="qa-q">心理咨询能帮我做什么？</p>
+          <p class="qa-a">咨询不是帮你"解决问题"，更像是一起打开一盏灯。有些感受你说不清楚，但它就是在那里。我们慢慢地把它们说出来，看清楚从哪里来、对你意味着什么。很多时候，被真正听见，本身就已经是改变的开始。</p>
+        </div>
+
+        <div class="qa-item">
+          <p class="qa-q">需要做多少次？</p>
+          <p class="qa-a">每个人节奏不同，没有固定答案。如果你只是需要一个地方整理思绪，短程几次也可以有收获。如果想做更深的探索——理解自己的模式、处理更久远的东西——通常需要更长的时间。第一次见面，我们一起聊聊你想要什么，再来判断。</p>
+        </div>
+
+        <div class="qa-item">
+          <p class="qa-q">第一次来，会发生什么？</p>
+          <p class="qa-a">第一次，我们先好好认识一下。你可以聊聊是什么让你想来——不需要总结，想到什么说什么就好。我会问一些问题，帮我们一起弄清楚现在的你在哪里，以及接下来可以怎么走。如果第一次结束后觉得我们不太合适，也完全可以说。</p>
+        </div>
+
+        <div class="qa-item">
+          <p class="qa-q">你会分享你自己的感受吗？</p>
+          <p class="qa-a">我不是空白屏幕式的咨询师。当你说的某些事在我这里真实地引发了什么，我会告诉你——不是评判，而是因为我们是平等的，真实的连接比任何技术都更重要。当然，我的自我披露始终为你的探索服务，不会把焦点移向我自己。</p>
+        </div>
+
+        <div class="qa-item">
+          <p class="qa-q">我适合做咨询吗？</p>
+          <p class="qa-a">如果你年满18岁，目前没有活跃的自杀自伤行为，也没有处于精神疾病发作期，都可以联系我聊聊看。你不需要"有足够严重的问题"才能来——有时候只是感觉哪里不对劲，或者想更认识自己，这就是很好的理由。</p>
+        </div>
+
+        <div class="qa-item">
+          <p class="qa-q">咨询保密吗？</p>
+          <p class="qa-a">是的，咨询内容全程保密，遵守职业伦理守则。唯一的例外是当存在危及生命安全的情况时，我需要采取相应措施。具体的保密框架，我们会在第一次见面时一起确认并签署咨询协议。</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 暂不接待 -->
+    <div class="no-intake-box fade d8">
+      <span class="no-intake-title">暂不接待</span>
+      <p>目前暂不接待有活跃自杀/自伤风险的来访者，以及处于精神疾病急性发作期的来访者。</p>
+      <p>如果你现在正处于危机状态，这里有可以联系的资源：</p>
+      <ul class="hotline-list">
+        <li>北京心理危机研究与干预中心：010-82951332（24小时）</li>
+        <li>全国心理援助热线：400-161-9995（24小时）</li>
+        <li>生命热线：400-821-1215（24小时）</li>
+      </ul>
+    </div>
+
+    <!-- 分隔线 -->
+    <div class="divider fade d8">
+      <span class="divider-line"></span><span class="divider-star">✦</span><span class="divider-line"></span>
+    </div>
+
+    <!-- ══════════ 简历 ══════════ -->
+
+    <div class="fade d8">
+      <div class="section-label">
+        <span class="section-label-text">我的受训背景</span>
+        <span class="section-label-line"></span>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <span class="stat-num">250+</span>
+          <span class="stat-label">咨询经验（小时）<br/>持续增加中</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">110+</span>
+          <span class="stat-label">个人体验（小时）<br/>持续增加中</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">110h</span>
+          <span class="stat-label">团体督导<br/>持续增加中</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">60h</span>
+          <span class="stat-label">个体督导<br/>持续增加中</span>
+        </div>
+      </div>
+
+      <div class="training-block">
+        <span class="training-group-title">长程培训</span>
+        <ul class="training-list">
+          <li><span class="yr">2020–2023</span>简单心理 Uni · 咨询师成长计划</li>
+          <li><span class="yr">2025 至今</span>国际存在人本学院 · 2年系统训练</li>
+          <li><span class="yr">2025 至今</span>CBT 两年系统训练</li>
+        </ul>
+      </div>
+
+      <div class="training-block">
+        <span class="training-group-title">短程培训</span>
+        <ul class="training-list">
+          <li><span class="yr">2020–2021</span>简单心理 Uni · 人本主义心理治疗入门课</li>
+          <li><span class="yr">2021</span>简单心理 Uni · 自体心理学入门课程</li>
+          <li><span class="yr">2021–2022</span>简单心理 Uni · 叶斌格式塔心理治疗入门课</li>
+          <li><span class="yr">2025</span>简单心理 Uni · 依恋理论的临床实践</li>
+          <li><span class="yr">2025</span>简单心理 Uni · 动机式访谈入门</li>
+        </ul>
+      </div>
+
+      <div class="training-block">
+        <span class="training-group-title">学历与资质</span>
+        <ul class="training-list">
+          <li><span class="yr"></span>中国人民大学 · 应用心理学硕士</li>
+          <li><span class="yr"></span>英国拉夫堡大学 · 传播学硕士</li>
+          <li><span class="yr"></span>国家三级心理咨询师</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ══════════ 英雄结语 ══════════ -->
+    <div class="hero-closing">
+      <span class="hero-closing-deco">✦ ✦ ✦</span>
+      <p class="hero-closing-text">
+        能鼓起勇气走进咨询室的人，<br>本身就是自己生活里的<em>英雄</em>了。
+      </p>
+      <span class="hero-closing-deco-bottom">✦ ✦ ✦</span>
+    </div>
+
+
+  </main>
+
+  <footer>存在人本取向 · 心理咨询师 ChenChen</footer>
+
+  <nav class="site-nav">
+    <a href="index.html"><span class="nn">01</span> 首页</a>
+    <a href="about.html"><span class="nn">02</span> 关于我</a>
+    <a href="podcast.html"><span class="nn">03</span> 播客-小心思-</a>
+    <a href="theater.html"><span class="nn">04</span> 心理探险家</a>
+    <a href="consult.html" class="active"><span class="nn">05</span> 咨询预约</a>
+  </nav>
+</body>
+</html>
