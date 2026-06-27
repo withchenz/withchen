@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>方案A — 取向纯粹性 Waffle</title>
+<style>
+  :root {
+    --bg: #ede9e1; --paper: #f7f4ee; --text: #1a1815;
+    --text-mid: #4a4640; --text-light: #9a9590; --rule: #d4cfc6;
+    --red: #e07070; --gold: #d4a847; --sage: #7aaa8a;
+    --blue: #6a9ab8; --lavender: #9b8dc4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    font-family: 'Work Sans', sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 40px;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,300&family=Work+Sans:wght@300;400;500;600&display=swap');
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    box-shadow: 3px 3px 0 var(--rule);
+    border-radius: 2px;
+    padding: 48px 56px;
+    max-width: 860px;
+    width: 100%;
+  }
+  .label { font-size: 11px; font-weight: 600; letter-spacing: .08em; color: var(--red); text-transform: uppercase; margin-bottom: 8px; }
+  h2 { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 700; color: var(--text); margin-bottom: 6px; line-height: 1.2; }
+  .sub { font-size: 14px; color: var(--text-light); margin-bottom: 36px; }
+  .rule { height: 2px; background: var(--text); margin-bottom: 32px; }
+
+  /* Waffle grid */
+  .waffle-wrap { display: flex; gap: 48px; align-items: flex-start; }
+  .waffle {
+    display: grid;
+    grid-template-columns: repeat(20, 18px);
+    gap: 3px;
+    flex-shrink: 0;
+  }
+  .cell {
+    width: 18px; height: 18px; border-radius: 3px;
+  }
+  .c1 { background: var(--red); }       /* 精神分析 单一 */
+  .c2 { background: var(--blue); }      /* 人本/EFT 单一 */
+  .c3 { background: var(--gold); }      /* CBT 单一 */
+  .c4 { background: var(--sage); }      /* 家庭/后现代 单一 */
+  .c5 { background: #c8b8e8; }          /* 双取向 */
+  .c6 { background: #e8d8c0; }          /* 三取向+ */
+  .c7 { background: var(--rule); }      /* 仅整合/空 */
+
+  .legend { display: flex; flex-direction: column; gap: 14px; padding-top: 4px; }
+  .legend-item { display: flex; align-items: center; gap: 10px; }
+  .dot { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
+  .legend-text { font-size: 13px; color: var(--text-mid); }
+  .legend-text strong { color: var(--text); font-weight: 600; }
+
+  .stat-row { display: flex; gap: 40px; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--rule); }
+  .stat { text-align: center; }
+  .stat-num { font-family: 'Fraunces', serif; font-size: 36px; font-weight: 700; color: var(--text); line-height: 1; }
+  .stat-label { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="label">Slide 09d · FINDINGS</div>
+  <h2>谁在"坚守"单一取向？</h2>
+  <p class="sub">200条帖子中，每格代表1位咨询师的取向申报</p>
+  <div class="rule"></div>
+
+  <div class="waffle-wrap">
+    <div class="waffle" id="waffle"></div>
+    <div class="legend">
+      <div style="font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--text-light);margin-bottom:4px;">单一取向（65%）</div>
+      <div class="legend-item"><div class="dot" style="background:var(--red)"></div><div class="legend-text"><strong>精神分析/动力学</strong> · 67人</div></div>
+      <div class="legend-item"><div class="dot" style="background:var(--blue)"></div><div class="legend-text"><strong>人本/存在/EFT</strong> · 29人</div></div>
+      <div class="legend-item"><div class="dot" style="background:var(--gold)"></div><div class="legend-text"><strong>CBT/认知行为</strong> · 17人</div></div>
+      <div class="legend-item"><div class="dot" style="background:var(--sage)"></div><div class="legend-text"><strong>家庭·后现代</strong> · 17人</div></div>
+      <div style="height:8px"></div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--text-light);margin-bottom:4px;">混搭取向（33%）</div>
+      <div class="legend-item"><div class="dot" style="background:#c8b8e8"></div><div class="legend-text"><strong>双取向</strong> · 48人</div></div>
+      <div class="legend-item"><div class="dot" style="background:#e8d8c0"></div><div class="legend-text"><strong>三取向及以上</strong> · 18人</div></div>
+      <div style="height:8px"></div>
+      <div class="legend-item"><div class="dot" style="background:var(--rule)"></div><div class="legend-text">仅写"整合" · 4人</div></div>
+    </div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat">
+      <div class="stat-num" style="color:var(--red)">65%</div>
+      <div class="stat-label">只申报单一取向</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" style="color:var(--lavender)">33%</div>
+      <div class="stat-label">列出多个取向</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">2%</div>
+      <div class="stat-label">只写"整合"不具体</div>
+    </div>
+    <div class="stat" style="margin-left:auto;text-align:left;max-width:200px">
+      <div style="font-size:12px;color:var(--text-mid);font-style:italic;line-height:1.6">"整合取向"几乎不出现在帖子标题——但混搭的33%，没有人承认。</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const waffle = document.getElementById('waffle');
+// 200格：精神分析67, 人本29, CBT17, 家庭+后现代17, 双取向48, 三取向+18, 整合4
+const data = [
+  {cls:'c1', n:67}, {cls:'c2', n:29}, {cls:'c3', n:17},
+  {cls:'c4', n:17}, {cls:'c5', n:48}, {cls:'c6', n:18}, {cls:'c7', n:4}
+];
+data.forEach(({cls, n}) => {
+  for(let i=0;i<n;i++){
+    const d = document.createElement('div');
+    d.className = 'cell ' + cls;
+    waffle.appendChild(d);
+  }
+});
+</script>
+</body>
+</html>

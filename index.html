@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>withchen</title>
+  <link rel="preconnect" href="https://fonts.loli.net" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.loli.net/css2?family=Caveat:wght@400;600&family=Noto+Sans+SC:wght@300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue:        #74B9E8;
+      --blue-deep:   #4A9BD4;
+      --blue-light:  #D0E9F7;
+      --cream:       #F7F3EC;
+      --green:       #8BBF9F;
+      --coral:       #E8734A;
+      --ink:         #2C2C2C;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--blue);
+      color: var(--cream);
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-family: 'Inter', 'Noto Sans SC', sans-serif;
+      font-weight: 300;
+      overflow: hidden; position: relative;
+    }
+    .bg-sparkles { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .sparkle {
+      position: absolute; color: #FFE066; opacity: 0.2;
+      animation: twinkle 3s ease-in-out infinite;
+    }
+    .sparkle:nth-child(1)  { top:  8%; left: 12%; font-size: 1.2rem; animation-delay: 0s; }
+    .sparkle:nth-child(2)  { top: 15%; left: 78%; font-size: 0.8rem; animation-delay: 0.7s; }
+    .sparkle:nth-child(3)  { top: 30%; left:  5%; font-size: 0.6rem; animation-delay: 1.4s; }
+    .sparkle:nth-child(4)  { top: 25%; left: 88%; font-size: 1rem;   animation-delay: 0.3s; }
+    .sparkle:nth-child(5)  { top: 55%; left:  8%; font-size: 0.7rem; animation-delay: 1.8s; }
+    .sparkle:nth-child(6)  { top: 70%; left: 82%; font-size: 1.1rem; animation-delay: 0.5s; }
+    .sparkle:nth-child(7)  { top: 80%; left: 20%; font-size: 0.8rem; animation-delay: 2.1s; }
+    .sparkle:nth-child(8)  { top: 88%; left: 65%; font-size: 0.6rem; animation-delay: 1.1s; }
+    .sparkle:nth-child(9)  { top: 45%; left: 93%; font-size: 0.9rem; animation-delay: 2.5s; }
+    .sparkle:nth-child(10) { top: 62%; left: 48%; font-size: 0.5rem; animation-delay: 0.9s; }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.15; transform: scale(0.8) rotate(0deg); }
+      50%       { opacity: 0.9;  transform: scale(1.4) rotate(20deg); }
+    }
+    .container {
+      position: relative; z-index: 1;
+      text-align: center; padding: 2rem; max-width: 640px;
+    }
+    .en-name {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      letter-spacing: 0.3em; color: var(--blue-light);
+      margin-bottom: 0.75rem;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s;
+    }
+    .cn-name {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(3rem, 10vw, 5.5rem);
+      font-weight: 600; line-height: 1;
+      color: var(--cream); letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.5s;
+    }
+    .divider {
+      display: flex; align-items: center; gap: 0.75rem;
+      justify-content: center; margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.8s;
+    }
+    .divider-line { width: 40px; height: 1px; background: var(--cream); opacity: 0.4; }
+    .divider-star { font-size: 0.7rem; opacity: 0.7; }
+    .roles {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-weight: 300; font-size: clamp(0.85rem, 2vw, 1rem);
+      color: var(--cream); line-height: 2; letter-spacing: 0.08em;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 1s;
+    }
+    .roles span { display: inline-block; margin: 0 0.3rem; }
+    .roles span::after { content: '·'; margin-left: 0.6rem; opacity: 0.4; }
+    .roles span:last-child::after { content: ''; }
+    .page-nav {
+      margin-top: 2.5rem; display: flex; gap: 1.5rem; justify-content: center;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 1.4s;
+    }
+    .page-nav a {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.82rem; font-weight: 300;
+      color: var(--cream); text-decoration: none;
+      letter-spacing: 0.12em; opacity: 0.6;
+      border-bottom: 1px solid rgba(247,243,236,0.3);
+      padding-bottom: 2px; transition: opacity 0.2s;
+    }
+    .page-nav a:hover { opacity: 1; }
+    .footer {
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      z-index: 1; font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.7rem; color: var(--cream);
+      letter-spacing: 0.1em; white-space: nowrap;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 1.8s;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .spotlight { position: fixed; inset: 0; pointer-events: none; z-index: 2; opacity: 0; transition: opacity 0.4s ease; }
+    .spotlight.active { opacity: 1; }
+    @media (max-width: 480px) {
+      .footer { white-space: normal; text-align: center; width: 90%; left: 5%; transform: none; line-height: 1.8; }
+      .roles { line-height: 2.4; }
+    }
+  </style>
+</head>
+<body>
+  <canvas class="spotlight" id="spotlight"></canvas>
+  <div class="bg-sparkles">
+    <span class="sparkle">✦</span><span class="sparkle">✦</span><span class="sparkle">✦</span>
+    <span class="sparkle">✦</span><span class="sparkle">✦</span><span class="sparkle">✦</span>
+    <span class="sparkle">✦</span><span class="sparkle">✦</span><span class="sparkle">✦</span><span class="sparkle">✦</span>
+  </div>
+  <div class="container">
+    <p class="en-name">withchen.com</p>
+    <h1 class="cn-name">CHEN</h1>
+    <div class="divider">
+      <span class="divider-line"></span><span class="divider-star">✦</span><span class="divider-line"></span>
+    </div>
+    <p class="roles">
+      <span>内容创作者</span><span>播客主播</span><span>心理咨询师</span>
+    </p>
+    <nav class="page-nav">
+      <a href="about.html">关于我</a>
+      <a href="podcast.html">小心思</a>
+      <a href="theater.html">心理探险家</a>
+    </nav>
+  </div>
+  <p class="footer">星星与七便士 · -小心思- · 存在人本取向咨询师</p>
+  <script>
+    const canvas = document.getElementById('spotlight');
+    const ctx = canvas.getContext('2d');
+    let mouse = { x: -999, y: -999 }, current = { x: -999, y: -999 };
+    function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
+    resize(); window.addEventListener('resize', resize);
+    document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; canvas.classList.add('active'); });
+    document.addEventListener('mouseleave', () => canvas.classList.remove('active'));
+    document.addEventListener('touchmove', e => { const t = e.touches[0]; mouse.x = t.clientX; mouse.y = t.clientY; canvas.classList.add('active'); }, { passive: true });
+    document.addEventListener('touchend', () => canvas.classList.remove('active'));
+    (function draw() {
+      current.x += (mouse.x - current.x) * 0.1;
+      current.y += (mouse.y - current.y) * 0.1;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(30,80,120,0.45)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.save(); ctx.globalCompositeOperation = 'destination-out';
+      const r = 180, grad = ctx.createRadialGradient(current.x, current.y, 0, current.x, current.y, r);
+      grad.addColorStop(0, 'rgba(0,0,0,1)'); grad.addColorStop(0.6, 'rgba(0,0,0,0.7)'); grad.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = grad; ctx.beginPath(); ctx.arc(current.x, current.y, r, 0, Math.PI*2); ctx.fill(); ctx.restore();
+      ctx.save(); ctx.globalCompositeOperation = 'source-over';
+      const glow = ctx.createRadialGradient(current.x, current.y, 0, current.x, current.y, r*0.8);
+      glow.addColorStop(0, 'rgba(255,224,102,0.18)'); glow.addColorStop(0.5, 'rgba(255,200,50,0.06)'); glow.addColorStop(1, 'rgba(255,200,50,0)');
+      ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(current.x, current.y, r*0.8, 0, Math.PI*2); ctx.fill(); ctx.restore();
+      requestAnimationFrame(draw);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>Slide 13 — 预咨询 × 互动量</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;1,9..144,300&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<style>
+  :root{--bg:#ede9e1;--paper:#f7f4ee;--text:#1a1815;--text-mid:#4a4640;--text-light:#9a9590;--rule:#d4cfc6;--blue:#6a9ab8;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);font-family:'Work Sans',sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:40px;}
+  .card{background:var(--paper);border:1px solid var(--rule);box-shadow:3px 3px 0 var(--rule);padding:48px 56px;max-width:860px;width:100%;}
+  .label{font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--blue);text-transform:uppercase;margin-bottom:8px;}
+  h2{font-family:'Fraunces',serif;font-size:30px;font-weight:700;color:var(--text);margin-bottom:6px;}
+  .sub{font-size:14px;color:var(--text-light);margin-bottom:8px;}
+  .callout{background:#eef3f7;border-left:3px solid var(--blue);padding:10px 16px;margin-bottom:24px;font-size:13px;color:var(--text-mid);font-style:italic;}
+  .rule{height:2px;background:var(--text);margin-bottom:28px;}
+  .two-col{display:flex;gap:48px;align-items:center;}
+  #chart{flex:1;height:320px;}
+  .stats{display:flex;flex-direction:column;gap:28px;flex-shrink:0;width:200px;}
+  .stat-block{border-left:3px solid var(--rule);padding-left:16px;}
+  .stat-block.active{border-color:var(--blue);}
+  .stat-num{font-family:'Fraunces',serif;font-size:40px;font-weight:700;line-height:1;}
+  .stat-sub{font-size:12px;color:var(--text-light);margin-top:4px;}
+  .note{font-size:12px;color:var(--text-light);margin-top:16px;}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="label">Slide 13 · FINDINGS — 什么帖子更受欢迎？</div>
+  <h2>有预咨询设置的帖子，互动高 2.7×</h2>
+  <p class="sub">是否设有预咨询/评估 × 平均互动量</p>
+  <div class="callout">预咨询不只是服务设置——它在帖子里传达出<strong>专业感与边界意识</strong>，来访者更愿意回应</div>
+  <div class="rule"></div>
+  <div class="two-col">
+    <div id="chart"></div>
+    <div class="stats">
+      <div class="stat-block active">
+        <div class="stat-num" style="color:var(--blue)">65.9</div>
+        <div class="stat-sub">有预咨询 · 平均互动量<br>（N=117）</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num" style="color:var(--rule)">24.5</div>
+        <div class="stat-sub">无预咨询 · 平均互动量<br>（N=31）</div>
+      </div>
+      <div class="stat-block" style="border-color:var(--text-light)">
+        <div class="stat-num" style="color:var(--text-mid);font-size:28px">53%</div>
+        <div class="stat-sub">的有效招募贴<br>设有预咨询</div>
+      </div>
+    </div>
+  </div>
+  <p class="note">N=148条（排除未标注）· 互动量=点赞+收藏+评论均值</p>
+</div>
+<script>
+const chart = echarts.init(document.getElementById('chart'));
+chart.setOption({
+  backgroundColor:'#f7f4ee',
+  grid:{top:16,bottom:40,left:48,right:16},
+  tooltip:{show:false},
+  xAxis:{type:'category',data:['无预咨询','有预咨询'],axisLabel:{color:'#4a4640',fontSize:13,fontFamily:'Work Sans'},axisLine:{lineStyle:{color:'#d4cfc6'}},axisTick:{show:false}},
+  yAxis:{type:'value',max:90,axisLabel:{color:'#9a9590',fontSize:11},axisLine:{show:false},splitLine:{lineStyle:{color:'#d4cfc6',type:'dashed'}}},
+  series:[{
+    type:'bar',
+    data:[
+      {value:24.5,itemStyle:{color:'#d4cfc6'}},
+      {value:65.9,itemStyle:{color:'#6a9ab8'}}
+    ],
+    barWidth:64,
+    label:{show:true,position:'top',formatter:p=>p.value,fontSize:18,fontWeight:700,color:'#1a1815',fontFamily:'Fraunces, serif'}
+  }]
+});
+</script>
+</body>
+</html>

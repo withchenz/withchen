@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>withchen</title>
+  <link rel="preconnect" href="https://fonts.loli.net" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.loli.net/css2?family=Caveat:wght@400;600&family=Noto+Sans+SC:wght@300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:  #060D1A;
+      --blue:  #74B9E8;
+      --cream: #F7F3EC;
+      --coral: #E8734A;
+      --green: #8BBF9F;
+      --gold:  #FFE066;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: var(--navy); }
+
+    /* ── Star canvas ── */
+    #stars { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; }
+
+    /* ── Intro ── */
+    #intro {
+      position: fixed; inset: 0; z-index: 10;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 4.5rem;   /* 欢迎文字与按钮拉开距离 */
+      transition: opacity 0.6s ease;
+    }
+    #intro.hidden { opacity: 0; pointer-events: none; }
+
+    .welcome {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: clamp(1rem, 2.8vw, 1.45rem);
+      font-weight: 300;
+      color: var(--cream);
+      letter-spacing: 0.38em;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+    @keyframes shimmer {
+      0%,100% { opacity: 0.3; text-shadow: 0 0 20px rgba(247,243,236,0.1); }
+      50%      { opacity: 0.95; text-shadow: 0 0 28px rgba(247,243,236,0.5), 0 0 55px rgba(116,185,232,0.2); }
+    }
+
+    #enter-btn {
+      font-family: 'Noto Sans SC', sans-serif;  /* 中文字体统一 */
+      font-size: clamp(0.7rem, 1.4vw, 0.85rem); /* 更小 */
+      font-weight: 300;
+      color: rgba(247,243,236,0.5);             /* 若隐若现 */
+      background: transparent;
+      border: 1px solid rgba(247,243,236,0.18);
+      padding: 0.55rem 1.75rem;
+      border-radius: 2rem;
+      cursor: pointer;
+      letter-spacing: 0.22em;
+      transition: all 0.4s ease;
+      animation: btn-pulse 5s ease-in-out infinite;
+    }
+    #enter-btn:hover {
+      color: rgba(247,243,236,0.9);
+      border-color: rgba(247,243,236,0.5);
+      background: rgba(247,243,236,0.05);
+      box-shadow: 0 0 18px rgba(116,185,232,0.25);
+    }
+    /* 按钮呼吸感：轻微出现/消退，引导点击 */
+    @keyframes btn-pulse {
+      0%,100% { opacity: 0.55; box-shadow: 0 0 0 rgba(116,185,232,0); }
+      50%      { opacity: 1;    box-shadow: 0 0 16px rgba(116,185,232,0.3); }
+    }
+
+    /* ── Curtains ── */
+    #curtain-left, #curtain-right {
+      position: fixed; top: 0; height: 100vh; width: 50%;
+      z-index: 20;
+      transition: transform 0.95s cubic-bezier(0.4,0,0.2,1);
+    }
+    #curtain-left {
+      left: 0;
+      /* 初始在屏幕外左边 */
+      transform: translateX(-100%);
+      background:
+        repeating-linear-gradient(to right,
+          rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 2%,
+          rgba(0,0,0,0.1) 5%, rgba(255,255,255,0) 8%),
+        linear-gradient(160deg, #1C0A4A 0%, #120835 60%, #0D0628 100%);
+      box-shadow: inset -6px 0 20px rgba(0,0,0,0.5);
+    }
+    #curtain-right {
+      right: 0;
+      /* 初始在屏幕外右边 */
+      transform: translateX(100%);
+      background:
+        repeating-linear-gradient(to left,
+          rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 2%,
+          rgba(0,0,0,0.1) 5%, rgba(255,255,255,0) 8%),
+        linear-gradient(200deg, #1C0A4A 0%, #120835 60%, #0D0628 100%);
+      box-shadow: inset 6px 0 20px rgba(0,0,0,0.5);
+    }
+    /* 帷幔关上（划入中间） */
+    #curtain-left.closing  { transform: translateX(0);    transition: transform 0.45s ease-in; }
+    #curtain-right.closing { transform: translateX(0);    transition: transform 0.45s ease-in; }
+    /* 帷幔拉开（划出两侧） */
+    #curtain-left.open  { transform: translateX(-100%);   transition: transform 0.95s cubic-bezier(0.4,0,0.2,1); }
+    #curtain-right.open { transform: translateX(100%);    transition: transform 0.95s cubic-bezier(0.4,0,0.2,1); }
+
+    /* Curtain tie */
+    .curtain-tie {
+      position: fixed; top: 52%; z-index: 19;
+      width: 30px; height: 52px;
+      opacity: 0; transition: opacity 0.5s ease 0.85s;
+      pointer-events: none;
+    }
+    #tie-left  { left: 3px; }
+    #tie-right { right: 3px; }
+    .curtain-tie.show { opacity: 1; }
+    .curtain-tie::before {
+      content: '';
+      display: block; width: 100%; height: 100%;
+      background: radial-gradient(ellipse at 50% 35%, #2d1570 40%, #1a0a40 100%);
+      border-radius: 50% 50% 35% 35% / 55% 55% 45% 45%;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.6);
+    }
+
+    /* ── Stage ── */
+    #stage {
+      position: fixed; inset: 0; z-index: 5;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-end;
+    }
+
+    /* Characters */
+    .char-wrap {
+      position: relative; width: 100%;
+      flex: 1; display: flex;
+      align-items: flex-end; justify-content: center;
+    }
+
+    #char-gouzi {
+      position: absolute; bottom: 0;
+      left: 50%;
+      height: clamp(110px, 18vh, 200px); width: auto; /* 狗子明显小一些 */
+      transform: translate(-260%, 20px);
+      opacity: 0;
+      z-index: 3; /* 狗子在前 */
+      filter: drop-shadow(0 6px 16px rgba(0,0,0,0.5));
+    }
+    #char-chen {
+      position: absolute; bottom: 0;
+      left: 50%;
+      height: clamp(200px, 36vh, 370px); width: auto;
+      transform: translate(60%, 20px);
+      opacity: 0;
+      z-index: 2;
+      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.5));
+    }
+    #char-together {
+      position: absolute; bottom: 0;
+      left: 50%; transform: translateX(-50%);
+      width: clamp(300px, 52vw, 580px); height: auto;
+      opacity: 0;
+      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.5));
+    }
+
+    @keyframes bob {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-7px); }
+    }
+
+    /* ── Film strip ── */
+    #filmstrip {
+      width: 100%; background: #0e0e0e;
+      opacity: 0; transform: translateY(50px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      flex-shrink: 0;
+    }
+    #filmstrip.show { opacity: 1; transform: translateY(0); }
+
+    .sprockets {
+      display: flex; align-items: center;
+      height: 16px; padding: 0 8px; gap: 10px;
+      background: #080808; overflow: hidden;
+    }
+    .s-hole {
+      flex-shrink: 0; width: 11px; height: 9px;
+      border-radius: 2px; background: #000;
+      border: 1px solid #1e1e1e;
+    }
+
+    .film-frames {
+      display: flex; overflow-x: auto;
+      scrollbar-width: none; justify-content: center;
+    }
+    .film-frames::-webkit-scrollbar { display: none; }
+
+    .film-frame {
+      flex: 0 0 auto;
+      min-width: clamp(110px, 18vw, 190px);
+      padding: 0.85rem 0.75rem 0.8rem;
+      border-right: 1px solid #1e1e1e;
+      text-decoration: none;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 0.35rem;
+      transition: background 0.2s;
+    }
+    .film-frame:first-child { border-left: 1px solid #1e1e1e; }
+    .film-frame:hover { background: rgba(255,255,255,0.05); }
+
+    .frame-icon {
+      font-size: 1.1rem; opacity: 0.5; line-height: 1;
+    }
+    .frame-label {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: clamp(0.65rem, 1.4vw, 0.78rem);
+      font-weight: 300; color: var(--cream);
+      letter-spacing: 0.07em; text-align: center;
+      line-height: 1.45;
+    }
+
+    /* withchen logo */
+    #site-logo {
+      position: fixed; top: 1.25rem; left: 2rem; z-index: 30;
+      font-family: 'Caveat', cursive; font-size: 1.1rem;
+      color: rgba(247,243,236,0.4);
+      opacity: 0; transition: opacity 0.6s ease;
+      pointer-events: none; text-decoration: none;
+    }
+    #site-logo.show { opacity: 1; pointer-events: all; }
+
+    @media (max-width: 480px) {
+      .film-frame { min-width: 98px; padding: 0.7rem 0.4rem; }
+      #char-gouzi  { height: 15vh; }
+      #char-chen   { height: 28vh; }
+      #char-together { width: 86vw; }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="stars"></canvas>
+  <a href="#" id="site-logo">withchen</a>
+
+  <!-- Intro screen -->
+  <div id="intro">
+    <p class="welcome">欢迎来到我的世界</p>
+    <button id="enter-btn">进入我的世界 ✦</button>
+  </div>
+
+  <!-- Curtains -->
+  <div id="curtain-left"></div>
+  <div id="curtain-right"></div>
+  <div id="tie-left"  class="curtain-tie"></div>
+  <div id="tie-right" class="curtain-tie"></div>
+
+  <!-- Stage -->
+  <div id="stage">
+    <div class="char-wrap">
+      <img id="char-gouzi"    src="gouzi_nobg.png"     alt="狗子" />
+      <img id="char-chen"     src="chen_nobg.png"      alt="Chen" />
+      <img id="char-together" src="gouzihewo_nobg.png" alt="我们" />
+    </div>
+
+    <nav id="filmstrip">
+      <div class="sprockets" id="sp-top"></div>
+      <div class="film-frames">
+        <a href="about.html" class="film-frame">
+          <span class="frame-icon">✦</span>
+          <span class="frame-label">关于我</span>
+        </a>
+        <a href="#" class="film-frame">
+          <span class="frame-icon">✉</span>
+          <span class="frame-label">星星与七便士</span>
+        </a>
+        <a href="podcast.html" class="film-frame">
+          <span class="frame-icon">◉</span>
+          <span class="frame-label">小心思</span>
+        </a>
+        <a href="theater.html" class="film-frame">
+          <span class="frame-icon">◈</span>
+          <span class="frame-label">内在剧场</span>
+        </a>
+        <a href="#" class="film-frame">
+          <span class="frame-icon">♡</span>
+          <span class="frame-label">关于我的<br/>使用说明</span>
+        </a>
+      </div>
+      <div class="sprockets" id="sp-bot"></div>
+    </nav>
+  </div>
+
+  <script>
+    // ── Stars ────────────────────────────────────────────────────
+    const canvas = document.getElementById('stars');
+    const ctx    = canvas.getContext('2d');
+    let stars    = [];
+
+    function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
+    resize();
+    window.addEventListener('resize', resize);
+
+    function initStars() {
+      stars = [];
+      for (let i = 0; i < 200; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.8 + 0.6,   // 0.6–2.4px，高分屏也能看清
+          phase: Math.random() * Math.PI * 2,
+          speed: Math.random() * 0.008 + 0.004,
+          gold:  Math.random() < 0.15,
+        });
+      }
+    }
+    initStars();
+
+    // ── Milky Way band (drawn once onto offscreen canvas) ──────
+    const mwCanvas = document.createElement('canvas');
+    const mwCtx    = mwCanvas.getContext('2d');
+
+    function buildMilkyWay() {
+      mwCanvas.width  = canvas.width;
+      mwCanvas.height = canvas.height;
+      mwCtx.clearRect(0, 0, mwCanvas.width, mwCanvas.height);
+
+      // diagonal nebula band (top-right → bottom-left)
+      const angle = -0.42; // radians
+      const cx = mwCanvas.width * 0.6, cy = mwCanvas.height * 0.35;
+      const len = Math.hypot(mwCanvas.width, mwCanvas.height);
+
+      mwCtx.save();
+      mwCtx.translate(cx, cy);
+      mwCtx.rotate(angle);
+
+      // soft glow band
+      const band = mwCtx.createLinearGradient(-len/2, 0, len/2, 0);
+      band.addColorStop(0,    'rgba(80,110,180,0)');
+      band.addColorStop(0.35, 'rgba(90,120,200,0.07)');
+      band.addColorStop(0.5,  'rgba(120,160,230,0.13)');
+      band.addColorStop(0.65, 'rgba(90,120,200,0.07)');
+      band.addColorStop(1,    'rgba(80,110,180,0)');
+      mwCtx.fillStyle = band;
+      mwCtx.fillRect(-len/2, -mwCanvas.height * 0.28, len, mwCanvas.height * 0.56);
+
+      // a second narrow brighter core
+      const core = mwCtx.createLinearGradient(-len/2, 0, len/2, 0);
+      core.addColorStop(0,    'rgba(160,200,255,0)');
+      core.addColorStop(0.4,  'rgba(160,200,255,0.04)');
+      core.addColorStop(0.5,  'rgba(200,220,255,0.09)');
+      core.addColorStop(0.6,  'rgba(160,200,255,0.04)');
+      core.addColorStop(1,    'rgba(160,200,255,0)');
+      mwCtx.fillStyle = core;
+      mwCtx.fillRect(-len/2, -mwCanvas.height * 0.07, len, mwCanvas.height * 0.14);
+
+      // dense mini-stars within the band
+      for (let i = 0; i < 600; i++) {
+        const x = (Math.random() - 0.5) * len;
+        const y = (Math.random() - 0.5) * mwCanvas.height * 0.45;
+        const r = Math.random() * 0.7 + 0.1;
+        const a = Math.random() * 0.55 + 0.1;
+        mwCtx.beginPath();
+        mwCtx.arc(x, y, r, 0, Math.PI * 2);
+        mwCtx.fillStyle = `rgba(200,220,255,${a})`;
+        mwCtx.fill();
+      }
+
+      mwCtx.restore();
+    }
+    buildMilkyWay();
+
+    function drawStars() {
+      const t = Date.now() * 0.001;
+
+      // background
+      const bg = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      bg.addColorStop(0, '#050C17');
+      bg.addColorStop(1, '#090F1F');
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // milky way band
+      ctx.drawImage(mwCanvas, 0, 0);
+
+      // foreground stars
+      stars.forEach(s => {
+        const a = 0.35 + 0.65 * (0.5 + 0.5 * Math.sin(t * s.speed + s.phase));
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = s.gold ? `rgba(255,220,90,${a})` : `rgba(210,230,255,${a})`;
+        ctx.fill();
+      });
+
+      requestAnimationFrame(drawStars);
+    }
+    drawStars();
+
+    // ── Sprocket holes ───────────────────────────────────────────
+    function buildSprockets(id) {
+      const el = document.getElementById(id);
+      const n  = Math.ceil(innerWidth / 21) + 2;
+      el.innerHTML = Array(n).fill('<div class="s-hole"></div>').join('');
+    }
+    buildSprockets('sp-top');
+    buildSprockets('sp-bot');
+
+    // ── Animation ────────────────────────────────────────────────
+    const intro     = document.getElementById('intro');
+    const curtL     = document.getElementById('curtain-left');
+    const curtR     = document.getElementById('curtain-right');
+    const tieL      = document.getElementById('tie-left');
+    const tieR      = document.getElementById('tie-right');
+    const gouzi     = document.getElementById('char-gouzi');
+    const chen      = document.getElementById('char-chen');
+    const together  = document.getElementById('char-together');
+    const filmstrip = document.getElementById('filmstrip');
+    const siteLogo  = document.getElementById('site-logo');
+
+    const wait = ms => new Promise(r => setTimeout(r, ms));
+
+    async function runAnimation() {
+      document.getElementById('enter-btn').disabled = true;
+
+      // 1. 淡出欢迎文字
+      intro.classList.add('hidden');
+      await wait(400);
+
+      // 2. 帷幔从两侧划入（合拢）
+      curtL.classList.add('closing');
+      curtR.classList.add('closing');
+      await wait(500);
+
+      // 3. 帷幔立刻拉开
+      curtL.classList.remove('closing');
+      curtR.classList.remove('closing');
+      // 强制reflow让浏览器识别class变化
+      void curtL.offsetWidth;
+      curtL.classList.add('open');
+      curtR.classList.add('open');
+
+      // 4. 帷幔结出现
+      await wait(800);
+      tieL.classList.add('show');
+      tieR.classList.add('show');
+
+      // 5. 狗子从左下进场
+      await wait(100);
+      gouzi.style.transition = 'transform 1.0s cubic-bezier(0.25,0.8,0.25,1), opacity 0.35s ease';
+      gouzi.style.opacity = '1';
+      gouzi.style.transform = 'translate(-200%, 0)'; /* 落点：左侧 */
+
+      // 6. Chen从右侧进场（稍晚）
+      await wait(280);
+      chen.style.transition = 'transform 1.0s cubic-bezier(0.25,0.8,0.25,1), opacity 0.35s ease';
+      chen.style.opacity = '1';
+      chen.style.transform = 'translate(10%, 0)'; /* 落点：略偏右 */
+
+      // 7. 落定后轻弹
+      await wait(1050);
+      gouzi.style.animation = 'bob 0.55s ease-in-out 2';
+      chen.style.animation  = 'bob 0.55s ease-in-out 2';
+
+      // 8. 淡出两人，淡入合影
+      await wait(1300);
+      gouzi.style.transition = 'opacity 0.4s ease';
+      chen.style.transition  = 'opacity 0.4s ease';
+      gouzi.style.opacity = '0';
+      chen.style.opacity  = '0';
+
+      await wait(220);
+      together.style.transition = 'opacity 0.7s ease';
+      together.style.opacity = '1';
+
+      // 9. 胶片导航升起
+      await wait(550);
+      filmstrip.classList.add('show');
+      siteLogo.classList.add('show');
+    }
+
+    document.getElementById('enter-btn').addEventListener('click', runAnimation);
+    document.addEventListener('keydown', e => {
+      if ((e.key === 'Enter' || e.key === ' ') && !document.getElementById('enter-btn').disabled) {
+        runAnimation();
+      }
+    });
+  </script>
+</body>
+</html>

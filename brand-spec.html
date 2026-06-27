@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>withchen · 品牌规范</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --blue:       #74B9E8;
+    --blue-deep:  #4A9BD4;
+    --blue-light: #D0E9F7;
+    --cream:      #F7F3EC;
+    --cream-warm: #EDE7DA;
+    --green:      #8BBF9F;
+    --green-light:#C4DDD0;
+    --coral:      #E8734A;
+    --coral-light:#FAE0D8;
+    --ink:        #2C2C2C;
+    --ink-light:  #6B6B6B;
+    --white:      #FFFFFF;
+  }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Noto Sans SC', 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--blue);
+    padding: 60px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .header-title {
+    font-family: 'Caveat', cursive;
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+  .header-sub {
+    font-family: 'ZCOOL KuaiLe', cursive;
+    font-size: 18px;
+    color: var(--ink);
+    opacity: 0.6;
+    margin-top: 8px;
+  }
+  .header-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.5;
+    text-align: right;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    padding: 64px 80px;
+    border-bottom: 1px solid var(--cream-warm);
+  }
+  .section-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 32px;
+  }
+
+  /* ── COLORS ── */
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+  .color-card {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .color-swatch {
+    height: 120px;
+  }
+  .color-info {
+    background: white;
+    padding: 14px 16px;
+  }
+  .color-name {
+    font-family: 'ZCOOL KuaiLe', cursive;
+    font-size: 14px;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .color-hex {
+    font-family: 'Inter', monospace;
+    font-size: 11px;
+    color: var(--ink-light);
+  }
+  .color-role {
+    font-size: 11px;
+    color: var(--ink-light);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  .type-block {
+    margin-bottom: 48px;
+    padding: 36px 40px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+  }
+  .type-meta {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .type-display-cn {
+    font-family: 'ZCOOL KuaiLe', cursive;
+    font-size: 48px;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .type-display-en {
+    font-family: 'Caveat', cursive;
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .type-body {
+    font-family: 'Noto Sans SC', 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    color: var(--ink);
+    line-height: 1.9;
+    max-width: 520px;
+  }
+  .type-body-en {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    color: var(--ink);
+    line-height: 1.9;
+    max-width: 520px;
+  }
+
+  /* ── COMBINATION PREVIEW ── */
+  .preview-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .preview-card {
+    border-radius: 20px;
+    padding: 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .preview-card.light {
+    background: var(--cream);
+    border: 1px solid var(--cream-warm);
+  }
+  .preview-card.dark {
+    background: var(--ink);
+    color: white;
+  }
+  .preview-card.blue {
+    background: var(--blue-light);
+    border: 1px solid var(--blue);
+  }
+  .preview-card.pink {
+    background: var(--pink-light);
+    border: 1px solid var(--pink);
+  }
+  .preview-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: 12px;
+  }
+  .preview-title-cn {
+    font-family: 'ZCOOL KuaiLe', cursive;
+    font-size: 28px;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .preview-title-en {
+    font-family: 'Caveat', cursive;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .preview-body {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 1.9;
+    opacity: 0.75;
+  }
+  .preview-chip {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin-top: 16px;
+    font-family: 'Inter', sans-serif;
+  }
+  .chip-blue { background: var(--blue); color: var(--ink); }
+  .chip-green { background: var(--green-light); color: var(--ink); }
+  .chip-pink { background: var(--pink); color: var(--ink); }
+  .chip-cream { background: var(--cream-warm); color: var(--ink); }
+  .chip-white { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); }
+
+  .sparkle {
+    position: absolute;
+    font-size: 22px;
+    opacity: 0.3;
+  }
+
+  /* ── DOMAIN SECTION ── */
+  .domain-box {
+    background: white;
+    border-radius: 20px;
+    padding: 36px 40px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+  }
+  .domain-main {
+    flex: 1;
+  }
+  .domain-name {
+    font-family: 'Caveat', cursive;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--blue-deep);
+    margin-bottom: 8px;
+  }
+  .domain-desc {
+    font-size: 14px;
+    color: var(--ink-light);
+    line-height: 1.7;
+    max-width: 400px;
+  }
+  .domain-step {
+    flex: 1;
+  }
+  .step-title {
+    font-family: 'ZCOOL KuaiLe', cursive;
+    font-size: 16px;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+  .step-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .step-num {
+    width: 22px;
+    height: 22px;
+    background: var(--blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  code {
+    background: var(--cream-warm);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 12px;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    position: sticky;
+    top: 0;
+    background: rgba(247,243,236,0.92);
+    backdrop-filter: blur(8px);
+    padding: 14px 80px;
+    display: flex;
+    gap: 32px;
+    z-index: 100;
+    border-bottom: 1px solid var(--cream-warm);
+  }
+  .nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav a:hover { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="header-title">withchen<br>品牌规范</div>
+    <div class="header-sub">郑忱个人网站 · Brand Specification v1.0</div>
+  </div>
+  <div class="header-tag">
+    项目零 · Phase 00<br>
+    品牌基础 · Brand Foundation<br>
+    2026.06
+  </div>
+</div>
+
+<nav class="nav">
+  <a href="#colors">色彩</a>
+  <a href="#type">字体</a>
+  <a href="#preview">组合预览</a>
+  <a href="#domain">域名</a>
+</nav>
+
+<!-- ── 色彩系统 ── -->
+<section class="section" id="colors">
+  <div class="section-label">01 · 色彩系统 · Color System</div>
+  <div class="color-grid">
+
+    <div class="color-card">
+      <div class="color-swatch" style="background:#74B9E8;"></div>
+      <div class="color-info">
+        <div class="color-name">矢车菊蓝</div>
+        <div class="color-hex">#74B9E8</div>
+        <div class="color-role">主色 · 背景大面积用色<br>温柔、开阔、安全</div>
+      </div>
+    </div>
+
+    <div class="color-card">
+      <div class="color-swatch" style="background:#F7F3EC;border:1px solid #EDE7DA;"></div>
+      <div class="color-info">
+        <div class="color-name">奶油白</div>
+        <div class="color-hex">#F7F3EC</div>
+        <div class="color-role">主色 · 页面底色<br>温暖、干净、有质感</div>
+      </div>
+    </div>
+
+    <div class="color-card">
+      <div class="color-swatch" style="background:#8BBF9F;"></div>
+      <div class="color-info">
+        <div class="color-name">鼠尾草绿</div>
+        <div class="color-hex">#8BBF9F</div>
+        <div class="color-role">点缀色 · 标签、按钮<br>自然、疗愈</div>
+      </div>
+    </div>
+
+    <div class="color-card">
+      <div class="color-swatch" style="background:#E8734A;"></div>
+      <div class="color-info">
+        <div class="color-name">珊瑚橙</div>
+        <div class="color-hex">#E8734A</div>
+        <div class="color-role">点缀色 · 心理板块/按钮<br>温暖、有行动感</div>
+      </div>
+    </div>
+
+    <div class="color-card">
+      <div class="color-swatch" style="background:#2C2C2C;"></div>
+      <div class="color-info">
+        <div class="color-name">墨色</div>
+        <div class="color-hex">#2C2C2C</div>
+        <div class="color-role">文字主色 · 插画轮廓<br>温暖的近黑色</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="color-grid" style="margin-top:16px;grid-template-columns:repeat(5,1fr);">
+    <div class="color-card">
+      <div class="color-swatch" style="background:#4A9BD4;"></div>
+      <div class="color-info">
+        <div class="color-name">深蓝</div>
+        <div class="color-hex">#4A9BD4</div>
+        <div class="color-role">蓝色的深版<br>悬停、强调</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#D0E9F7;"></div>
+      <div class="color-info">
+        <div class="color-name">浅蓝</div>
+        <div class="color-hex">#D0E9F7</div>
+        <div class="color-role">蓝色的浅版<br>卡片背景</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#C4DDD0;"></div>
+      <div class="color-info">
+        <div class="color-name">浅绿</div>
+        <div class="color-hex">#C4DDD0</div>
+        <div class="color-role">绿色的浅版<br>卡片背景</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#FAE0D8;"></div>
+      <div class="color-info">
+        <div class="color-name">浅珊瑚</div>
+        <div class="color-hex">#FAE0D8</div>
+        <div class="color-role">珊瑚橙的浅版<br>卡片背景</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#EDE7DA;"></div>
+      <div class="color-info">
+        <div class="color-name">暖灰米</div>
+        <div class="color-hex">#EDE7DA</div>
+        <div class="color-role">分隔线、边框<br>有温度的灰</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 字体系统 ── -->
+<section class="section" id="type">
+  <div class="section-label">02 · 字体系统 · Typography</div>
+
+  <div class="type-block">
+    <div class="type-meta">
+      <span>标题字体 · Display — 站酷快乐体（中文）</span>
+      <span>用于：大标题、导航、板块名</span>
+    </div>
+    <div class="type-display-cn">观察 · 记录 · 陪伴</div>
+    <div class="type-display-cn" style="font-size:32px;opacity:0.6;margin-top:8px;">星星与七便士 · 小心思 · withchen</div>
+  </div>
+
+  <div class="type-block">
+    <div class="type-meta">
+      <span>标题字体 · Display — Caveat（英文）</span>
+      <span>用于：英文标题、装饰性文字、签名</span>
+    </div>
+    <div class="type-display-en">Observe · Remember · Stay</div>
+    <div class="type-display-en" style="font-size:30px;opacity:0.6;margin-top:8px;">withchen.com · a world through her eyes</div>
+  </div>
+
+  <div class="type-block">
+    <div class="type-meta">
+      <span>正文字体 · Body — Noto Sans SC 300（中文）/ Inter 300（英文）</span>
+      <span>用于：文章正文、说明文字</span>
+    </div>
+    <div class="type-body" style="margin-bottom:20px;">
+      我喜欢用电影里的角色来讲心理学——不是因为他们是虚构的，而是因为他们说出了很多真实的人说不出口的话。存在主义告诉我们，焦虑不是病，是人意识到自己自由的代价。
+    </div>
+    <div class="type-body-en">
+      I use film characters to talk about psychology — not because they're fictional, but because they say things that real people can't. Existentialism tells us that anxiety isn't a disorder; it's the price of realizing you are free.
+    </div>
+  </div>
+</section>
+
+<!-- ── 组合预览 ── -->
+<section class="section" id="preview">
+  <div class="section-label">03 · 组合预览 · How It Looks Together</div>
+
+  <div class="preview-row" style="margin-bottom:24px;">
+
+    <div class="preview-card blue">
+      <div class="sparkle" style="top:16px;right:24px;">✦</div>
+      <div class="preview-tag">文章板块 · Articles</div>
+      <div class="preview-title-cn">在京都，我发现了一种对待孤独的方式</div>
+      <div class="preview-title-en">Kyoto, Solitude & Wabi-sabi</div>
+      <div class="preview-body" style="margin-top:12px;">一个人走在哲学之道，我忽然想到，日本人对"物哀"的理解其实和存在主义很接近...</div>
+      <div>
+        <span class="preview-chip chip-blue">文化</span>
+        <span class="preview-chip chip-green" style="margin-left:6px;">日本</span>
+      </div>
+    </div>
+
+    <div class="preview-card pink">
+      <div class="sparkle" style="bottom:20px;right:24px;">✦</div>
+      <div class="preview-tag">播客板块 · Podcast</div>
+      <div class="preview-title-cn">-小心思- EP.23</div>
+      <div class="preview-title-en">The Truman Show & Anxiety</div>
+      <div class="preview-body" style="margin-top:12px;">楚门不知道自己活在一个布景里——但我们呢？我们有多少"真实"是被建构出来的？</div>
+      <div>
+        <span class="preview-chip chip-pink">电影心理</span>
+        <span class="preview-chip chip-cream" style="margin-left:6px;">存在主义</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="preview-row">
+
+    <div class="preview-card light">
+      <div class="preview-tag">心理知识卡片 · Psychology Card</div>
+      <div class="preview-title-cn" style="font-size:22px;">存在性焦虑</div>
+      <div class="preview-title-en" style="font-size:20px;">Existential Anxiety</div>
+      <div class="preview-body" style="margin-top:10px;">
+        不是对某件具体事情的担忧，<br>而是对"我是谁""我为什么在这里"这类问题的基底性不安。<br><br>
+        <em style="font-family:'Inter',sans-serif;font-size:12px;opacity:0.7;">Not a fear of something specific, but a baseline unease about existence itself — "who am I, why am I here."</em>
+      </div>
+    </div>
+
+    <div class="preview-card dark">
+      <div class="sparkle" style="top:20px;right:28px;opacity:0.4;color:var(--blue);">✦</div>
+      <div class="preview-tag" style="color:rgba(255,255,255,0.4);">关于 · About</div>
+      <div class="preview-title-cn" style="color:white;font-size:24px;">我是郑忱</div>
+      <div class="preview-title-en" style="color:var(--blue);font-size:22px;">Hi, I'm Chen.</div>
+      <div class="preview-body" style="color:rgba(255,255,255,0.65);margin-top:10px;">
+        内容创作者、播客主播、存在人本取向的心理咨询师。<br>我用文字观察世界，用声音记录小心思，用狗子陪我走完了一段很重要的时光。
+      </div>
+      <span class="preview-chip chip-white" style="margin-top:16px;">找我聊聊 →</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── 域名购买指引 ── -->
+<section class="section" id="domain">
+  <div class="section-label">04 · 域名购买指引 · Domain Setup</div>
+  <div class="domain-box">
+    <div class="domain-main">
+      <div class="domain-name">withchen.com</div>
+      <div class="domain-desc">
+        建议用 <strong>.com</strong> 而不是 .me——你有专业咨询业务，.com 对来访者更有信任感。<br><br>
+        "with chen" 读起来是"和郑忱在一起"，符合你陪伴型的创作姿态，也好记、好拼写。<br><br>
+        <strong>价格参考</strong>：约 $10–15 美元/年（约 70–100 元人民币）。
+      </div>
+    </div>
+    <div class="domain-step">
+      <div class="step-title">购买步骤（15分钟内搞定）</div>
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div>打开 <code>namecheap.com</code>，搜索 <code>withchen.com</code> 确认是否可购买</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div>注册账号，用信用卡或PayPal付款，勾选 <strong>WhoisGuard</strong>（保护个人信息，免费）</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div>注册 <code>vercel.com</code> 账号（用GitHub登录最方便，如果没有GitHub也可以邮箱注册）</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div>把这两件事做完后告诉我，我们就可以开始搭网站骨架了</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="padding:40px 80px;text-align:center;font-size:12px;color:var(--ink-light);font-family:'Inter',sans-serif;letter-spacing:0.1em;">
+  withchen · Brand Specification v1.0 · 2026.06 · 郑忱个人网站项目
+</div>
+
+</body>
+</html>

@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>心理探险家 · withchen</title>
+  <link rel="preconnect" href="https://fonts.loli.net" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.loli.net/css2?family=Caveat:wght@400;600&family=Noto+Sans+SC:wght@300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue:       #74B9E8;
+      --blue-deep:  #4A9BD4;
+      --blue-light: #D0E9F7;
+      --cream:      #F7F3EC;
+      --green:      #8BBF9F;
+      --coral:      #E8734A;
+      --ink:        #2C2C2C;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      min-height: 100vh;
+      font-family: 'Inter', 'Noto Sans SC', sans-serif;
+      font-weight: 300;
+    }
+
+    /* ── 导航 ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(247,243,236,0.88);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    }
+    .nav-logo {
+      font-family: 'Caveat', cursive; font-size: 1.1rem;
+      color: var(--ink); text-decoration: none;
+      opacity: 0.55; letter-spacing: 0.05em; transition: opacity 0.2s;
+    }
+    .nav-logo:hover { opacity: 0.9; }
+    .nav-back {
+      font-family: 'Inter', sans-serif; font-size: 0.75rem;
+      color: var(--ink); text-decoration: none;
+      opacity: 0.35; letter-spacing: 0.15em; transition: opacity 0.2s;
+    }
+    .nav-back:hover { opacity: 0.7; }
+
+    /* ── 背景 sparkle ── */
+    .bg-sparkles { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .sparkle { position: absolute; color: var(--blue); animation: twinkle 3s ease-in-out infinite; }
+    .sparkle:nth-child(1) { top:  7%; left:  9%; font-size: 1rem;   animation-delay: 0s; }
+    .sparkle:nth-child(2) { top: 13%; left: 84%; font-size: 0.7rem; animation-delay: 0.9s; }
+    .sparkle:nth-child(3) { top: 42%; left:  4%; font-size: 0.6rem; animation-delay: 1.6s; }
+    .sparkle:nth-child(4) { top: 36%; left: 93%; font-size: 0.85rem; animation-delay: 0.4s; }
+    .sparkle:nth-child(5) { top: 78%; left:  5%; font-size: 0.8rem; animation-delay: 2.1s; }
+    .sparkle:nth-child(6) { top: 85%; left: 90%; font-size: 0.6rem; animation-delay: 0.7s; }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.15; transform: scale(0.85) rotate(0deg); }
+      50%       { opacity: 0.8;  transform: scale(1.3) rotate(15deg); }
+    }
+
+    /* ── 主体 ── */
+    main {
+      position: relative; z-index: 1;
+      max-width: 880px; margin: 0 auto;
+      padding: 7rem 2rem 5rem;
+    }
+
+    /* ── 页头 ── */
+    .page-header {
+      text-align: center; margin-bottom: 3.5rem;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s;
+    }
+    .page-tag {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.7rem; font-weight: 300;
+      letter-spacing: 0.28em; color: var(--blue-deep);
+      margin-bottom: 0.9rem;
+    }
+    .page-title {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(2.4rem, 7vw, 3.8rem);
+      font-weight: 600; color: var(--ink); line-height: 1.1;
+      margin-bottom: 0.9rem;
+    }
+    .page-sub {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.88rem; font-weight: 300;
+      color: var(--ink); opacity: 0.55; line-height: 1.9;
+    }
+
+    /* ── 分隔线 ── */
+    .divider {
+      display: flex; align-items: center; gap: 0.6rem;
+      margin-bottom: 3rem;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.45s;
+    }
+    .divider-line { flex: 1; height: 1px; background: rgba(44,44,44,0.1); }
+    .divider-star { font-size: 0.55rem; color: var(--blue); opacity: 0.6; }
+
+    /* ── 卡片网格 ── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.75rem;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.65s;
+    }
+    @media (max-width: 640px) {
+      .cards { grid-template-columns: 1fr; }
+    }
+
+    /* ── 单张卡片 ── */
+    .card {
+      background: #fff;
+      border-radius: 1.5rem;
+      box-shadow: 0 6px 28px rgba(44,44,44,0.07);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 40px rgba(44,44,44,0.12);
+    }
+
+    /* ── 缩略图区 ── */
+    .thumb {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      position: relative;
+      background: #0a1020;
+      flex-shrink: 0;
+    }
+    /* deck iframe 缩略图：渲染实际页面然后 scale 缩小 */
+    .deck-thumb-wrap {
+      width: 100%; height: 100%;
+      position: relative; overflow: hidden;
+    }
+    .deck-iframe-scale {
+      position: absolute; top: 0; left: 0;
+      /* 先放大到 3x，再用 scale(1/3) 缩回来，等效于正常大小但分辨率 3x */
+      width: 300%; height: 300%;
+      transform: scale(0.3333);
+      transform-origin: top left;
+      border: none; pointer-events: none;
+      overflow: hidden;
+    }
+
+    /* 飞书卡片封面图 */
+    .thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* 图片缺失时的 fallback */
+    .thumb-fallback {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0.6rem;
+      background: linear-gradient(135deg, #1a2a4a 0%, #2a4060 100%);
+    }
+    .thumb-fallback-icon { font-size: 2.5rem; opacity: 0.5; }
+    .thumb-fallback-text {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.75rem; font-weight: 300;
+      color: rgba(247,243,236,0.5); letter-spacing: 0.1em;
+    }
+
+    /* 卡片标签徽章 */
+    .thumb-badge {
+      position: absolute; top: 0.75rem; left: 0.75rem;
+      z-index: 10;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.65rem; font-weight: 300;
+      letter-spacing: 0.12em;
+      padding: 0.25rem 0.65rem;
+      border-radius: 2rem;
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    }
+    .badge-blue  { background: #E8734A; color: #fff; border: none; }
+    .badge-green { background: #C06040; color: #fff; border: none; }
+
+    /* ── 卡片正文 ── */
+    .card-body {
+      padding: 1.5rem 1.5rem 1.25rem;
+      flex: 1; display: flex; flex-direction: column; gap: 0.6rem;
+    }
+    .card-title {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.98rem; font-weight: 400;
+      color: var(--ink); line-height: 1.55;
+    }
+    .card-desc {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.8rem; font-weight: 300;
+      color: var(--ink); opacity: 0.55; line-height: 1.8;
+      flex: 1;
+    }
+
+    /* 密码展示行 */
+    .pwd-row {
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-top: 0.2rem;
+    }
+    .pwd-label {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.72rem; font-weight: 300;
+      color: var(--ink); opacity: 0.45; letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+    .pwd-chip {
+      font-family: 'Inter', monospace;
+      font-size: 0.75rem; font-weight: 400;
+      background: var(--blue-light);
+      color: var(--blue-deep);
+      padding: 0.2rem 0.6rem;
+      border-radius: 0.4rem;
+      letter-spacing: 0.05em;
+      user-select: all;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .pwd-chip:hover { background: #b8dcf3; }
+    .pwd-copied {
+      font-size: 0.68rem; color: var(--green);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .pwd-copied.show { opacity: 1; }
+
+    /* ── 密码展示行 ── */
+    .pwd-row {
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-top: 0.15rem;
+    }
+    .pwd-label {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.7rem; font-weight: 300;
+      color: var(--ink); opacity: 0.4;
+      white-space: nowrap;
+    }
+    .pwd-chip {
+      font-family: 'Inter', monospace;
+      font-size: 0.73rem; font-weight: 400;
+      background: var(--blue-light); color: var(--blue-deep);
+      padding: 0.18rem 0.55rem; border-radius: 0.4rem;
+      letter-spacing: 0.04em; user-select: all;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .pwd-chip:hover { background: #b8dcf3; }
+    .pwd-copied {
+      font-size: 0.67rem; color: var(--green);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .pwd-copied.show { opacity: 1; }
+
+    /* ── CTA 按钮 ── */
+    .card-footer {
+      padding: 0 1.5rem 1.5rem;
+      display: flex; gap: 0.6rem;
+    }
+    .btn {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.78rem; font-weight: 300;
+      letter-spacing: 0.08em;
+      padding: 0.55rem 1.1rem;
+      border-radius: 0.75rem;
+      text-decoration: none; cursor: pointer;
+      border: none; outline: none;
+      transition: background 0.2s, transform 0.1s;
+      display: inline-flex; align-items: center; gap: 0.3rem;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary {
+      background: var(--blue); color: #fff;
+    }
+    .btn-primary:hover { background: var(--blue-deep); }
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid rgba(44,44,44,0.18);
+      color: var(--ink); opacity: 0.6;
+    }
+    .btn-ghost:hover { opacity: 1; background: rgba(44,44,44,0.04); }
+
+    /* ── 密码弹窗 ── */
+    #gate-modal {
+      display: none;
+      position: fixed; inset: 0; z-index: 300;
+      background: rgba(6,13,26,0.7);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      align-items: center; justify-content: center;
+      padding: 1.5rem;
+    }
+    #gate-modal.open { display: flex; }
+    .gate-card {
+      background: #fff;
+      border-radius: 1.5rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+      padding: 2.5rem 2.5rem 2rem;
+      width: 100%; max-width: 400px;
+      text-align: center;
+    }
+    .gate-icon { font-size: 2rem; margin-bottom: 1.1rem; }
+    .gate-question {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.88rem; font-weight: 300;
+      color: var(--ink); line-height: 1.9;
+      margin-bottom: 1.4rem;
+    }
+    .gate-question strong {
+      font-weight: 400; display: block;
+      font-size: 0.92rem; margin-bottom: 0.4rem;
+    }
+    .gate-input-row {
+      display: flex; gap: 0.5rem; margin-bottom: 0.65rem;
+      flex-wrap: wrap;
+    }
+    .gate-input-row #gate-input { min-width: 0; flex: 1 1 160px; }
+    .gate-input-row .gate-submit { flex-shrink: 0; }
+    #gate-input {
+      flex: 1;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.88rem; font-weight: 300;
+      border: 1px solid rgba(44,44,44,0.18);
+      border-radius: 0.75rem;
+      padding: 0.62rem 1rem;
+      background: var(--cream); color: var(--ink);
+      outline: none; transition: border-color 0.2s;
+    }
+    #gate-input:focus { border-color: var(--blue); }
+    #gate-input.shake {
+      animation: shake 0.4s ease;
+      border-color: var(--coral);
+    }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20%      { transform: translateX(-6px); }
+      40%      { transform: translateX(6px); }
+      60%      { transform: translateX(-4px); }
+      80%      { transform: translateX(4px); }
+    }
+    .gate-submit {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.82rem; font-weight: 300;
+      letter-spacing: 0.08em;
+      background: var(--blue); color: #fff;
+      border: none; border-radius: 0.75rem;
+      padding: 0.62rem 1.1rem;
+      cursor: pointer; white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .gate-submit:hover { background: var(--blue-deep); }
+    .gate-hint {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.72rem; font-weight: 300;
+      color: var(--coral); min-height: 1rem;
+      opacity: 0; transition: opacity 0.25s;
+    }
+    .gate-hint.show { opacity: 1; }
+    .gate-cancel {
+      display: block; margin-top: 1rem;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.72rem; font-weight: 300;
+      color: var(--ink); opacity: 0.35;
+      cursor: pointer; text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .gate-cancel:hover { opacity: 0.65; }
+
+    /* ── 全屏 deck overlay ── */
+    #deck-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 200;
+      background: #000;
+      flex-direction: column;
+    }
+    #deck-overlay.open { display: flex; }
+    .overlay-bar {
+      display: flex; align-items: center; justify-content: flex-end;
+      padding: 0.6rem 1rem;
+      background: rgba(0,0,0,0.7);
+      flex-shrink: 0;
+    }
+    .overlay-close {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.78rem; font-weight: 300;
+      color: rgba(247,243,236,0.6);
+      background: rgba(247,243,236,0.1);
+      border: 1px solid rgba(247,243,236,0.15);
+      border-radius: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      cursor: pointer; letter-spacing: 0.08em;
+      transition: background 0.2s, color 0.2s;
+    }
+    .overlay-close:hover { background: rgba(247,243,236,0.2); color: #fff; }
+    #deck-frame-full {
+      flex: 1; width: 100%; border: none;
+    }
+
+    /* ── 动画 ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── footer ── */
+    footer {
+      position: relative; z-index: 1;
+      text-align: center; padding: 2.5rem 1rem;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.7rem; color: var(--ink);
+      opacity: 0.18; letter-spacing: 0.1em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-sparkles">
+    <span class="sparkle">✦</span><span class="sparkle">✦</span>
+    <span class="sparkle">✦</span><span class="sparkle">✦</span>
+    <span class="sparkle">✦</span><span class="sparkle">✦</span>
+  </div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">withchen</a>
+    <a href="index.html" class="nav-back">← 回到首页</a>
+  </nav>
+
+  <main>
+    <div class="page-header">
+      <p class="page-tag">心理探险家 · Psychology Explorer</p>
+      <h1 class="page-title">思考 · 研究 · 分享</h1>
+      <p class="page-sub">存在人本取向的田野观察与临床思考</p>
+    </div>
+
+    <div class="divider">
+      <span class="divider-line"></span>
+      <span class="divider-star">✦</span>
+      <span class="divider-line"></span>
+    </div>
+
+    <div class="cards">
+
+      <!-- 卡片 1：研究 Deck -->
+      <div class="card">
+        <div class="thumb">
+          <div class="deck-thumb-wrap">
+            <iframe class="deck-iframe-scale" src="deck/index.html" tabindex="-1" scrolling="no"></iframe>
+          </div>
+          <span class="thumb-badge badge-blue">研究报告</span>
+        </div>
+        <div class="card-body">
+          <p class="card-title">中国心理咨询师如何在社交媒体上招募来访者——以小红书为例</p>
+          <p class="card-desc">以小红书为例 · 一份关于咨询师如何呈现自我、建立信任、触达来访者的实证研究</p>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-primary" onclick="openDeck()">全屏查看 →</button>
+        </div>
+      </div>
+
+      <!-- 卡片 2：飞书文档 -->
+      <div class="card">
+        <div class="thumb">
+          <img src="4thcongress.JPG" alt="第四届存在主义心理治疗大会"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <div class="thumb-fallback" style="display:none;">
+            <span class="thumb-fallback-icon">🌿</span>
+            <span class="thumb-fallback-text">4thcongress.jpg</span>
+          </div>
+          <span class="thumb-badge badge-green">资料文件夹</span>
+        </div>
+        <div class="card-body">
+          <p class="card-title">第四届存在主义心理治疗大会</p>
+          <p class="card-desc">相关资料、笔记与思考整理 · 飞书文档</p>
+          <div class="pwd-row">
+            <span class="pwd-label">访问密码</span>
+            <span class="pwd-chip" onclick="copyPwd(this, '4&73158r')" title="点击复制">4&amp;73158r</span>
+            <span class="pwd-copied" id="pwd-copied">已复制 ✓</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a class="btn btn-primary"
+             href="https://my.feishu.cn/drive/folder/EEDPfIpODl5DG8dT0wgcZBjznxf"
+             target="_blank" rel="noopener">打开飞书 →</a>
+        </div>
+      </div>
+
+    </div><!-- /cards -->
+  </main>
+
+  <footer>星星与七便士 · -小心思- · 存在人本取向咨询师</footer>
+
+  <!-- 密码弹窗 -->
+  <div id="gate-modal">
+    <div class="gate-card">
+      <div class="gate-icon">🗝</div>
+      <p class="gate-question">
+        <strong>回答一个小问题</strong>
+        第四届存在主义心理治疗大会在哪座城市举行？
+      </p>
+      <div class="gate-input-row">
+        <input id="gate-input" type="text" placeholder="城市名 / City name" autocomplete="off" />
+        <button class="gate-submit" onclick="checkGate()">进入 →</button>
+      </div>
+      <p class="gate-hint" id="gate-hint">再想想～</p>
+      <a class="gate-cancel" onclick="closeGate()">取消</a>
+    </div>
+  </div>
+
+  <!-- 全屏 deck overlay -->
+  <div id="deck-overlay">
+    <div class="overlay-bar">
+      <button class="overlay-close" onclick="closeDeck()">✕ 关闭</button>
+    </div>
+    <iframe id="deck-frame-full" src="" allowfullscreen></iframe>
+  </div>
+
+  <script>
+    const GATE_ANSWERS = ['丹佛', 'denver', '丹佛市'];
+
+    // 点「全屏查看」→ 先弹密码窗
+    function openDeck() {
+      document.getElementById('gate-modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => document.getElementById('gate-input').focus(), 80);
+    }
+
+    function checkGate() {
+      const val = document.getElementById('gate-input').value.trim();
+      if (GATE_ANSWERS.some(a => a.toLowerCase() === val.toLowerCase())) {
+        closeGate();
+        // 手机端：新标签页打开（方便双指缩放）；桌面端：overlay 全屏
+        if (window.innerWidth < 768) {
+          window.open('deck/index.html', '_blank');
+        } else {
+          const fr = document.getElementById('deck-frame-full');
+          if (!fr.src || fr.src === window.location.href) fr.src = 'deck/index.html';
+          document.getElementById('deck-overlay').classList.add('open');
+          document.body.style.overflow = 'hidden';
+        }
+      } else {
+        const input = document.getElementById('gate-input');
+        const hint  = document.getElementById('gate-hint');
+        input.value = '';
+        input.classList.add('shake');
+        hint.classList.add('show');
+        setTimeout(() => {
+          input.classList.remove('shake');
+          hint.classList.remove('show');
+        }, 2000);
+      }
+    }
+
+    function closeGate() {
+      document.getElementById('gate-modal').classList.remove('open');
+      document.getElementById('gate-input').value = '';
+      document.getElementById('gate-hint').classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    function closeDeck() {
+      document.getElementById('deck-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function copyPwd(el, pwd) {
+      navigator.clipboard.writeText(pwd).then(() => {
+        const tip = document.getElementById('pwd-copied');
+        tip.classList.add('show');
+        setTimeout(() => tip.classList.remove('show'), 2000);
+      });
+    }
+
+    document.getElementById('gate-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') checkGate();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { closeDeck(); closeGate(); }
+    });
+
+  </script>
+
+</body>
+</html>

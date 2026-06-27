@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>关于 · withchen</title>
+  <link rel="preconnect" href="https://fonts.loli.net" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.loli.net/css2?family=Caveat:wght@400;600&family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --blue:        #74B9E8;
+      --blue-deep:   #4A9BD4;
+      --blue-light:  #D0E9F7;
+      --cream:       #F7F3EC;
+      --cream-warm:  #EDE7DA;
+      --green:       #8BBF9F;
+      --coral:       #E8734A;
+      --ink:         #2C2C2C;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--cream);
+      color: var(--ink);
+      min-height: 100vh;
+      font-family: 'Inter', 'Noto Sans SC', sans-serif;
+      font-weight: 300;
+    }
+
+    /* 导航 */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-logo {
+      font-family: 'Caveat', cursive;
+      font-size: 1.1rem;
+      color: var(--ink);
+      text-decoration: none;
+      opacity: 0.55;
+      letter-spacing: 0.05em;
+      transition: opacity 0.2s;
+    }
+    .nav-logo:hover { opacity: 0.9; }
+    .nav-back {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: var(--ink);
+      text-decoration: none;
+      opacity: 0.35;
+      letter-spacing: 0.15em;
+      transition: opacity 0.2s;
+    }
+    .nav-back:hover { opacity: 0.7; }
+
+    /* 背景星星 */
+    .bg-sparkles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .sparkle {
+      position: absolute;
+      color: var(--blue);
+      animation: twinkle 3s ease-in-out infinite;
+    }
+    .sparkle:nth-child(1)  { top:  6%; left: 8%;  font-size: 1rem;   animation-delay: 0s; }
+    .sparkle:nth-child(2)  { top: 12%; left: 85%; font-size: 0.7rem; animation-delay: 0.8s; }
+    .sparkle:nth-child(3)  { top: 40%; left: 4%;  font-size: 0.6rem; animation-delay: 1.5s; }
+    .sparkle:nth-child(4)  { top: 35%; left: 92%; font-size: 0.9rem; animation-delay: 0.3s; }
+    .sparkle:nth-child(5)  { top: 72%; left: 7%;  font-size: 0.8rem; animation-delay: 2s; }
+    .sparkle:nth-child(6)  { top: 80%; left: 88%; font-size: 0.7rem; animation-delay: 0.6s; }
+    .sparkle:nth-child(7)  { top: 90%; left: 45%; font-size: 0.5rem; animation-delay: 1.2s; }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; transform: scale(0.85) rotate(0deg); }
+      50%       { opacity: 0.85; transform: scale(1.3) rotate(15deg); }
+    }
+
+    /* 主体 */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 6rem 2rem 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* 插画 */
+    .illustration {
+      width: 100%;
+      max-width: 580px;
+      border-radius: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.2s;
+    }
+
+    /* 正文卡片 */
+    .card {
+      background: #fff;
+      box-shadow: 0 8px 32px rgba(44,44,44,0.08);
+      border-radius: 1.5rem;
+      padding: 2.5rem 2.5rem;
+      margin-top: -2rem;
+      width: 100%;
+      max-width: 560px;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.6s;
+    }
+
+    .name {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(2rem, 7vw, 3.2rem);
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 1.25rem;
+      line-height: 1;
+    }
+
+    .intro {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.9rem, 2.2vw, 1rem);
+      line-height: 2;
+      color: var(--ink);
+      opacity: 0.85;
+      margin-bottom: 2rem;
+    }
+
+    .intro em {
+      font-style: normal;
+      color: var(--coral);
+    }
+
+    /* 身份标签 */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 2.5rem;
+    }
+    .tag {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 300;
+      padding: 0.35rem 0.9rem;
+      border-radius: 2rem;
+      letter-spacing: 0.05em;
+      border: 1px solid var(--blue);
+      color: var(--blue-deep);
+      background: var(--blue-light);
+    }
+    .tag.green { border-color: var(--green); color: #5A9470; background: var(--green-light, #C4DDD0); }
+    .tag.warm  { border-color: #D4956A; color: #C07040; background: #F5E6DA; }
+
+    /* 分隔线 */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 2rem;
+    }
+    .divider-line { flex: 1; height: 1px; background: rgba(44,44,44,0.15); }
+    .divider-star { font-size: 0.6rem; color: var(--blue); opacity: 0.7; }
+
+    /* 联系方式 */
+    .contact-label {
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      color: var(--blue-deep);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    .contact-email {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      border-bottom: 1px solid rgba(44,44,44,0.25);
+      padding-bottom: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .contact-email:hover {
+      color: var(--coral);
+      border-color: var(--coral);
+    }
+
+    /* 底部 */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.7rem;
+      color: var(--ink);
+      opacity: 0.2;
+      letter-spacing: 0.1em;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      main { padding: 5rem 1.25rem 3rem; }
+      .card { padding: 1.75rem 1.5rem; margin-top: -1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-sparkles">
+    <span class="sparkle">✦</span>
+    <span class="sparkle">✦</span>
+    <span class="sparkle">✦</span>
+    <span class="sparkle">✦</span>
+    <span class="sparkle">✦</span>
+    <span class="sparkle">✦</span>
+    <span class="sparkle">✦</span>
+  </div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">withchen</a>
+    <a href="index.html" class="nav-back">← 回到首页</a>
+  </nav>
+
+  <main>
+    <img class="illustration" src="gouzihewo.png" alt="ChenChen 和狗子" />
+
+    <div class="card">
+      <h1 class="name">ChenChen</h1>
+
+      <p class="intro">
+        你好，我是 ChenChen。<br/>
+        浙江武义人，在<em>新加坡、英国、上海、杭州</em>兜兜转转，
+        现在落脚深圳。<br/><br/>
+        走过这些地方，养成了一个习惯——
+        用<em>慢一点的眼光</em>打量每个当下：
+        街角的光影、陌生人的表情、一顿饭里藏着的小心情，
+        都是我想记下来的东西。<br/><br/>
+        我写文章、做播客，也是一名正在进阶中的心理咨询师。
+        相信每个人都带着自己独特的答案，
+        只是有时候需要一个<em>安静的空间</em>把它找出来。
+      </p>
+
+      <div class="tags">
+        <span class="tag">内容创作者</span>
+        <span class="tag green">播客主播</span>
+        <span class="tag warm">存在人本取向咨询师</span>
+      </div>
+
+      <div class="divider">
+        <span class="divider-line"></span>
+        <span class="divider-star">✦</span>
+        <span class="divider-line"></span>
+      </div>
+
+      <p class="contact-label">找我聊聊</p>
+      <a class="contact-email" href="mailto:zhengchencandy@gmail.com">zhengchencandy@gmail.com</a>
+    </div>
+  </main>
+
+  <footer>星星与七便士 · -小心思- · 存在人本取向咨询师</footer>
+
+</body>
+</html>
