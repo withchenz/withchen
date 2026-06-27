@@ -207,13 +207,33 @@
       position: relative;
       z-index: 1;
       text-align: center;
-      padding: 2rem;
+      padding: 2rem 1rem 6rem;
       font-family: 'Noto Sans SC', sans-serif;
       font-size: 0.7rem;
       color: var(--ink);
       opacity: 0.2;
       letter-spacing: 0.1em;
     }
+
+    /* ── bottom nav ── */
+    .site-nav {
+      position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+      z-index: 50; display: flex; align-items: center;
+      background: rgba(255,255,255,0.88); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-radius: 3rem; padding: 0.3rem; gap: 0.1rem;
+      box-shadow: 0 4px 28px rgba(44,44,44,0.1);
+    }
+    .site-nav a {
+      display: flex; align-items: center; gap: 0.3rem;
+      padding: 0.42rem 1rem; border-radius: 2.5rem;
+      text-decoration: none; color: var(--ink); opacity: 0.45;
+      font-family: 'Noto Sans SC', sans-serif; font-size: 0.78rem; font-weight: 300;
+      letter-spacing: 0.03em; white-space: nowrap; transition: all 0.2s;
+    }
+    .site-nav a:hover { opacity: 0.8; }
+    .site-nav a.active { background: var(--ink); color: var(--cream); opacity: 1; }
+    .site-nav .nn { font-family: 'Caveat', cursive; font-size: 0.68rem; opacity: 0.55; }
+    .site-nav a.active .nn { opacity: 0.45; }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
@@ -280,6 +300,11 @@
   </main>
 
   <footer>星星与七便士 · -小心思- · 存在人本取向咨询师</footer>
+  <nav class="site-nav">
+    <a href="index.html"><span class="nn">01</span> 首页</a>
+    <a href="podcast.html"><span class="nn">02</span> 小心思</a>
+    <a href="theater.html"><span class="nn">03</span> 心理探险家</a>
+  </nav>
 
 </body>
 </html>
