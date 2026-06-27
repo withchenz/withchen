@@ -244,6 +244,12 @@
     .site-nav a.active { background: var(--ink); color: var(--cream); opacity: 1; }
     .site-nav .nn { font-family: 'Caveat', cursive; font-size: 0.68rem; opacity: 0.55; }
     .site-nav a.active .nn { opacity: 0.45; }
+    @media (max-width: 600px) {
+      .site-nav { gap: 0; padding: 0.22rem; }
+      .site-nav a { font-size: 0; padding: 0.38rem 0.62rem; }
+      .site-nav .nn { font-size: 0.7rem; opacity: 0.65; }
+      .site-nav a.active .nn { opacity: 0.55; }
+    }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
