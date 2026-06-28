@@ -1,381 +1,267 @@
-# 郑忱个人网站 · 项目总规划 Memo
-> 最后更新：2026-06-26
+# withchen.com · 项目交接 Memo
+> 最后更新：2026-06-28
 
 ---
 
-## 一、设计风格 · 从Reference总结
+## 0. 基本信息
 
-### 整体风格关键词
-**治愈系 IP 叙事 + 手绘插画 + 留白排版 + 中英混排**
+| 项目 | 内容 |
+|---|---|
+| 网站域名 | withchen.com |
+| GitHub 仓库 | withchenz/withchen |
+| GitHub PAT | 见本地密码管理器，勿存入 repo |
+| 部署平台 | Vercel（绑 GitHub 自动部署）|
+| CDN | Cloudflare（China 访问加速）|
+| 本地文件夹 | /Users/adminx/Desktop/个人网站/ |
 
-你的reference全部来自 Blue Class 插画课的 IP 设计作品，加上少数水彩风格。
-可以提炼出以下共同特征：
-
-### 1. 插画风格
-- 简洁轮廓线 + 局部填色，不追求细节精细度，靠"表情/姿势"传递情绪
-- 角色都有**故事背景**（一段文字介绍世界观），不是单纯卖萌
-- 星星、光晕、sparkle 是高频装饰元素（和你的"星星与七便士"天然契合）
-- 贴纸/邮票/卡片 是最喜欢的载体形式——适合做**心理知识卡片**
-- 角色常与真实照片/场景叠加（Mendey 放在黑白街景上）→ 有一种"穿越现实"的诗意感
-
-### 2. 配色系统（按风格分两组）
-**暖色系 · 更适合「我」的身份表达**
-| 色块 | 代码 | 来源IP |
-|---|---|---|
-| 土陶红 | `#C8422A` 左右 | Lumi Twinkle Twinkle |
-| 芥末黄 | `#D4A847` | Lumi / Mendey |
-| 亚麻米白 | `#F5F0E8` | Lumi 背景 |
-| 深棕黑 | `#2A2420` | Mendey |
-| 草绿 | `#6A8B5A` | Lumi 靴子 |
-
-**冷色系 · 更适合「内容/播客」板块**
-| 色块 | 代码 | 来源IP |
-|---|---|---|
-| 矢车菊蓝（确认） | `#74B9E8` | 用户选定 |
-| 柠檬黄 | `#FFFF9A` | Spring 丰容计划 |
-| 珊瑚橙（确认） | `#E8734A` | 替代粉色，用于心理板块/CTA按钮 |
-| 淡灰白 | `#F2F2F2` | Wound & Wild |
-
-**建议**：网站以**暖色系为主基调**（符合心理咨询师温暖感 + 人文观察者身份），内容板块用冷色作点缀区分。
-
-### 3. 排版风格
-- 大量留白，内容密度低
-- 标题：**手写感/不规则字体** 做display，正文用细腻的无衬线体
-- 中英文自然混排，英文常用全大写或斜体作为装饰文字（"AUTO-OFFLINE MODE: ON" / "LUCKY · RICH · for you"）
-- 常见布局：卡片式网格 / 全页面插图 + 少量文字
-
-### 4. 你特别喜欢的元素清单
-- ✦ 星形sparkle装饰
-- 邮票/贴纸形状的内容卡片
-- 角色与场景叠加（插画 + 真实照片）
-- "故事背景"文案风格（诗意+克制）
-- 猫的形象（你有两只猫！灰白短毛猫 + 金渐层长毛猫）
+**安全规则：没有用户确认，不得 push 到 GitHub。**
 
 ---
 
-## 二、交互灵感 · hiesther.me
+## 0.5 核心目标
 
-**网站**：https://hiesther.me/  
-**作者**：ESTHER不二，建筑背景 + AI方向创作者
+**articles.html 的核心目标是 SEO**，让用户在 Google / 百度 / 微信搜索「越南攻略」「老挝旅游」「新加坡生活」等关键词时能搜到 withchen 的文章。
 
-### 值得学习的交互特点
-1. **Terminal开场** — 用命令行 `esther@universe ~ zsh` 作为进入动画，个性极强，让人立刻感受到博主的性格
-2. **无限画布/缩放拖拽** — 内容区域可以 Scroll 缩放、Drag 移动，像在"浏览一张大地图"而非翻页
-3. **OS/系统隐喻** — 整个网站像一个人的操作系统，导航是 About / Values / Now
-4. **`$ cat contact.md` 风格的联系方式** — 把干燥的信息变成有趣的命令行输出
-5. **人格化的文案** — "esther@universe" 这种命名，让域名本身变成人设的一部分
-
-### 你可以借鉴但转化成自己风格的方向
-Esther 是科技/AI人设，你是人文/心理/美食/艺术人设。  
-同样的「沉浸式进入」体验，你可以用：
-- 一个**角色动画开场**（你的IP猫咪或人物形象出现在屏幕上，欢迎你进入她的世界）
-- 用**"翻阅绘本"或"打开信封"**作为进入隐喻，而不是terminal
-- 导航用你的IP语言命名：「观察日志」「小心思」「找我聊聊」「星星地图」
+SEO 设计要点（写代码时必须遵守）：
+- articles.html 本身必须有静态可索引的文章内容，不能全靠 JS 动态渲染（爬虫看不到）
+- 每篇文章应有独立的 `<a href>` 链接（不能只用 `onclick`），让爬虫能跟进
+- 页面 `<title>` 和 `<meta description>` 需包含核心关键词（旅行、东南亚、攻略等）
+- 文章卡片的标题必须是真实 `<h2>` 或 `<h3>` 标签，不能只是 `<div>`
+- 封面图需要 `alt` 属性，包含文章标题关键词
+- 考虑生成 sitemap.xml 让搜索引擎更快收录
 
 ---
 
-## 三、网站命名建议
+## 1. 设计系统
 
-### 背景信息
-- 公众号：**星星与七便士**
-- 播客：**-小心思-**
-- 本人：**郑忱**（邮箱含 candy，可能是英文昵称）
-
-### 候选方案（从简单到有创意）
-
-| 方案 | 域名 | 理由 | 记忆难度 |
-|---|---|---|---|
-| **A · 名字直接** | `zhengchen.me` | 最专业，搜名字能找到 | ⭐ 极低 |
-| **B · 昵称路线** | `chencandy.me` | 来自你邮箱的candy，亲切 | ⭐ 极低 |
-| **C · 星星路线** | `starsixtypence.com` | 七便士对应sixpence，但太长 | ⭐⭐⭐ |
-| **D · 融合** | `xingchen.me` | 星辰 / 你的名字谐音 | ⭐ 低 |
-| **E · 诗意** | `sevenstars.me` | 七便士→七颗星，简洁有力 | ⭐⭐ |
-| **F · IP路线** | `chenxing.me` | 忱（chen）+ 星（xing），双关 | ⭐ 低 |
-
-**我的建议**：先确定英文昵称是否是 "Candy"，如果是 → `candychen.me` 或 `chencandy.me` 最简单且有个性。  
-如果想要更文艺感 → `xingchen.me`（星辰，也是你名字的读音延伸）。
-
----
-
-## 四、网站功能架构
-
-```
-首页 (Landing)
-├── 互动开场动画（IP形象出现）
-├── 简短自我介绍
-└── 导航到各模块
-
-观察日志 (Articles) ← 星星与七便士 公众号
-├── 文章卡片列表
-├── 标签分类：文化 / 美食 / 艺术 / 人文 / 地理
-└── 同步来源：微信公众号 RSS（via RSSHub）
-
-小心思 (Podcast) ← 小宇宙
-├── 最新几集展示
-├── 嵌入播放器 or 跳转链接
-└── 同步来源：小宇宙 RSS（官方支持）
-
-找我聊聊 (Consulting) ← 心理咨询预约
-├── 简介：存在-人本取向，X年经验
-├── 预约按钮 → 芒种小程序（现在）/ 简单心理（未来）
-└── FAQ
-
-星星地图 (Knowledge Cards) ← 存在人本可视化
-├── 概念卡片（翻转/交互）
-├── 分类：存在主义 / 人本主义 / 诊断参考（DSM-5等）
-└── 设计：与你的IP风格一致的卡片
-
-关于我 (About)
-├── 郑忱 + 猫咪介绍
-├── IP角色说明
-└── 联系方式
+### 颜色变量（所有页面统一）
+```css
+:root {
+  --blue:       #74B9E8;
+  --blue-deep:  #4A9BD4;
+  --blue-light: #D0E9F7;
+  --cream:      #F7F3EC;
+  --ink:        #2C2C2C;
+  --green:      #8BBF9F;
+  --coral:      #E8734A;
+  --purple:     #9B8BC4;
+}
 ```
 
----
+### 字体
+- **Caveat** — 手写风格，用于标题、logo、数字装饰
+- **Noto Sans SC 300** — 正文中文
+- **Inter 300** — 英文辅助
 
-## 五、技术方案（面向零基础 Vibe Coder）
+字体通过 `fonts.loli.net` 加载（国内镜像，替代 Google Fonts）。
 
-### 推荐路径：**Next.js + Vercel + Notion/GitHub**
+### 底部 pill 导航（6 项，全部页面统一）
+```html
+<nav class="site-nav">
+  <a href="index.html"><span class="nn">01</span> 首页</a>
+  <a href="about.html"><span class="nn">02</span> 关于我</a>
+  <a href="articles.html"><span class="nn">03</span> 星星七便士</a>
+  <a href="podcast.html"><span class="nn">04</span> 播客-小心思-</a>
+  <a href="theater.html"><span class="nn">05</span> 心理探险家</a>
+  <a href="consult.html"><span class="nn">06</span> 咨询预约</a>
+</nav>
+```
 
-这是目前最适合"我能vibe coding但不是专业程序员"的组合：
-
-#### 步骤拆解（按优先级）
-
-**第一步：域名 + 托管（1天内搞定）**
-1. 在 [Namecheap](https://namecheap.com) 或 [Cloudflare Registrar](https://cloudflare.com) 购买域名（约$10-15/年）
-2. 注册 [Vercel](https://vercel.com) 账号（免费，国内访问稳定）
-3. 用 Vercel 的 "Deploy with Next.js" 一键创建项目框架
-
-**第二步：基础页面（和我一起vibe coding，1-2周）**
-- 首页 + About页 + 联系方式
-- 你提供设计方向，我来写代码
-
-**第三步：内容系统**
-
-| 内容类型 | 技术方案 | 难度 |
-|---|---|---|
-| 文章（手动） | Markdown文件放在 `/posts` 文件夹 | ⭐ 极低 |
-| 文章（自动同步） | RSSHub抓微信公众号 → Next.js读取RSS | ⭐⭐⭐ 中等 |
-| 播客 | 小宇宙有官方RSS，直接读取 | ⭐⭐ 低 |
-| 知识卡片 | 手写HTML/CSS卡片组件 | ⭐⭐ 低 |
-
-**关于微信公众号同步（重要说明）**：
-微信没有官方RSS。有两个方案：
-- **方案A（简单）**：手动复制文章到网站，适合早期内容少的时候
-- **方案B（自动）**：用RSSHub服务（开源）或第三方微信RSS工具，有一定技术门槛，建议等网站基础搭好再做
+手机适配 CSS（所有页面都有）：
+```css
+@media (max-width: 600px) {
+  .site-nav { gap: 0; padding: 0.22rem; }
+  .site-nav a { font-size: 0; padding: 0.38rem 0.62rem; }
+  .site-nav .nn { font-size: 0.7rem; opacity: 0.65; }
+  .site-nav a.active .nn { opacity: 0.55; }
+}
+```
+原理：`font-size: 0` 让中文文字消失（text node），`.nn` 上的 explicit `font-size` 恢复数字显示。
 
 ---
 
-## 六、子项目优先级规划
+## 2. 页面清单与当前状态
 
-### Phase 1 · 基础建站（本阶段）
-- [ ] 确定网站名字和域名
-- [ ] 设计review（颜色系统 / 字体选择 / IP形象方向）
-- [ ] 首页 Landing page（含开场动画）
-- [ ] About 页面
+### ✅ index.html — 首页
+- 品牌蓝 `#74B9E8` 背景
+- 大标题 "CHEN"（Caveat 字体）
+- 鼠标探照灯效果（canvas）
+- 星星 sparkle 背景动画
+- 底部 6 项导航（首页 active）
+- **已推送上线**
 
-### Phase 2 · 内容上线
-- [ ] 文章板块（手动导入3-5篇开始）
-- [ ] 播客板块（RSS接入小宇宙）
-- [ ] 预约链接接入
+### ✅ about.html — 关于我
+- 奶油色背景
+- 顶部 `gouzihewo.png` 插画
+- 白色卡片：ChenChen 自我介绍 + 身份标签（内容创作者 / 播客主播 / 存在人本取向咨询师）
+- 联系邮件：zhengchencandy@gmail.com
+- 底部 6 项导航（关于我 active）
+- **已推送上线**
 
-### Phase 3 · 知识卡片
-- [ ] 存在人本概念卡片（交互设计）
-- [ ] DSM-5诊断卡片（后续）
+### ✅ articles.html — 星星与七便士（公众号文章）
+- 奶油色背景
+- 打字机动画标题 "星星与七便士"（Caveat，逐字显示，打完后光标消失）
+- `fetch('./articles.json')` 读取文章数据
+- skeleton loading（4个闪光占位卡片）
+- 动态分类 tab（从 articles.json 的 `category` 字段自动生成）
+- 2列响应式卡片网格（移动端 1 列）
+- 卡片：16:9 封面图 + 精选/分类标签 + 2行标题 + 2行摘要 + 日期 + 箭头
+- 点击卡片 → `window.open(url, '_blank')` 跳转微信公众号
+- XSS 防护：`h()` escape 函数
+- 底部 6 项导航（星星七便士 active）
+- **代码已写好，但 articles.json 还没有（需要用户跑本地爬虫生成）**
+- **尚未推送到 GitHub**
 
-### Phase 4 · IP & 自动化
-- [ ] IP角色设计（建议找插画师合作 or AI生成初稿）
-- [ ] 公众号文章自动同步
-- [ ] 更多交互细节打磨
+#### 公众号合集链接（5个，对应 articles.json 数据源）
 
----
+| 合集名 | 链接 |
+|---|---|
+| 东南亚走走停停 | https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MjM5NTEwNzY3NQ==&action=getalbum&album_id=4115597889819377679#wechat_redirect |
+| 新加坡生活 | https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MjM5NTEwNzY3NQ==&action=getalbum&album_id=3982328465012965391#wechat_redirect |
+| 神游中国 | https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MjM5NTEwNzY3NQ==&action=getalbum&album_id=4107935031702847495#wechat_redirect |
+| 亚洲吃饭故事 | https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MjM5NTEwNzY3NQ==&action=getalbum&album_id=3982329749728280578#wechat_redirect |
+| 南洋文化林林总总 | https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MjM5NTEwNzY3NQ==&action=getalbum&album_id=3982330764011651073#wechat_redirect |
 
-## 七、下一步行动（给你）
+原始文档：`公众号文章合集.docx`（已存放在 `/Users/adminx/Desktop/个人网站/`）
 
-1. **今天能做的**：告诉我你想用哪个域名方向（名字/昵称/诗意），我们确认后可以马上开始建网站骨架
-2. **需要你想清楚的**：
-   - 你的猫叫什么名字？（IP设计会用到）
-   - 英文昵称是Candy吗？还是另有其他？
-   - 网站想要中英双语还是只中文？
-   - 网站主视觉你更偏向暖色系（Lumi风格）还是天蓝色调（flaaax风格）？
-3. **我们接下来可以直接开始**：首页的 HTML/CSS 原型（你不需要懂代码，我写你看效果）
+#### articles.json 格式（用户本地爬虫输出）
+```json
+[
+  {
+    "url": "https://mp.weixin.qq.com/s/xxxxxx",
+    "title": "文章标题",
+    "pub_date": "2026年6月24日 13:15",
+    "cover_img": "https://mmbiz.qpic.cn/...",
+    "content_text": "纯文本正文（用于摘要显示）",
+    "content_html": "<p>HTML 正文</p>",
+    "scraped_at": "2026-06-28 10:00:00",
+    "category": "旅行",     ← 可选，有值才显示分类 tab
+    "featured": true        ← 可选，true 显示蓝色"✦ 精选"标签
+  }
+]
+```
 
----
+### ✅ podcast.html — 播客 -小心思-
+- 奶油色背景
+- INS 式中心轮播 + 横向列表行
+- EP02–EP16 hardcoded（15集）
+- 分类：书里的心理学灵感 / 旅行 / 电影 / 心理咨询师的存在与思考（**分集分配待用户确认**）
+- 底部 6 项导航（播客 active）
+- **已推送上线**
 
----
-
-## 八、当前页面架构（已完成）
-
-| 文件 | 内容 | 背景色 |
-|---|---|---|
-| `index.html` | 原始蓝色 CHEN 落地页，带鼠标探照灯效果 + 星星sparkle + ✦进入 链接 | 品牌蓝 #74B9E8 |
-| `splash.html` | 电影式动画开场：星空 → 帷幕动画 → Chen+狗子入场 → 胶片导航条 | 深海军蓝 #060D1A |
-| `about.html` | 关于我：gouzihewo.png 配白卡片，三个身份标签 | 奶油色 cream |
-| `podcast.html` | 小心思播客：INS式中心轮播，EP02–EP16 hardcoded，三色渐变卡片 | 奶油色 cream |
-
-**字体系统**：Caveat（标题/手写） + Noto Sans SC 300（正文/中文） + Inter 300（英文辅助）  
-**色板**：--blue #74B9E8 / --cream #F7F3EC / --green #8BBF9F / --coral #E8734A / --ink #2C2C2C
-
----
-
-## 九、早间规划 · 新功能清单（2026-06-26）
-
-> 用户早间提出的9个方向，按优先级排列
-
-### ① 星星与七便士 · 公众号文章页
-
-- **路由**：`articles.html` 或 `xingxing.html`
-- **功能**：
-  - 打字机动画开场（慢慢浮现标题）
-  - 4篇高光文章卡片（10万+阅读）置顶展示
-  - 按国家/地区 或 主题 分类浏览（旅行 / 心理 / 艺术 / 电影）
-  - 每篇文章配封面图，点击跳转微信公众号原文
-- **技术**：手动维护文章数组（不依赖RSS，避免CORS问题）
-
----
-
-### ② 心理探险家 · 心理学内容基地
-
-- **命名由来**：灵感来自《头脑特工队》(Inside Out)，探险家身份 + 心理学方向
-- **路由**：`theater.html`（文件名暂保留）
-- **内容规划（长期）**：
-  1. **田野调查**：心理咨询师如何在社交媒体招募来访者（小红书研究 deck）、存在主义大会记录（飞书文档）
-  2. **课程可视化卡片**：存在人本两年课程，每月课程内容变成 IP 动画 / 视觉记忆卡片
-  3. **心理科普工具**：焦虑症诊断等科普，以及 AI 小工具（如 AI 解梦流程工具，开放给读者使用）
-  4. **读书笔记**：欧文·亚隆、存在主义心理学相关书目
-  5. **影视推荐**：心理学主题电影/剧，配豆瓣链接或跳转 Bilibili
-- **当前已上线**：
-  - Card 1：小红书研究 deck（密码：丹佛/Denver）
+### ✅ theater.html — 心理探险家
+- 奶油色背景
+- 卡片式双模块：
+  - Card 1：小红书研究 deck（密码：丹佛/Denver）→ `/deck/` 路径
   - Card 2：第四届存在主义大会飞书文档（密码：4&73158r）
-- **技术**：iframe 嵌入 + 密码验证脚本（纯前端）
+- 底部 6 项导航（心理探险家 active）
+- **已推送上线**
+
+### ✅ consult.html — 心理咨询预约
+- 奶油色背景
+- **结构（从上到下）：**
+  1. **写给你** — 叙事段落 + sailIn 动画的亚隆引言 + 小房子意象卡片 + 来访者画像（emoji 列表）+ 存在人本取向介绍
+  2. **使用手册** — 设置四格 + 督导注记 + Q&A（含自我披露 Q）+ 暂不接待（含3个24小时危机热线）
+  3. **简历** — 4个数据卡片（250+时/110+时/110h督导/60h自我体验）+ 长程/短程培训列表 + 学历
+  4. **英雄结语** — 渐变背景卡片，"英雄"高亮蓝色，heroReveal 动效
+- **预约/二维码部分已删除**（待芒种后台生成正式小程序码再加回）
+- 底部 6 项导航（咨询预约 active）
+- **代码已更新（含新 6 项导航），尚未推送到 GitHub**
+
+#### consult.html 关键 CSS
+```css
+/* 亚隆引言 sail-in 动画 */
+@keyframes sailIn {
+  from { transform: translateX(26px); }
+  to   { transform: translateX(0); }
+}
+.yalom-quote {
+  animation: sailIn 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.55s;
+}
+
+/* 英雄结语 reveal 动画 */
+@keyframes heroReveal {
+  from { opacity: 0; transform: translateY(10px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.hero-closing {
+  animation: heroReveal 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 1.3s;
+  background: linear-gradient(135deg, rgba(116,185,232,0.09) 0%, rgba(247,243,236,0) 55%, rgba(155,139,196,0.07) 100%);
+  border-radius: 1.75rem;
+}
+```
+
+### ✅ splash.html — 电影开场动画（不在主导航内）
+- 深海军蓝背景
+- 动画：星空 → 帷幕 → Chen+狗子入场 → 胶片导航条
+- 胶片 5 帧链接：
+  - 帧1：关于我 → about.html ✅
+  - 帧2：星星与七便士 → articles.html ← **目前是否已链接，需确认**
+  - 帧3：小心思 → podcast.html ✅
+  - 帧4：心理探险家 → theater.html ✅
+  - 帧5：关于我的使用说明 → manual.html ← **页面未建**
 
 ---
 
-### ③ 关于我的使用说明 · 咨询师介绍页
+## 3. 待办事项（按优先级）
 
-- **命名**：用户定名，刻意的"产品说明书"语气
+### 立即待办
+- [ ] **推送到 GitHub**：articles.html + consult.html（已更新 6 项导航）
+  - 在确认推送前，先让用户看 articles.html 页面效果
+- [ ] **articles.json**：用户跑本地爬虫，生成后放到 `/Users/adminx/Desktop/个人网站/articles.json`；可加 `category` 和 `featured` 字段
+
+### 待建页面
+- [ ] **manual.html** — 关于我的使用说明（info in memo section 三 below）
+- [ ] **splash.html 帧2** — 链接到 articles.html（需确认是否已设置）
+
+### 预约功能
+- [ ] **小程序码**：需要芒种后台或微信开发者工具生成正式 `.png` 格式小程序码（不是普通二维码，不能用草料）
+  - 小程序 URL 备忘：`小程序://芒种心理/fKoQotH9vzJjfYc`
+  - 拿到图片后加回 consult.html 结尾
+
+### 内容完善
+- [ ] **podcast 分集分类**：用户手动把 EP02–EP16 分配到 4 个分类
+- [ ] **SEO**：sitemap.xml + robots.txt + Google Search Console
+
+---
+
+## 4. manual.html — 关于我的使用说明（规划）
+
 - **路由**：`manual.html`
-- **功能**：
-  - 进入交互：信封/文件夹解锁 UI
-  - 内容模块：
-    - 我的工作方式（存在-人本取向，具体方法论）
-    - 受训背景（学历、督导、认证等）
-    - 预约方式：**QR码图片**（非可点击链接，因微信小程序URL只在微信内有效）
-  - 小程序 URL 备忘：
-    - `#小程序://芒种心理/KKramHoJkkh1nGl`
-    - `#小程序://芒种心理/fKoQotH9vzJjfYc`
-- **注意**：预约必须用二维码图片，不能做可点击链接（浏览器内无效）
+- **内容**：
+  - 我的工作方式（存在-人本取向，具体方法论）
+  - 受训背景（学历、督导、认证等）
+  - Q&A 使用说明
+  - 预约方式（等小程序码就位后加）
+- **交互设想**：进入时有信封/文件夹解锁 UI（可选）
+- **注意**：预约必须用二维码图片，不能做可点击跳转链接（浏览器内打不开微信小程序）
 
 ---
 
-### ④ 关于我页面 · 插画更新
+## 5. 图片资源
 
-- 重新生成 `gouzihewo.png`，在画面中加入**笔记本电脑**
-- 代表 ChenChen 的三个工作特质：笨拙、真诚、勤奋
-- 当前 `gouzihewo.png` 已去除背景存为 `gouzihewo_nobg.png`，新版需同步去背
-
----
-
-### ⑤ 动态表情包 · Chen & 狗子动画贴纸
-
-- **Chen 的动作**：在工作 / 旅行 / 阅读 / 看电影
-- **狗子的动作**：吃东西 / 打滚 / 打哈欠 / 睡觉
-- **制作流程**：
-  1. Midjourney 生成各姿势静态图
-  2. 去背 → 导入 Rive.app 做循环动画
-  3. 导出 `.riv` 嵌入网页，或导出 GIF/APNG 备用
-- **用途**：Loading 动画 / 页面插画 / 微信表情包
+| 文件 | 说明 |
+|---|---|
+| `gouzihewo.png` | ChenChen + 狗子插画（带背景）|
+| `gouzihewo_nobg.png` | 去背版 |
+| `chen.png` / `chen_nobg.png` | Chen 单人图 |
+| `gouzi.png` / `gouzi_nobg.png` | 狗子单图 |
+| `xiaoxinsi.png` | 小心思播客封面 |
+| `og-cover.jpg` | Open Graph 分享封面图 |
+| `qr-consult.png` | 旧的二维码（无效，微信不支持，暂不使用）|
+| `4thcongress.JPG` | 存在主义大会照片 |
 
 ---
 
-### ⑥ 播客分集分类
+## 6. 技术说明
 
-- 需要 ChenChen 手动将 EP02–EP16（15集）分配到以下分类：
-  - 书里的心理学灵感
-  - 旅行
-  - 电影
-  - 心理咨询师的存在与思考
-- 完成后更新 `podcast.html` 加入 tab 筛选功能
+- **纯静态 HTML/CSS/JS**，无框架，无构建工具
+- **内容加载**：articles.html 用 `fetch('./articles.json')` 读取，其余 hardcoded
+- **中国访问**：Cloudflare CDN 加速，字体用 fonts.loli.net 国内镜像
+- **GitHub → Vercel**：每次 push main 分支自动部署，约 1 分钟生效
 
 ---
 
-### ⑦ 中国大陆访问优化 · Cloudflare CDN
-
-- 当前：Vercel 托管，国内访问速度不稳定
-- 方案：在 Cloudflare 配置 CDN 加速（withchen.com 已在 Namecheap 购买）
-- 步骤：将域名 DNS 迁移到 Cloudflare → 开启 Proxy → 配置缓存规则
-- **优先级**：中等（先把内容做好再优化访问速度）
-
----
-
-### ⑧ ICP 备案
-
-- 国内服务器/域名需要 ICP 备案（工业和信息化部）
-- 当前托管在 Vercel（境外），**暂时不需要备案**
-- 如果未来迁移到阿里云/腾讯云国内节点，则需要办理
-- 备忘：备案周期约 20 个工作日，需要身份证 + 域名证书
-
----
-
-### ⑨ 图片存储扩容方案
-
-- **当前**：图片存在 GitHub 仓库（免费，限额 1GB）
-- **现状评估**：暂时够用（网站图片体量小）
-- **未来方案**：迁移到 Cloudflare R2
-  - 免费额度：10GB 存储 + 每月 100 万次读取请求
-  - 无出口带宽费用（对比 AWS S3 省钱）
-  - 与 Cloudflare CDN 天然集成
-- **触发时机**：GitHub 使用超过 500MB 时开始迁移
-
----
-
-## 十、胶片导航条 · 未完成页面规划
-
-`splash.html` 底部胶片共 5 帧，对应如下：
-
-| 帧 | 标题 | 文件 | 状态 |
-|---|---|---|---|
-| 1 | 关于我 | `about.html` | ✅ 已完成 |
-| 2 | 星星与七便士 | `articles.html` | ❌ 待建 |
-| 3 | 小心思 | `podcast.html` | ✅ 已完成 |
-| 4 | 心理探险家 | `theater.html` | ✅ 已完成（基础版）|
-| 5 | 关于我的使用说明 | `manual.html` | ❌ 待建 |
-
----
-
----
-
-## 十一、SEO 策略（待实施）
-
-### 目标
-当用户在谷歌/百度/微信搜索以下关键词时，能找到 withchen.com，点击后跳转公众号文章。
-
-### 目标关键词清单（初版）
-- 新加坡旅游 / 新加坡美食 / 新加坡生活
-- 印尼旅游 / 印尼美食 / 巴厘岛
-- 马来西亚旅游 / 马来西亚美食
-- 文莱旅游 / 文莱美食
-- 越南文化 / 越南旅游
-- 存在主义心理治疗 / 人本主义心理咨询
-- 心理咨询师 深圳
-- （后续补充更多长尾词）
-
-### 实施前提（重要）
-Google/百度收录的是**网站上的文字内容**，不是微信公众号。
-要让搜索引擎找到这些关键词，文章内容必须在 withchen.com 上，不能只放跳转链接。
-
-**建议方案**：
-- 「星星与七便士」文章页（articles.html）：把公众号文章**摘录/全文复制**到网站，底部放「查看原文 →微信公众号」的链接
-- 每篇文章单独一个 HTML 页面，包含完整文字内容
-
-### 技术待办
-- [ ] 所有页面加 `<meta name="description">` 和 Open Graph 标签
-- [ ] 创建 `sitemap.xml`（帮助 Google 收录所有页面）
-- [ ] 创建 `robots.txt`
-- [ ] 在 Google Search Console 提交网站
-- [ ] 在百度站长工具提交网站（需要国内手机号验证）
-- [ ] 每篇文章页面的 title/description 包含目标关键词
-
----
-
-*memo by Claude · 郑忱个人网站项目*
+*memo by Claude · withchen.com*
