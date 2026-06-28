@@ -9,6 +9,7 @@
   <meta property="og:description" content="东南亚旅行 · 美食 · 文化 · 南洋生活" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://withchen.com/articles.html" />
+  <meta name="referrer" content="no-referrer" />
   <link rel="preconnect" href="https://fonts.loli.net" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.loli.net/css2?family=Caveat:wght@400;600&family=Noto+Sans+SC:wght@300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
@@ -490,7 +491,7 @@
         const locParts = [a.country, a.city].filter(Boolean);
         const locStr  = flag + locParts.join(" · ");
         const imgHTML = a.cover_img
-          ? `<img src="${h(a.cover_img)}" alt="${h(a.title)}" loading="lazy"
+          ? `<img src="${h(a.cover_img)}" alt="${h(a.title)}" loading="lazy" referrerpolicy="no-referrer"
                   onerror="this.parentNode.innerHTML='<div class=fc-placeholder><span>✦</span></div>'" />`
           : '<div class="fc-placeholder"><span>✦</span></div>';
         const badge = a.featured ? '<span class="fc-badge">10万+</span><br>' : "";
@@ -641,7 +642,7 @@
       const locLine = [locParts.join(" · "), themes].filter(Boolean).join("  |  ");
 
       const imgHTML = a.cover_img
-        ? `<img src="${h(a.cover_img)}" alt="${h(a.title)}" loading="lazy"
+        ? `<img src="${h(a.cover_img)}" alt="${h(a.title)}" loading="lazy" referrerpolicy="no-referrer"
                 onerror="this.style.display='none'" />`
         : "";
 
