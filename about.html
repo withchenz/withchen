@@ -256,6 +256,28 @@
       main { padding: 5rem 1.25rem 3rem; }
       .card { padding: 1.75rem 1.5rem; margin-top: -1.5rem; }
     }
+
+    @media (min-width: 900px) {
+      main {
+        max-width: 900px;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 2.5rem;
+        padding: 7rem 3rem 5rem;
+      }
+      .illustration {
+        max-width: 380px;
+        flex: 0 0 380px;
+        position: sticky;
+        top: 6rem;
+        margin-top: 0;
+      }
+      .card {
+        flex: 1;
+        max-width: none;
+        margin-top: 0;
+      }
+    }
   </style>
 </head>
 <body>
