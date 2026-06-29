@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>存在人本主义书单 1.0 · withchen</title>
-  <meta name="description" content="一份关于存在人本主义心理治疗的书单，涵盖心理学、哲学与文学，16位作者，跨越5个国家。" />
+  <title>存在人本主义书单 2.0 · withchen</title>
+  <meta name="description" content="一份关于存在人本主义心理治疗的书单，涵盖心理学、哲学与文学，30余位作者，含学院推荐书目。" />
   <meta property="og:title" content="存在人本主义书单" />
   <meta property="og:description" content="一个有趣的书单" />
   <meta property="og:image" content="https://withchen.com/og-booklist.png" />
@@ -567,6 +567,14 @@
     <div class="list-wrap">
       <!-- Filters -->
       <div class="filter-group">
+        <span class="filter-label">流派</span>
+        <div class="chip-row" id="filter-trad">
+          <button class="chip active ink" data-val="">全部</button>
+          <button class="chip" data-val="existential">存在取向</button>
+          <button class="chip" data-val="humanistic">人本取向</button>
+        </div>
+      </div>
+      <div class="filter-group">
         <span class="filter-label">类型</span>
         <div class="chip-row" id="filter-type">
           <button class="chip active ink" data-val="">全部</button>
@@ -623,181 +631,312 @@
      DATA
   ══════════════════════════════════════════ */
   const AUTHORS = [
-    // ── 心理学家 ──────────────────────────────
+    // ── 存在取向 · 心理学 ────────────────────
     {
       id: 'yalom', name: '欧文·亚隆', nameEn: 'Irvin D. Yalom',
       country: '🇺🇸 美国', dates: '1931—',
-      type: 'psychology', coords: [-122.1, 37.4],
+      type: 'psychology', tradition: 'existential', coords: [-122.1, 37.4],
       quote: '我们都是行走在大海上的孤舟，而咨询，是两条小船靠近、并肩航行的一段时间。',
       books: [
-        { title: '当尼采哭泣', year: 1992, genre: '小说', difficulty: '入门', douban: 'https://book.douban.com/subject/1061043/', weread: 'https://weread.qq.com/web/search/books?keyword=当尼采哭泣', cover: '/covers/s1673090.jpg' },
-        { title: '爱情刽子手', year: 1989, genre: '小说', difficulty: '入门', douban: 'https://book.douban.com/subject/35513203/', weread: 'https://weread.qq.com/web/search/books?keyword=爱情刽子手', cover: '/covers/s33935539.jpg' },
-        { title: '妈妈及生命的意义', year: 1999, genre: '小说', difficulty: '入门', douban: 'https://book.douban.com/subject/5999507/', weread: 'https://weread.qq.com/web/search/books?keyword=妈妈及生命的意义', cover: '/covers/s4655313.jpg' },
-        { title: '凝视太阳', year: 2008, genre: '理论', difficulty: '入门', douban: 'https://book.douban.com/subject/26660579/', weread: 'https://weread.qq.com/web/search/books?keyword=凝视太阳+亚隆', cover: '/covers/s28358542.jpg' },
-        { title: '诊疗椅上的谎言', year: 1996, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/27018914/', weread: 'https://weread.qq.com/web/search/books?keyword=诊疗椅上的谎言', cover: '/covers/s35240418.jpg' },
-        { title: '叔本华的治疗', year: 2005, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/3684193/', weread: 'https://weread.qq.com/web/search/books?keyword=叔本华的治疗', cover: '/covers/s3756843.jpg' },
-        { title: '破茧而出', year: 2015, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/26368422/', weread: 'https://weread.qq.com/web/search/books?keyword=破茧而出+亚隆', cover: '/covers/s28131657.jpg' },
-        { title: '成为我自己', year: 2017, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/33460827/', weread: 'https://weread.qq.com/web/search/books?keyword=成为我自己+亚隆', cover: '/covers/s33491495.jpg' },
-        { title: '存在主义心理治疗', year: 1980, genre: '理论', difficulty: '专业', douban: 'https://book.douban.com/subject/26304954/', weread: 'https://weread.qq.com/web/search/books?keyword=存在主义心理治疗', cover: '/covers/s28113560.jpg' },
-      ]
-    },
-    {
-      id: 'rogers', name: '卡尔·罗杰斯', nameEn: 'Carl R. Rogers',
-      country: '🇺🇸 美国', dates: '1902—1987',
-      type: 'psychology', coords: [-117.3, 32.8],
-      quote: '好奇怪的悖论——当我接受自己本来的样子，我才能改变。',
-      books: [
-        { title: '成为一个人', year: 1961, genre: '理论', difficulty: '入门', douban: 'https://book.douban.com/subject/26147872/', weread: '', cover: '/covers/s27763786.jpg' },
-        { title: '当事人中心治疗', year: 1951, genre: '理论', difficulty: '专业', douban: 'https://book.douban.com/subject/25768466/', weread: '', cover: '/covers/s27134853.jpg' },
+        { title: '当尼采哭泣', year: 1992, genre: '小说', difficulty: '入门', douban: 'https://book.douban.com/subject/1061043/', cover: '/covers/s1673090.jpg' },
+        { title: '爱情刽子手', year: 1989, genre: '小说', difficulty: '入门', douban: 'https://book.douban.com/subject/35513203/', cover: '/covers/s33935539.jpg' },
+        { title: '妈妈及生命的意义', year: 1999, genre: '小说', difficulty: '入门', douban: 'https://book.douban.com/subject/5999507/', cover: '/covers/s4655313.jpg' },
+        { title: '凝视太阳', year: 2008, genre: '理论', difficulty: '入门', douban: 'https://book.douban.com/subject/26660579/', cover: '/covers/s28358542.jpg' },
+        { title: '给心理治疗师的礼物', year: 2002, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/26841312/', cover: '/covers/s28914594.jpg' },
+        { title: '日益亲近', year: 1974, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/26564740/', cover: '/covers/s28248445.jpg' },
+        { title: '诊疗椅上的谎言', year: 1996, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/27018914/', cover: '/covers/s35240418.jpg' },
+        { title: '叔本华的治疗', year: 2005, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/3684193/', cover: '/covers/s3756843.jpg' },
+        { title: '破茧而出', year: 2015, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/26368422/', cover: '/covers/s28131657.jpg' },
+        { title: '成为我自己', year: 2017, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/33460827/', cover: '/covers/s33491495.jpg' },
+        { title: '存在主义心理治疗', year: 1980, genre: '理论', difficulty: '专业', douban: 'https://book.douban.com/subject/26304954/', cover: '/covers/s28113560.jpg' },
       ]
     },
     {
       id: 'may', name: '罗洛·梅', nameEn: 'Rollo May',
       country: '🇺🇸 美国', dates: '1909—1994',
-      type: 'psychology', coords: [-74.1, 40.8],
+      type: 'psychology', tradition: 'existential', coords: [-74.1, 40.8],
       quote: '焦虑是人类意识到自己存在的代价。',
       books: [
-        { title: '爱与意志', year: 1969, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/4839255/', weread: 'https://weread.qq.com/web/search/books?keyword=爱与意志+罗洛梅', cover: '/covers/s4461651.jpg' },
-        { title: '创造的勇气', year: 1975, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/3265210/', weread: '', cover: '/covers/s3365504.jpg' },
-        { title: '焦虑的意义', year: 1950, genre: '理论', difficulty: '专业', douban: 'https://book.douban.com/subject/26878224/', weread: '', cover: '/covers/s29053436.jpg' },
+        { title: '爱与意志', year: 1969, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/4839255/', cover: '/covers/s4461651.jpg' },
+        { title: '创造的勇气', year: 1975, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/3265210/', cover: '/covers/s3365504.jpg' },
+        { title: '人的自我寻求', year: 1953, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/25768266/', cover: '/covers/s27134464.jpg' },
+        { title: '祈望神话', year: 1991, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/11586653/', cover: '/covers/s11277712.jpg' },
+        { title: '自由与命运', year: 1981, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/4834600/', cover: '/covers/s4404472.jpg' },
+        { title: '焦虑的意义', year: 1950, genre: '理论', difficulty: '专业', douban: 'https://book.douban.com/subject/26878224/', cover: '/covers/s29053436.jpg' },
+        { title: '存在之发现', year: 1983, genre: '理论', difficulty: '专业', douban: 'https://book.douban.com/subject/3265824/', cover: '/covers/s4544634.jpg' },
+        { title: '存在：精神病学和心理学的新方向', year: 1958, genre: '理论', difficulty: '专业', douban: 'https://book.douban.com/subject/10517480/', cover: '/covers/s8935092.jpg' },
+        { title: '存在主义心理学：一种整合的临床观', year: 1995, genre: '理论', difficulty: '专业', douban: '', cover: '' },
       ]
     },
     {
       id: 'frankl', name: '维克多·弗兰克尔', nameEn: 'Viktor E. Frankl',
       country: '🇦🇹 奥地利', dates: '1905—1997',
-      type: 'psychology', coords: [16.2, 48.1],
+      type: 'psychology', tradition: 'existential', coords: [16.2, 48.1],
       quote: '人所拥有的任何东西，都可以被剥夺，唯独人性最后的自由——选择如何应对任何特定环境——不能被剥夺。',
       books: [
-        { title: '活出生命的意义', year: 1946, genre: '小说', difficulty: '入门', douban: 'https://book.douban.com/subject/5330333/', weread: 'https://weread.qq.com/web/search/books?keyword=活出生命的意义', cover: '/covers/s6235123.jpg' },
-        { title: '追求意义的意志', year: 1969, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/26299708/', weread: '', cover: '/covers/s27981936.jpg' },
+        { title: '活出生命的意义', year: 1946, genre: '小说', difficulty: '入门', douban: 'https://book.douban.com/subject/5330333/', cover: '/covers/s6235123.jpg' },
+        { title: '追求意义的意志', year: 1969, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/26299708/', cover: '/covers/s27981936.jpg' },
       ]
     },
     {
       id: 'buber', name: '马丁·布伯', nameEn: 'Martin Buber',
       country: '🇦🇹 奥地利', dates: '1878—1965',
-      type: 'psychology', coords: [16.5, 48.35],
+      type: 'psychology', tradition: 'existential', coords: [16.5, 48.35],
       quote: '一切真实的生命都是相遇。',
       books: [
-        { title: '我与你', year: 1923, genre: '哲学', difficulty: '进阶', douban: 'https://book.douban.com/subject/35110061/', weread: '', cover: '/covers/s34000583.jpg' },
+        { title: '我与你', year: 1923, genre: '哲学', difficulty: '进阶', douban: 'https://book.douban.com/subject/35110061/', cover: '/covers/s34000583.jpg' },
       ]
     },
     {
       id: 'vandeurzen', name: 'Emmy van Deurzen', nameEn: 'Emmy van Deurzen',
       country: '🇬🇧 英国', dates: '1951—',
-      type: 'psychology', coords: [-0.15, 51.5],
+      type: 'psychology', tradition: 'existential', coords: [-0.15, 51.5],
       quote: '存在主义治疗不是要解决问题，而是要更好地理解生命的复杂性。',
       books: [
-        { title: '存在性咨询与治疗实践', year: 2012, genre: '理论', difficulty: '专业', douban: 'https://book.douban.com/subject/10525282/', weread: '', cover: '/covers/s10182527.jpg' },
-        { title: '心理治疗中的存在主义挑战', year: 2015, genre: '理论', difficulty: '专业', douban: 'https://book.douban.com/subject/27013398/', weread: '', cover: '/covers/s29418792.jpg' },
+        { title: '存在性咨询与治疗实践', year: 2012, genre: '理论', difficulty: '专业', douban: 'https://book.douban.com/subject/10525282/', cover: '/covers/s10182527.jpg' },
+        { title: '心理治疗中的存在主义挑战', year: 2015, genre: '理论', difficulty: '专业', douban: 'https://book.douban.com/subject/27013398/', cover: '/covers/s29418792.jpg' },
+        { title: '存在主义世界的幸福', year: 2009, genre: '理论', difficulty: '专业', douban: 'https://book.douban.com/subject/10519759/', cover: '/covers/s10242198.jpg' },
       ]
     },
     {
       id: 'cooper', name: 'Mick Cooper', nameEn: 'Mick Cooper',
       country: '🇬🇧 英国', dates: '1966—',
-      type: 'psychology', coords: [-4.3, 55.85],
+      type: 'psychology', tradition: 'existential', coords: [-4.3, 55.85],
       quote: '人的存在根本上是关系性的——我们在与他人的相遇中成为自己。',
       books: [
-        { title: '存在主义疗法', year: 2003, genre: '理论', difficulty: '专业', douban: 'https://book.douban.com/subject/6307806/', weread: '', cover: '/covers/s7027375.jpg' },
+        { title: '存在主义疗法', year: 2003, genre: '理论', difficulty: '专业', douban: 'https://book.douban.com/subject/6307806/', cover: '/covers/s7027375.jpg' },
+      ]
+    },
+    {
+      id: 'schneider', name: 'Kirk Schneider', nameEn: 'Kirk J. Schneider',
+      country: '🇺🇸 美国', dates: '1956—',
+      type: 'psychology', tradition: 'existential', coords: [-122.0, 37.6],
+      quote: '敬畏——面对当下的完全投入——是存在取向治疗的核心。',
+      books: [
+        { title: '唤醒敬畏', year: 2004, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/6875324/', cover: '/covers/s7645431.jpg' },
+        { title: '存在-人本主义治疗', year: 2010, genre: '理论', difficulty: '专业', douban: '', cover: '' },
+      ]
+    },
+    {
+      id: 'josselson', name: '乔塞尔森', nameEn: 'Ruthellen Josselson',
+      country: '🇺🇸 美国', dates: '1946—',
+      type: 'psychology', tradition: 'existential', coords: [-76.6, 39.3],
+      quote: '人际关系是存在的基础——我们在与他人的深刻相遇中找到自我。',
+      books: [
+        { title: '在生命最深处与人相遇', year: 2017, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/37816364/', cover: '/covers/s35476718.jpg' },
+      ]
+    },
+    {
+      id: 'jacobsen', name: 'Bo Jacobsen', nameEn: 'Bo Jacobsen',
+      country: '🇩🇰 丹麦', dates: '1944—',
+      type: 'psychology', tradition: 'existential', coords: [12.6, 55.65],
+      quote: '存在主义心理学的核心问题是：作为人意味着什么？',
+      books: [
+        { title: '存在主义心理学的邀请', year: 2007, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/36013362/', cover: '/covers/s34270657.jpg' },
+      ]
+    },
+    {
+      id: 'iacovou', name: 'Iacovou & Weixel-Dixon', nameEn: 'Susan Iacovou · Karen Weixel-Dixon',
+      country: '🇬🇧 英国', dates: '',
+      type: 'psychology', tradition: 'existential', coords: [-1.5, 51.5],
+      quote: '存在主义治疗的每一个关键点，都关乎治疗师与来访者的真实相遇。',
+      books: [
+        { title: '存在主义治疗100个关键点与技巧', year: 2015, genre: '理论', difficulty: '专业', douban: 'https://book.douban.com/subject/34895661/', cover: '/covers/s33525123.jpg' },
+      ]
+    },
+
+    // ── 人本取向 · 心理学 ────────────────────
+    {
+      id: 'rogers', name: '卡尔·罗杰斯', nameEn: 'Carl R. Rogers',
+      country: '🇺🇸 美国', dates: '1902—1987',
+      type: 'psychology', tradition: 'humanistic', coords: [-117.3, 32.8],
+      quote: '好奇怪的悖论——当我接受自己本来的样子，我才能改变。',
+      books: [
+        { title: '成为一个人', year: 1961, genre: '理论', difficulty: '入门', douban: 'https://book.douban.com/subject/26147872/', cover: '/covers/s27763786.jpg' },
+        { title: '个人形成论', year: 1961, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/1218321/', cover: '/covers/s6002743.jpg' },
+        { title: '论人的成长', year: 1965, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/26220853/', cover: '/covers/s27733788.jpg' },
+        { title: '自由学习', year: 1969, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/26345256/', cover: '/covers/s28027485.jpg' },
+        { title: '卡尔·罗杰斯论会心团体', year: 1970, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/1481974/', cover: '/covers/s1698061.jpg' },
+        { title: '罗杰斯著作精粹', year: 1989, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/1931681/', cover: '/covers/s2167413.jpg' },
+        { title: '当事人中心治疗', year: 1951, genre: '理论', difficulty: '专业', douban: 'https://book.douban.com/subject/1193668/', cover: '/covers/s1139391.jpg' },
       ]
     },
     {
       id: 'maslow', name: '亚伯拉罕·马斯洛', nameEn: 'Abraham H. Maslow',
       country: '🇺🇸 美国', dates: '1908—1970',
-      type: 'psychology', coords: [-73.9, 40.62],
+      type: 'psychology', tradition: 'humanistic', coords: [-73.9, 40.62],
       quote: '如果你只能做锤子，你就会把所有东西都看成钉子。',
       books: [
-        { title: '动机与人格', year: 1954, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/11516520/', weread: 'https://weread.qq.com/web/search/books?keyword=动机与人格+马斯洛', cover: '/covers/s11102651.jpg' },
-        { title: '存在心理学探索', year: 1962, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/3074379/', weread: '', cover: '/covers/s3089728.jpg' },
+        { title: '动机与人格', year: 1954, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/11516520/', cover: '/covers/s11102651.jpg' },
+        { title: '存在心理学探索', year: 1962, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/3074379/', cover: '/covers/s3089728.jpg' },
       ]
     },
     {
       id: 'fromm', name: '埃里希·弗洛姆', nameEn: 'Erich Fromm',
       country: '🇩🇪 德国', dates: '1900—1980',
-      type: 'psychology', coords: [8.7, 50.1],
+      type: 'psychology', tradition: 'humanistic', coords: [8.7, 50.1],
       quote: '爱是主动的，是一种能力的施予，而不是被动的情感。',
       books: [
-        { title: '爱的艺术', year: 1956, genre: '理论', difficulty: '入门', douban: 'https://book.douban.com/subject/30297159/', weread: 'https://weread.qq.com/web/search/books?keyword=爱的艺术+弗洛姆', cover: '/covers/s29880130.jpg' },
-        { title: '逃避自由', year: 1941, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/2049127/', weread: 'https://weread.qq.com/web/search/books?keyword=逃避自由+弗洛姆', cover: '/covers/s2376566.jpg' },
+        { title: '爱的艺术', year: 1956, genre: '理论', difficulty: '入门', douban: 'https://book.douban.com/subject/30297159/', cover: '/covers/s29880130.jpg' },
+        { title: '逃避自由', year: 1941, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/2049127/', cover: '/covers/s2376566.jpg' },
+      ]
+    },
+    {
+      id: 'cain', name: 'David J. Cain', nameEn: 'David J. Cain',
+      country: '🇺🇸 美国', dates: '',
+      type: 'psychology', tradition: 'humanistic', coords: [-117.1, 32.7],
+      quote: '以人为中心的治疗，是对来访者固有潜能与自我方向的深深信任。',
+      books: [
+        { title: '以人为中心心理治疗', year: 2002, genre: '理论', difficulty: '专业', douban: 'https://book.douban.com/subject/10111018/', cover: '/covers/s7029217.jpg' },
+      ]
+    },
+    {
+      id: 'landreth', name: 'Garry L. Landreth', nameEn: 'Garry L. Landreth',
+      country: '🇺🇸 美国', dates: '1931—',
+      type: 'psychology', tradition: 'humanistic', coords: [-97.1, 33.2],
+      quote: '游戏是儿童的语言，玩具是他们的词汇。',
+      books: [
+        { title: '游戏治疗', year: 2002, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/25715671/', cover: '/covers/s27850645.jpg' },
+      ]
+    },
+    {
+      id: 'markyang', name: '杨吉膺', nameEn: 'Mark Yang',
+      country: '🇨🇳 中国', dates: '',
+      type: 'psychology', tradition: 'humanistic', coords: [121.5, 31.2],
+      quote: '存在主义的无为，不是无所作为，而是无执着于作为。',
+      books: [
+        { title: '生活本无应许之地', year: 2023, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/36414405/', cover: '/covers/s34632075.jpg' },
+      ]
+    },
+    {
+      id: 'rogers_studies', name: 'Rogers 研究丛书', nameEn: 'Rogers Studies',
+      country: '🇺🇸 美国 · 🇨🇳 中国', dates: '',
+      type: 'psychology', tradition: 'humanistic', coords: [-77.4, 42.8],
+      quote: '罗杰斯改变了我们对人性与治疗关系的理解。',
+      books: [
+        { title: '卡尔·罗杰斯传记', year: 2009, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/26708474/', cover: '/covers/s28383150.jpg' },
+        { title: '卡尔·罗杰斯：对话录', year: 1989, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/3429957/', cover: '/covers/s3864818.jpg' },
+        { title: '罗杰斯心理治疗—经典个案及专家点评', year: 2001, genre: '理论', difficulty: '专业', douban: 'https://book.douban.com/subject/1879499/', cover: '/covers/s11272865.jpg' },
+        { title: '罗杰斯：心理健康思想解析', year: 2015, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/26222570/', cover: '/covers/s28534089.jpg' },
+        { title: '人性的迷失与复归', year: 2000, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/1029691/', cover: '/covers/s1020914.jpg' },
+        { title: '人性的彰显：人本主义心理学', year: 2009, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/3809842/', cover: '/covers/s26164755.jpg' },
+        { title: '三种心理学', year: 2004, genre: '理论', difficulty: '入门', douban: 'https://book.douban.com/subject/4161822/', cover: '/covers/s4192050.jpg' },
       ]
     },
 
-    // ── 文学 · 哲学 ───────────────────────────
+    // ── 存在取向 · 文学 · 哲学 ──────────────
     {
       id: 'nietzsche', name: '弗里德里希·尼采', nameEn: 'Friedrich Nietzsche',
       country: '🇩🇪 德国', dates: '1844—1900',
-      type: 'literary', coords: [7.6, 47.55],
+      type: 'literary', tradition: 'existential', coords: [7.6, 47.55],
       quote: '一个人知道自己为什么而活，就可以忍受任何一种生活。',
       books: [
-        { title: '查拉图斯特拉如是说', year: 1883, genre: '哲学', difficulty: '进阶', douban: 'https://book.douban.com/subject/1012032/', weread: 'https://weread.qq.com/web/search/books?keyword=查拉图斯特拉如是说', cover: '/covers/s2236447.jpg' },
-        { title: '悲剧的诞生', year: 1872, genre: '哲学', difficulty: '进阶', douban: 'https://book.douban.com/subject/3765393/', weread: '', cover: '/covers/s3879777.jpg' },
-        { title: '善恶的彼岸', year: 1886, genre: '哲学', difficulty: '进阶', douban: 'https://book.douban.com/subject/26893391/', weread: '', cover: '/covers/s29101314.jpg' },
+        { title: '查拉图斯特拉如是说', year: 1883, genre: '哲学', difficulty: '进阶', douban: 'https://book.douban.com/subject/1012032/', cover: '/covers/s2236447.jpg' },
+        { title: '悲剧的诞生', year: 1872, genre: '哲学', difficulty: '进阶', douban: 'https://book.douban.com/subject/3765393/', cover: '/covers/s3879777.jpg' },
+        { title: '善恶的彼岸', year: 1886, genre: '哲学', difficulty: '进阶', douban: 'https://book.douban.com/subject/26893391/', cover: '/covers/s29101314.jpg' },
       ]
     },
     {
       id: 'heidegger', name: '马丁·海德格尔', nameEn: 'Martin Heidegger',
       country: '🇩🇪 德国', dates: '1889—1976',
-      type: 'literary', coords: [7.85, 48.0],
+      type: 'literary', tradition: 'existential', coords: [7.85, 48.0],
       quote: '语言是存在之家。',
       books: [
-        { title: '存在与时间', year: 1927, genre: '哲学', difficulty: '专业', douban: 'https://book.douban.com/subject/26320437/', weread: '', cover: '/covers/s28441138.jpg' },
-      ]
-    },
-    {
-      id: 'camus', name: '阿尔贝·加缪', nameEn: 'Albert Camus',
-      country: '🇫🇷 法国', dates: '1913—1960',
-      type: 'literary', coords: [2.1, 48.8],
-      quote: '必须想象西西弗斯是幸福的。',
-      books: [
-        { title: '局外人', year: 1942, genre: '小说', difficulty: '入门', douban: 'https://book.douban.com/subject/4908885/', weread: 'https://weread.qq.com/web/search/books?keyword=局外人+加缪', cover: '/covers/s4468484.jpg' },
-        { title: '西西弗斯神话', year: 1942, genre: '哲学', difficulty: '进阶', douban: 'https://book.douban.com/subject/21324342/', weread: 'https://weread.qq.com/web/search/books?keyword=西西弗斯神话+加缪', cover: '/covers/s29412594.jpg' },
+        { title: '存在与时间', year: 1927, genre: '哲学', difficulty: '专业', douban: 'https://book.douban.com/subject/26320437/', cover: '/covers/s28441138.jpg' },
       ]
     },
     {
       id: 'sartre', name: '让-保罗·萨特', nameEn: 'Jean-Paul Sartre',
       country: '🇫🇷 法国', dates: '1905—1980',
-      type: 'literary', coords: [2.45, 48.98],
+      type: 'literary', tradition: 'existential', coords: [2.45, 48.98],
       quote: '存在先于本质。',
       books: [
-        { title: '恶心', year: 1938, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/1030554/', weread: 'https://weread.qq.com/web/search/books?keyword=恶心+萨特', cover: '/covers/s3046791.jpg' },
-        { title: '存在与虚无', year: 1943, genre: '哲学', difficulty: '专业', douban: 'https://book.douban.com/subject/1041452/', weread: '', cover: '/covers/s27242952.jpg' },
+        { title: '恶心', year: 1938, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/1030554/', cover: '/covers/s3046791.jpg' },
+        { title: '存在与虚无', year: 1943, genre: '哲学', difficulty: '专业', douban: 'https://book.douban.com/subject/1041452/', cover: '/covers/s27242952.jpg' },
       ]
     },
     {
-      id: 'dostoevsky', name: '陀思妥耶夫斯基', nameEn: 'Fyodor Dostoevsky',
-      country: '🇷🇺 俄国', dates: '1821—1881',
-      type: 'literary', coords: [30.3, 59.9],
-      quote: '美将拯救世界。',
+      id: 'camus', name: '阿尔贝·加缪', nameEn: 'Albert Camus',
+      country: '🇫🇷 法国', dates: '1913—1960',
+      type: 'literary', tradition: 'existential', coords: [2.1, 48.8],
+      quote: '必须想象西西弗斯是幸福的。',
       books: [
-        { title: '罪与罚', year: 1866, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/30438790/', weread: 'https://weread.qq.com/web/search/books?keyword=罪与罚+陀思妥耶夫斯基', cover: '/covers/s30014169.jpg' },
-        { title: '卡拉马佐夫兄弟', year: 1880, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/26427025/', weread: 'https://weread.qq.com/web/search/books?keyword=卡拉马佐夫兄弟', cover: '/covers/s28241597.jpg' },
-        { title: '地下室手记', year: 1864, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/5391974/', weread: 'https://weread.qq.com/web/search/books?keyword=地下室手记', cover: '/covers/s4606820.jpg' },
+        { title: '局外人', year: 1942, genre: '小说', difficulty: '入门', douban: 'https://book.douban.com/subject/4908885/', cover: '/covers/s4468484.jpg' },
+        { title: '西西弗斯神话', year: 1942, genre: '哲学', difficulty: '进阶', douban: 'https://book.douban.com/subject/21324342/', cover: '/covers/s29412594.jpg' },
       ]
     },
     {
-      id: 'tolstoy', name: '列夫·托尔斯泰', nameEn: 'Leo Tolstoy',
-      country: '🇷🇺 俄国', dates: '1828—1910',
-      type: 'literary', coords: [37.5, 54.15],
-      quote: '所有人都想改变世界，却没有人想改变自己。',
+      id: 'beauvoir', name: '西蒙娜·德·波伏娃', nameEn: 'Simone de Beauvoir',
+      country: '🇫🇷 法国', dates: '1908—1986',
+      type: 'literary', tradition: 'existential', coords: [2.35, 48.82],
+      quote: '人并非生来就是自由的，但人必须选择成为自由的。',
       books: [
-        { title: '伊万·伊里奇之死', year: 1886, genre: '小说', difficulty: '入门', douban: 'https://book.douban.com/subject/19980346/', weread: 'https://weread.qq.com/web/search/books?keyword=伊万伊里奇之死', cover: '/covers/s26376961.jpg' },
-        { title: '安娜·卡列尼娜', year: 1878, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/25973243/', weread: 'https://weread.qq.com/web/search/books?keyword=安娜卡列尼娜', cover: '/covers/s27445692.jpg' },
+        { title: 'The Ethics of Ambiguity', year: 1947, genre: '哲学', difficulty: '专业', douban: '', cover: '' },
+      ]
+    },
+    {
+      id: 'levinas', name: '埃马纽埃尔·列维纳斯', nameEn: 'Emmanuel Levinas',
+      country: '🇫🇷 法国', dates: '1906—1995',
+      type: 'literary', tradition: 'existential', coords: [2.2, 48.75],
+      quote: '他者的面孔呼唤我承担责任——这是伦理学最深的根基。',
+      books: [
+        { title: 'Totality and Infinity', year: 1961, genre: '哲学', difficulty: '专业', douban: '', cover: '' },
+      ]
+    },
+    {
+      id: 'merleauponty', name: '莫里斯·梅洛-庞蒂', nameEn: 'Maurice Merleau-Ponty',
+      country: '🇫🇷 法国', dates: '1908—1961',
+      type: 'literary', tradition: 'existential', coords: [-1.0, 46.0],
+      quote: '我们不是通过思维，而是通过身体来理解世界的。',
+      books: [
+        { title: 'The Phenomenology of Perception', year: 1945, genre: '哲学', difficulty: '专业', douban: '', cover: '' },
+      ]
+    },
+    {
+      id: 'laing', name: 'R. D. Laing', nameEn: 'Ronald David Laing',
+      country: '🇬🇧 英国', dates: '1927—1989',
+      type: 'literary', tradition: 'existential', coords: [-4.25, 55.86],
+      quote: '精神疾病不只是大脑的问题，它是人在特定处境中的一种存在方式。',
+      books: [
+        { title: 'The Divided Self', year: 1960, genre: '理论', difficulty: '专业', douban: '', cover: '' },
       ]
     },
     {
       id: 'kierkegaard', name: '索伦·克尔凯郭尔', nameEn: 'Søren Kierkegaard',
       country: '🇩🇰 丹麦', dates: '1813—1855',
-      type: 'literary', coords: [12.55, 55.68],
+      type: 'literary', tradition: 'existential', coords: [12.55, 55.68],
       quote: '绝望是一种存在的疾病——对自我的失败。',
       books: [
-        { title: '恐惧与颤抖', year: 1843, genre: '哲学', difficulty: '进阶', douban: 'https://book.douban.com/subject/1020296/', weread: '', cover: '/covers/s1013863.jpg' },
-        { title: '非此即彼', year: 1843, genre: '哲学', difficulty: '专业', douban: 'https://book.douban.com/subject/1066008/', weread: '', cover: '/covers/s2682284.jpg' },
+        { title: '恐惧与颤抖', year: 1843, genre: '哲学', difficulty: '进阶', douban: 'https://book.douban.com/subject/1020296/', cover: '/covers/s1013863.jpg' },
+        { title: '非此即彼', year: 1843, genre: '哲学', difficulty: '专业', douban: 'https://book.douban.com/subject/1066008/', cover: '/covers/s2682284.jpg' },
+      ]
+    },
+    {
+      id: 'dostoevsky', name: '陀思妥耶夫斯基', nameEn: 'Fyodor Dostoevsky',
+      country: '🇷🇺 俄国', dates: '1821—1881',
+      type: 'literary', tradition: 'existential', coords: [30.3, 59.9],
+      quote: '美将拯救世界。',
+      books: [
+        { title: '罪与罚', year: 1866, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/30438790/', cover: '/covers/s30014169.jpg' },
+        { title: '卡拉马佐夫兄弟', year: 1880, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/26427025/', cover: '/covers/s28241597.jpg' },
+        { title: '地下室手记', year: 1864, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/5391974/', cover: '/covers/s4606820.jpg' },
+      ]
+    },
+    {
+      id: 'tolstoy', name: '列夫·托尔斯泰', nameEn: 'Leo Tolstoy',
+      country: '🇷🇺 俄国', dates: '1828—1910',
+      type: 'literary', tradition: 'existential', coords: [37.5, 54.15],
+      quote: '所有人都想改变世界，却没有人想改变自己。',
+      books: [
+        { title: '伊万·伊里奇之死', year: 1886, genre: '小说', difficulty: '入门', douban: 'https://book.douban.com/subject/19980346/', cover: '/covers/s26376961.jpg' },
+        { title: '安娜·卡列尼娜', year: 1878, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/25973243/', cover: '/covers/s27445692.jpg' },
       ]
     },
   ];
 
   // Flatten all books
   const ALL_BOOKS = AUTHORS.flatMap(a =>
-    a.books.map(b => ({ ...b, authorId: a.id, authorName: a.name, authorType: a.type }))
+    a.books.map(b => ({ ...b, authorId: a.id, authorName: a.name, authorType: a.type, authorTradition: a.tradition }))
   );
 
   // Cover placeholder colors by genre
@@ -1061,10 +1200,10 @@
   /* ══════════════════════════════════════════
      LIST VIEW + FILTERS
   ══════════════════════════════════════════ */
-  const filterState = { type: '', diff: '', genre: '' };
+  const filterState = { trad: '', type: '', diff: '', genre: '' };
 
   function setupFilters() {
-    function bindGroup(groupId, stateKey, activeClass) {
+    function bindGroup(groupId, stateKey) {
       const el = document.getElementById(groupId);
       el.querySelectorAll('.chip').forEach(chip => {
         chip.addEventListener('click', () => {
@@ -1075,17 +1214,19 @@
         });
       });
     }
+    bindGroup('filter-trad', 'trad');
     bindGroup('filter-type', 'type');
     bindGroup('filter-diff', 'diff');
     bindGroup('filter-genre', 'genre');
   }
 
   function renderBooks() {
-    const { type, diff, genre } = filterState;
+    const { trad, type, diff, genre } = filterState;
     const filtered = ALL_BOOKS.filter(b => {
-      if (type  && b.authorType !== type)  return false;
-      if (diff  && b.difficulty !== diff)  return false;
-      if (genre && b.genre !== genre)      return false;
+      if (trad  && b.authorTradition !== trad) return false;
+      if (type  && b.authorType !== type)      return false;
+      if (diff  && b.difficulty !== diff)      return false;
+      if (genre && b.genre !== genre)          return false;
       return true;
     });
 

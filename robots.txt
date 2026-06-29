@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://withchen.com/sitemap.xml
