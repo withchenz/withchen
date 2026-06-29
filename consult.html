@@ -60,7 +60,7 @@
     main {
       position: relative; z-index: 1;
       max-width: 560px; margin: 0 auto;
-      padding: 7rem 1.75rem 7rem;
+      padding: 9rem 1.75rem 7rem;
     }
 
     /* ── 入场动效 ── */
@@ -288,7 +288,14 @@
     .hotline-list li::before { content: '·'; color: var(--blue-deep); opacity: 0.7; flex-shrink: 0; }
 
     /* ── 简历 ── */
-    .stats-row { display: flex; gap: 0.6rem; margin-bottom: 1.75rem; }
+    .stats-group { margin-bottom: 1.4rem; }
+    .stats-group-label {
+      display: block;
+      font-size: 0.65rem; font-weight: 400;
+      color: var(--ink); opacity: 0.3;
+      letter-spacing: 0.2em; margin-bottom: 0.6rem;
+    }
+    .stats-row { display: flex; gap: 0.6rem; margin-bottom: 0; }
     .stat-card {
       flex: 1; background: #fff; border-radius: 1rem;
       padding: 0.9rem 0.6rem; text-align: center;
@@ -370,6 +377,113 @@
       margin-top: 0.28rem; letter-spacing: 0.08em;
     }
 
+    /* ── HERO ── */
+    .page-hero {
+      display: flex; align-items: center; gap: 1.5rem;
+      padding: 1.5rem 1.75rem 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .hero-photo {
+      width: 82px; height: 108px; border-radius: 0.9rem;
+      object-fit: cover; object-position: 50% 8%;
+      flex-shrink: 0;
+      box-shadow: 0 4px 18px rgba(44,44,44,0.12);
+    }
+    .hero-text { flex: 1; }
+    .hero-role {
+      font-size: 0.68rem; font-weight: 300;
+      color: var(--ink); opacity: 0.35;
+      letter-spacing: 0.18em; margin-bottom: 0.35rem;
+    }
+    .hero-name {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(2rem, 6vw, 2.6rem);
+      font-weight: 600; line-height: 1;
+      color: var(--blue-deep); margin-bottom: 0.9rem;
+    }
+    .hero-cta {
+      display: inline-block;
+      background: var(--blue-light); color: var(--blue-deep);
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.8rem; font-weight: 300;
+      letter-spacing: 0.12em; padding: 0.52rem 1.3rem;
+      border-radius: 2rem; text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .hero-cta:hover { opacity: 0.75; transform: translateY(-1px); }
+
+    /* ── ANCHOR NAV ── */
+    .anchor-nav {
+      position: fixed; top: 3.55rem; left: 0; right: 0; z-index: 15;
+      display: flex; gap: 0; overflow-x: auto; scrollbar-width: none;
+      background: rgba(247,243,236,0.96);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(44,44,44,0.07);
+      padding: 0 1.75rem;
+    }
+    .anchor-nav::-webkit-scrollbar { display: none; }
+    .anchor-link {
+      flex-shrink: 0;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.72rem; font-weight: 300;
+      color: var(--ink); opacity: 0.38;
+      text-decoration: none; letter-spacing: 0.1em;
+      padding: 0.7rem 0.9rem;
+      border-bottom: 2px solid transparent;
+      transition: opacity 0.2s, border-color 0.2s;
+    }
+    .anchor-link:hover { opacity: 0.7; }
+    .anchor-link.active { opacity: 1; border-bottom-color: var(--blue-deep); }
+
+    /* ── BOOKING SECTION ── */
+    .booking-section {
+      text-align: center; padding: 2.5rem 1.5rem 1rem;
+      margin-top: 1rem;
+    }
+    .booking-title {
+      font-family: 'Caveat', cursive; font-size: 1.55rem; font-weight: 600;
+      color: var(--ink); margin-bottom: 0.3rem;
+    }
+    .booking-sub {
+      font-size: 0.78rem; font-weight: 300; color: var(--ink);
+      opacity: 0.38; letter-spacing: 0.08em; margin-bottom: 1.75rem;
+    }
+    .booking-qr {
+      width: 140px; height: 140px; object-fit: contain;
+      border-radius: 1rem; display: block; margin: 0 auto 1rem;
+      box-shadow: 0 4px 20px rgba(44,44,44,0.08);
+      background: #fff; padding: 0.5rem;
+    }
+    .booking-hint {
+      font-size: 0.75rem; font-weight: 300;
+      color: var(--ink); opacity: 0.45;
+      letter-spacing: 0.06em; margin-bottom: 1.5rem;
+    }
+    .booking-btn {
+      display: inline-block;
+      background: var(--blue); color: #fff;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.88rem; font-weight: 300;
+      letter-spacing: 0.14em; padding: 0.75rem 2.2rem;
+      border-radius: 2rem; text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+      box-shadow: 0 4px 16px rgba(116,185,232,0.35);
+    }
+    .booking-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .booking-or {
+      font-size: 0.7rem; color: var(--ink); opacity: 0.25;
+      margin: 1rem 0; letter-spacing: 0.2em;
+    }
+    .booking-email {
+      font-size: 0.78rem; color: var(--blue-deep); opacity: 0.65;
+      text-decoration: none; letter-spacing: 0.04em;
+    }
+    .booking-email:hover { opacity: 1; }
+
+    /* section scroll offset */
+    .scroll-section { scroll-margin-top: 7rem; }
+    #letter, #settings, #faq, #background, #booking { scroll-margin-top: 7.5rem; }
+
     /* ── BOTTOM NAV ── */
     .site-nav {
       position: fixed; bottom: 1.5rem; left: 50%; right: auto;
@@ -401,10 +515,9 @@
     }
 
     @media (min-width: 900px) {
-      main {
-        max-width: 700px;
-        padding: 8rem 3rem 6rem;
-      }
+      main { max-width: 700px; padding: 9.5rem 3rem 6rem; }
+      .page-hero { padding: 1.5rem 2rem 2rem; gap: 2.5rem; }
+      .hero-photo { width: 100px; height: 132px; }
     }
   </style>
 </head>
@@ -418,11 +531,31 @@
     <a href="index.html" class="nav-back">← 回到首页</a>
   </nav>
 
+  <!-- ── ANCHOR NAV ── -->
+  <nav class="anchor-nav" id="anchor-nav">
+    <a class="anchor-link active" href="#letter">写给你的话</a>
+    <a class="anchor-link" href="#settings">咨询设置</a>
+    <a class="anchor-link" href="#faq">常见问题</a>
+    <a class="anchor-link" href="#background">受训背景</a>
+    <a class="anchor-link" href="#clinical">临床经验和督导</a>
+    <a class="anchor-link" href="#booking">预约</a>
+  </nav>
+
   <main>
 
-    <!-- ══════════ 前半：写给你 ══════════ -->
+    <!-- ── HERO ── -->
+    <div class="page-hero">
+      <img class="hero-photo" src="头像备选3.jpg" alt="郑忱 ChenChen" />
+      <div class="hero-text">
+        <p class="hero-role">存在人本取向心理咨询师</p>
+        <p class="hero-name">郑忱</p>
+        <a class="hero-cta" href="#booking">预约咨询 →</a>
+      </div>
+    </div>
 
-    <span class="chapter-tag fade d1">写给你</span>
+    <!-- ══════════ 前半：写给你 ══════════ -->
+    <div id="letter"></div>
+    <span class="chapter-tag fade d1">写给你的话</span>
 
     <h1 class="letter-title fade d2">
       我曾经因为绝望和孤独走进咨询室，<br/>所以我知道这需要多大的勇气。
@@ -498,7 +631,7 @@
 
     <!-- 设置四格 -->
     <div class="fade d7">
-      <div class="section-label">
+      <div class="section-label" id="settings">
         <span class="section-label-text">咨询设置</span>
         <span class="section-label-line"></span>
       </div>
@@ -526,7 +659,7 @@
 
     <!-- Q&A -->
     <div class="fade d7">
-      <div class="section-label">
+      <div class="section-label" id="faq">
         <span class="section-label-text">常见问题</span>
         <span class="section-label-line"></span>
       </div>
@@ -585,28 +718,9 @@
     <!-- ══════════ 简历 ══════════ -->
 
     <div class="fade d8">
-      <div class="section-label">
+      <div class="section-label" id="background">
         <span class="section-label-text">我的受训背景</span>
         <span class="section-label-line"></span>
-      </div>
-
-      <div class="stats-row">
-        <div class="stat-card">
-          <span class="stat-num">250+</span>
-          <span class="stat-label">咨询经验（小时）<br/>持续增加中</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-num">110+</span>
-          <span class="stat-label">个人体验（小时）<br/>持续增加中</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-num">110h</span>
-          <span class="stat-label">团体督导<br/>持续增加中</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-num">60h</span>
-          <span class="stat-label">个体督导<br/>持续增加中</span>
-        </div>
       </div>
 
       <div class="training-block">
@@ -637,6 +751,39 @@
           <li><span class="yr"></span>国家三级心理咨询师</li>
         </ul>
       </div>
+
+      <!-- 临床经验和督导 -->
+      <div class="section-label" id="clinical" style="margin-top: 2rem;">
+        <span class="section-label-text">临床经验和督导</span>
+        <span class="section-label-line"></span>
+      </div>
+
+      <div class="stats-group">
+        <span class="stats-group-label">临床经验</span>
+        <div class="stats-row">
+          <div class="stat-card">
+            <span class="stat-num">250h+</span>
+            <span class="stat-label">咨询经验<br/>持续增加中</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">110h+</span>
+            <span class="stat-label">个人体验<br/>持续增加中</span>
+          </div>
+        </div>
+      </div>
+      <div class="stats-group">
+        <span class="stats-group-label">督导时长</span>
+        <div class="stats-row">
+          <div class="stat-card">
+            <span class="stat-num">110h+</span>
+            <span class="stat-label">团体督导<br/>持续增加中</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">60h+</span>
+            <span class="stat-label">个体督导<br/>持续增加中</span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- ══════════ 英雄结语 ══════════ -->
@@ -648,6 +795,19 @@
       <span class="hero-closing-deco-bottom">✦ ✦ ✦</span>
     </div>
 
+    <!-- 分隔线 -->
+    <div class="divider">
+      <span class="divider-line"></span><span class="divider-star">✦</span><span class="divider-line"></span>
+    </div>
+
+    <!-- ══════════ 预约 ══════════ -->
+    <div id="booking" class="booking-section">
+      <p class="booking-title">准备好了吗？</p>
+      <p class="booking-sub">扫码添加微信，发送「咨询」即可</p>
+      <img class="booking-qr" src="qr-consult.png" alt="微信预约二维码" />
+      <p class="booking-hint">微信扫一扫 · 备注"咨询"</p>
+      <a class="booking-btn" href="mailto:zhengchencandy@gmail.com">或发邮件预约 →</a>
+    </div>
 
   </main>
 
@@ -661,5 +821,21 @@
     <a href="theater.html">思考</a>
     <a href="consult.html" class="active">咨询</a>
   </nav>
+  <script>
+    // Anchor nav active state on scroll
+    const anchorLinks = document.querySelectorAll('.anchor-link');
+    const sectionIds  = ['letter','settings','faq','background','clinical','booking'];
+    const sections    = sectionIds.map(id => document.getElementById(id));
+    function updateAnchor() {
+      const offset = 130;
+      let current = 0;
+      sections.forEach((sec, i) => {
+        if (sec && sec.getBoundingClientRect().top <= offset) current = i;
+      });
+      anchorLinks.forEach((a, i) => a.classList.toggle('active', i === current));
+    }
+    window.addEventListener('scroll', updateAnchor, { passive: true });
+    updateAnchor();
+  </script>
 </body>
 </html>
