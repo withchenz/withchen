@@ -521,6 +521,91 @@
         </div>
       </div>
 
+      <!-- 卡片 3：存在人本主义书单 -->
+      <div class="card" onclick="window.location.href='booklist.html'" style="cursor:pointer">
+        <div class="thumb">
+          <svg viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
+            <defs>
+              <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%"   stop-color="#0D1B2E"/>
+                <stop offset="100%" stop-color="#1a2f50"/>
+              </linearGradient>
+              <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%"   stop-color="#74B9E8" stop-opacity="0.15"/>
+                <stop offset="100%" stop-color="#9B8BC4" stop-opacity="0.08"/>
+              </linearGradient>
+            </defs>
+            <!-- Background -->
+            <rect width="400" height="225" fill="url(#bg)"/>
+            <rect width="400" height="225" fill="url(#glow)"/>
+            <!-- Grid lines (map feel) -->
+            <g stroke="rgba(116,185,232,0.12)" stroke-width="0.6">
+              <line x1="0" y1="56"  x2="400" y2="56"/>
+              <line x1="0" y1="112" x2="400" y2="112"/>
+              <line x1="0" y1="168" x2="400" y2="168"/>
+              <line x1="80"  y1="0" x2="80"  y2="225"/>
+              <line x1="160" y1="0" x2="160" y2="225"/>
+              <line x1="240" y1="0" x2="240" y2="225"/>
+              <line x1="320" y1="0" x2="320" y2="225"/>
+            </g>
+            <!-- Continent silhouette (abstract) -->
+            <ellipse cx="100" cy="105" rx="65" ry="38" fill="rgba(234,238,230,0.07)"/>
+            <ellipse cx="220" cy="88"  rx="90" ry="42" fill="rgba(234,238,230,0.07)"/>
+            <ellipse cx="300" cy="148" rx="55" ry="30" fill="rgba(234,238,230,0.07)"/>
+            <!-- Author dots -->
+            <circle cx="130" cy="100" r="4" fill="#74B9E8" opacity="0.85"/>
+            <circle cx="148" cy="96"  r="4" fill="#74B9E8" opacity="0.85"/>
+            <circle cx="210" cy="82"  r="4" fill="#74B9E8" opacity="0.85"/>
+            <circle cx="232" cy="85"  r="4" fill="#74B9E8" opacity="0.85"/>
+            <circle cx="255" cy="80"  r="4" fill="#E8734A" opacity="0.85"/>
+            <circle cx="268" cy="76"  r="4" fill="#E8734A" opacity="0.85"/>
+            <circle cx="305" cy="140" r="4" fill="#E8734A" opacity="0.85"/>
+            <circle cx="320" cy="138" r="4" fill="#E8734A" opacity="0.85"/>
+            <!-- Books stack (right side) -->
+            <g transform="translate(292, 48)">
+              <!-- Book 3 (back) -->
+              <rect x="8" y="18" width="50" height="72" rx="2" fill="#9B8BC4" opacity="0.8"/>
+              <rect x="8" y="18" width="5"  height="72" rx="1" fill="rgba(0,0,0,0.25)"/>
+              <!-- Book 2 (mid) -->
+              <rect x="4" y="10" width="50" height="72" rx="2" fill="#74B9E8" opacity="0.85"/>
+              <rect x="4" y="10" width="5"  height="72" rx="1" fill="rgba(0,0,0,0.2)"/>
+              <!-- Book 1 (front) -->
+              <rect x="0" y="2"  width="50" height="72" rx="2" fill="#E8734A" opacity="0.9"/>
+              <rect x="0" y="2"  width="5"  height="72" rx="1" fill="rgba(0,0,0,0.2)"/>
+              <!-- Book lines -->
+              <line x1="10" y1="20" x2="44" y2="20" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/>
+              <line x1="10" y1="28" x2="44" y2="28" stroke="rgba(255,255,255,0.2)" stroke-width="0.8"/>
+            </g>
+            <!-- Stars -->
+            <text x="28"  y="34"  font-size="10" fill="#74B9E8" opacity="0.7">✦</text>
+            <text x="370" y="48"  font-size="7"  fill="#9B8BC4" opacity="0.6">✦</text>
+            <text x="52"  y="188" font-size="8"  fill="#74B9E8" opacity="0.5">✦</text>
+            <text x="355" y="195" font-size="6"  fill="#E8734A" opacity="0.55">✦</text>
+            <text x="190" y="198" font-size="5"  fill="#9B8BC4" opacity="0.4">✦</text>
+            <!-- Title text -->
+            <text x="28" y="120" font-family="Caveat, cursive" font-size="32" font-weight="700"
+                  fill="rgba(247,243,236,0.92)" letter-spacing="1">存在人本主义</text>
+            <text x="28" y="150" font-family="Caveat, cursive" font-size="22" font-weight="600"
+                  fill="rgba(247,243,236,0.65)" letter-spacing="2">书单 1.0</text>
+            <!-- Stat chips -->
+            <rect x="28" y="160" width="70" height="18" rx="9" fill="rgba(116,185,232,0.2)"/>
+            <text x="63" y="173" font-family="'Noto Sans SC', sans-serif" font-size="8" font-weight="300"
+                  fill="#74B9E8" text-anchor="middle">16 位作者</text>
+            <rect x="106" y="160" width="54" height="18" rx="9" fill="rgba(232,115,74,0.2)"/>
+            <text x="133" y="173" font-family="'Noto Sans SC', sans-serif" font-size="8" font-weight="300"
+                  fill="#E8734A" text-anchor="middle">38 本书</text>
+          </svg>
+          <span class="thumb-badge badge-blue">书单</span>
+        </div>
+        <div class="card-body">
+          <p class="card-title">存在人本主义书单 1.0</p>
+          <p class="card-desc">16 位作者 · 地图视图 + 书单视图 · 从亚隆到尼采，从弗兰克尔到陀思妥耶夫斯基</p>
+        </div>
+        <div class="card-footer">
+          <a class="btn btn-primary" href="booklist.html">探索书单 →</a>
+        </div>
+      </div>
+
     </div><!-- /cards -->
   </main>
 

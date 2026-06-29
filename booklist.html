@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>存在人本主义书单 1.0 · withchen</title>
+  <meta name="description" content="一份关于存在人本主义心理治疗的书单，涵盖心理学、哲学与文学，16位作者，跨越5个国家。" />
+  <meta property="og:title" content="存在人本主义书单" />
+  <meta property="og:description" content="一个有趣的书单" />
+  <meta property="og:image" content="https://withchen.com/og-booklist.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://withchen.com/booklist.html" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="withchen" />
+  <meta name="referrer" content="no-referrer" />
+
+  <link rel="preconnect" href="https://fonts.loli.net" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.loli.net/css2?family=Caveat:wght@400;600;700&family=Noto+Sans+SC:wght@300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/d3@7/dist/d3.min.js"></script>
+  <script src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
+
+  <style>
+    :root {
+      --blue:       #74B9E8;
+      --blue-deep:  #4A9BD4;
+      --blue-light: #D0E9F7;
+      --cream:      #F7F3EC;
+      --ink:        #2C2C2C;
+      --green:      #8BBF9F;
+      --coral:      #E8734A;
+      --purple:     #9B8BC4;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Inter', 'Noto Sans SC', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── Top nav ── */
+    nav.top-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      padding: 1.1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(247,243,236,0.9);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(44,44,44,0.06);
+    }
+    .nav-logo {
+      font-family: 'Caveat', cursive; font-size: 1.1rem;
+      color: var(--ink); text-decoration: none;
+      opacity: 0.5; letter-spacing: 0.05em; transition: opacity 0.2s;
+    }
+    .nav-logo:hover { opacity: 0.9; }
+    .nav-back {
+      font-size: 0.73rem; color: var(--ink); text-decoration: none;
+      opacity: 0.35; letter-spacing: 0.12em; transition: opacity 0.2s;
+    }
+    .nav-back:hover { opacity: 0.7; }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 7rem 2rem 2.5rem;
+      text-align: center;
+      max-width: 760px; margin: 0 auto;
+    }
+    .hero-tag {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.7rem; letter-spacing: 0.28em;
+      color: var(--blue-deep); margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+    .hero-title {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(2.6rem, 8vw, 4.2rem);
+      font-weight: 700; color: var(--ink); line-height: 1.1;
+      margin-bottom: 0.8rem;
+    }
+    .hero-title .accent { color: var(--blue); }
+    .hero-sub {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.85rem; font-weight: 300;
+      color: var(--ink); opacity: 0.5;
+      line-height: 1.9; margin-bottom: 2rem;
+    }
+
+    /* ── View toggle ── */
+    .view-toggle {
+      display: inline-flex; gap: 0.3rem;
+      background: rgba(44,44,44,0.06);
+      border-radius: 2rem; padding: 0.28rem;
+      margin-bottom: 0.5rem;
+    }
+    .toggle-btn {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.82rem; font-weight: 300;
+      letter-spacing: 0.06em;
+      padding: 0.5rem 1.4rem;
+      border-radius: 1.6rem; border: none;
+      cursor: pointer; transition: all 0.25s;
+      background: transparent; color: var(--ink); opacity: 0.5;
+    }
+    .toggle-btn.active {
+      background: var(--ink); color: var(--cream);
+      opacity: 1;
+    }
+    .toggle-btn:hover:not(.active) { opacity: 0.8; }
+
+    /* ── Stats bar ── */
+    .stats-bar {
+      display: flex; justify-content: center; gap: 2.5rem;
+      padding: 1rem 2rem 0;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.75rem; font-weight: 300;
+      color: var(--ink); opacity: 0.45;
+    }
+    .stats-bar span { display: flex; align-items: center; gap: 0.4rem; }
+    .stats-dot {
+      width: 8px; height: 8px; border-radius: 50%; display: inline-block;
+    }
+    .stats-dot.blue  { background: var(--blue); }
+    .stats-dot.coral { background: var(--coral); }
+
+    /* ── Section visibility ── */
+    .view-section { display: none; }
+    .view-section.active { display: block; }
+
+    /* ── Map ── */
+    .map-wrap {
+      position: relative;
+      width: 100%;
+      height: calc(100vh - 240px);
+      min-height: 400px;
+      background: #d8e8f2;
+      overflow: hidden;
+    }
+    #map-svg {
+      width: 100%; height: 100%;
+      cursor: grab;
+    }
+    #map-svg:active { cursor: grabbing; }
+
+    .map-controls {
+      position: absolute; bottom: 1.5rem; right: 1.5rem;
+      display: flex; flex-direction: column; gap: 0.4rem;
+      z-index: 10;
+    }
+    .map-ctrl {
+      width: 36px; height: 36px;
+      background: rgba(247,243,236,0.92);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(44,44,44,0.12);
+      border-radius: 0.6rem;
+      font-size: 1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--ink); transition: background 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .map-ctrl:hover { background: rgba(255,255,255,0.98); }
+
+    .map-legend {
+      position: absolute; bottom: 1.5rem; left: 1.5rem;
+      z-index: 10;
+      background: rgba(247,243,236,0.92);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(44,44,44,0.1);
+      border-radius: 0.85rem; padding: 0.7rem 1rem;
+      display: flex; flex-direction: column; gap: 0.4rem;
+    }
+    .legend-item {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.72rem; font-weight: 300;
+      color: var(--ink);
+    }
+    .legend-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .legend-dot.blue  { background: var(--blue); }
+    .legend-dot.coral { background: var(--coral); }
+
+    /* Map hint */
+    .map-hint {
+      position: absolute; top: 1rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.7rem; font-weight: 300;
+      color: var(--ink); opacity: 0.4;
+      background: rgba(247,243,236,0.8);
+      padding: 0.3rem 0.9rem; border-radius: 1rem;
+      pointer-events: none;
+      transition: opacity 1s;
+    }
+    .map-hint.hidden { opacity: 0; }
+
+    /* ── Author panel (right drawer) ── */
+    .author-panel {
+      position: fixed; top: 0; right: 0; bottom: 0;
+      width: 360px; z-index: 150;
+      background: var(--cream);
+      box-shadow: -4px 0 40px rgba(44,44,44,0.12);
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex; flex-direction: column;
+      overflow: hidden;
+    }
+    .author-panel.open { transform: translateX(0); }
+
+    .panel-header {
+      padding: 1.25rem 1.5rem 0;
+      display: flex; justify-content: flex-end;
+      flex-shrink: 0;
+    }
+    .panel-close {
+      width: 32px; height: 32px;
+      background: rgba(44,44,44,0.07);
+      border: none; border-radius: 50%;
+      font-size: 0.9rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--ink); opacity: 0.5;
+      transition: opacity 0.2s, background 0.2s;
+    }
+    .panel-close:hover { opacity: 1; background: rgba(44,44,44,0.12); }
+
+    .panel-body {
+      flex: 1; overflow-y: auto; padding: 1rem 1.5rem 6rem;
+    }
+    .panel-body::-webkit-scrollbar { width: 4px; }
+    .panel-body::-webkit-scrollbar-thumb { background: rgba(44,44,44,0.15); border-radius: 2px; }
+
+    /* Author info */
+    .author-meta {
+      display: flex; align-items: flex-start; gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .author-avatar {
+      width: 60px; height: 60px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-light), var(--blue));
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Caveat', cursive; font-size: 1.5rem;
+      color: #fff; font-weight: 600;
+    }
+    .author-avatar.coral {
+      background: linear-gradient(135deg, #f5c4b0, var(--coral));
+    }
+    .author-info { flex: 1; }
+    .author-name {
+      font-family: 'Caveat', cursive;
+      font-size: 1.7rem; font-weight: 700;
+      color: var(--ink); line-height: 1.1;
+      margin-bottom: 0.2rem;
+    }
+    .author-name-en {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem; font-weight: 300;
+      color: var(--ink); opacity: 0.45;
+      letter-spacing: 0.05em;
+    }
+    .author-country {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.72rem; font-weight: 300;
+      color: var(--ink); opacity: 0.45;
+      margin-top: 0.2rem;
+    }
+
+    .author-quote {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.82rem; font-weight: 300;
+      font-style: italic;
+      color: var(--ink); opacity: 0.65;
+      line-height: 1.9;
+      padding: 0.9rem 1rem;
+      background: rgba(116,185,232,0.08);
+      border-left: 2px solid var(--blue);
+      border-radius: 0 0.5rem 0.5rem 0;
+      margin-bottom: 1.4rem;
+    }
+    .author-quote.coral {
+      background: rgba(232,115,74,0.08);
+      border-left-color: var(--coral);
+    }
+
+    .panel-section-title {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.68rem; font-weight: 300;
+      letter-spacing: 0.18em; color: var(--ink); opacity: 0.35;
+      text-transform: uppercase;
+      margin-bottom: 0.9rem;
+    }
+
+    /* Mini book list in panel */
+    .panel-book {
+      display: flex; gap: 0.85rem; align-items: flex-start;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(44,44,44,0.07);
+      text-decoration: none; color: inherit;
+      transition: opacity 0.2s;
+    }
+    .panel-book:last-child { border-bottom: none; }
+    .panel-book:hover { opacity: 0.75; }
+
+    .panel-book-cover {
+      width: 46px; height: 65px;
+      border-radius: 3px;
+      flex-shrink: 0;
+      object-fit: cover;
+      display: block;
+    }
+    .panel-book-cover-ph {
+      width: 46px; height: 65px;
+      border-radius: 3px;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.5rem; font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      text-align: center; line-height: 1.4;
+      padding: 0.3rem;
+    }
+    .panel-book-info { flex: 1; }
+    .panel-book-title {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.82rem; font-weight: 400;
+      color: var(--ink); line-height: 1.5;
+      margin-bottom: 0.3rem;
+    }
+    .panel-book-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+    .mini-tag {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.6rem; font-weight: 300;
+      padding: 0.1rem 0.45rem;
+      border-radius: 0.3rem;
+    }
+    .tag-diff-入门 { background: rgba(139,191,159,0.15); color: var(--green); }
+    .tag-diff-进阶 { background: rgba(116,185,232,0.15); color: var(--blue-deep); }
+    .tag-diff-专业 { background: rgba(155,139,196,0.15); color: var(--purple); }
+    .tag-genre-小说  { background: rgba(232,115,74,0.12); color: var(--coral); }
+    .tag-genre-理论  { background: rgba(116,185,232,0.12); color: var(--blue-deep); }
+    .tag-genre-哲学  { background: rgba(155,139,196,0.12); color: var(--purple); }
+    .panel-book-year {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.6rem; color: var(--ink); opacity: 0.3;
+      margin-top: 0.15rem;
+    }
+    .panel-book-links { display: flex; gap: 0.35rem; margin-top: 0.45rem; }
+    .book-link-btn {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.6rem; font-weight: 300;
+      padding: 0.18rem 0.55rem; border-radius: 0.35rem;
+      text-decoration: none; transition: opacity 0.2s;
+    }
+    .book-link-btn:hover { opacity: 0.75; }
+    .douban-btn { background: rgba(44,44,44,0.08); color: var(--ink); }
+    .weread-btn { background: rgba(116,185,232,0.15); color: var(--blue-deep); }
+
+    /* Panel overlay */
+    .panel-overlay {
+      display: none; position: fixed; inset: 0;
+      z-index: 149; background: rgba(44,44,44,0.3);
+      backdrop-filter: blur(2px);
+    }
+    .panel-overlay.open { display: block; }
+
+    /* ── List view ── */
+    .list-wrap {
+      max-width: 1080px; margin: 0 auto;
+      padding: 1.5rem 2rem 7rem;
+    }
+
+    /* Filters */
+    .filter-group { margin-bottom: 0.75rem; }
+    .filter-label {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.65rem; font-weight: 300;
+      color: var(--ink); opacity: 0.35;
+      letter-spacing: 0.12em;
+      display: inline-block; margin-right: 0.6rem;
+      vertical-align: middle;
+    }
+    .chip-row { display: inline-flex; flex-wrap: wrap; gap: 0.4rem; }
+    .chip {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.73rem; font-weight: 300;
+      padding: 0.3rem 0.8rem; border-radius: 1.5rem;
+      border: 1px solid rgba(44,44,44,0.14);
+      cursor: pointer; transition: all 0.18s;
+      background: transparent; color: var(--ink);
+      opacity: 0.55;
+    }
+    .chip:hover { opacity: 0.85; border-color: rgba(44,44,44,0.3); }
+    .chip.active {
+      opacity: 1; border-color: transparent;
+      color: #fff;
+    }
+    .chip.active.blue   { background: var(--blue); }
+    .chip.active.coral  { background: var(--coral); }
+    .chip.active.green  { background: var(--green); }
+    .chip.active.purple { background: var(--purple); }
+    .chip.active.ink    { background: var(--ink); }
+
+    .filter-divider { height: 1px; background: rgba(44,44,44,0.07); margin: 1rem 0 1.2rem; }
+
+    /* Book grid */
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .book-card {
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .book-card:hover { transform: translateY(-3px); }
+    .book-card a { text-decoration: none; color: inherit; }
+
+    .book-cover-wrap {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.7rem;
+      box-shadow: 3px 4px 12px rgba(44,44,44,0.15);
+      position: relative;
+    }
+    .book-cover-img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .book-cover-ph {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: flex-start; justify-content: flex-end;
+      padding: 0.7rem 0.6rem;
+    }
+    .book-cover-ph-title {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.62rem; font-weight: 400;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.5;
+    }
+    .book-card-title {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.8rem; font-weight: 400;
+      color: var(--ink); line-height: 1.5;
+      margin-bottom: 0.35rem;
+      display: -webkit-box; -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .book-card-author {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.65rem; font-weight: 300;
+      color: var(--ink); opacity: 0.4;
+      margin-bottom: 0.3rem;
+    }
+    .book-card-tags { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+    .book-tag {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.58rem; font-weight: 300;
+      padding: 0.08rem 0.4rem;
+      border-radius: 0.25rem;
+    }
+    .book-count {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.72rem; font-weight: 300;
+      color: var(--ink); opacity: 0.35;
+      margin-bottom: 1rem;
+    }
+    .no-results {
+      text-align: center; padding: 4rem 0;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.88rem; font-weight: 300;
+      color: var(--ink); opacity: 0.35;
+    }
+
+    /* ── Bottom nav ── */
+    .site-nav {
+      position: fixed; bottom: 1.5rem; left: 50%; right: auto;
+      transform: translateX(-50%);
+      z-index: 50; display: flex; align-items: center;
+      width: fit-content;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-radius: 3rem; padding: 0.3rem; gap: 0.1rem;
+      box-shadow: 0 4px 28px rgba(44,44,44,0.1);
+    }
+    .site-nav a {
+      display: flex; align-items: center; gap: 0.3rem;
+      padding: 0.42rem 1rem; border-radius: 2.5rem;
+      text-decoration: none; color: var(--ink); opacity: 0.45;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.78rem; font-weight: 300;
+      letter-spacing: 0.03em; white-space: nowrap; transition: all 0.2s;
+    }
+    .site-nav a:hover { opacity: 0.8; }
+    .site-nav a.active { background: var(--ink); color: var(--cream); opacity: 1; }
+    @media (max-width: 600px) {
+      .site-nav { gap: 0.05rem; padding: 0.22rem 0.3rem; }
+      .site-nav a { font-size: 0.72rem; padding: 0.36rem 0.55rem; }
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 680px) {
+      nav.top-nav { padding: 1rem 1.25rem; }
+      .hero { padding: 5.5rem 1.25rem 1.5rem; }
+      .map-wrap { height: calc(100vh - 200px); min-height: 340px; }
+      .author-panel { width: 100%; top: auto; height: 75vh; border-radius: 1.5rem 1.5rem 0 0; }
+      .author-panel.open { transform: translateX(0); }
+      .list-wrap { padding: 1rem 1.25rem 7rem; }
+      .book-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 1rem; }
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero { animation: fadeUp 0.7s ease forwards; }
+    .stats-bar { animation: fadeUp 0.7s ease forwards 0.1s; opacity: 0; }
+  </style>
+</head>
+<body>
+
+  <nav class="top-nav">
+    <a href="index.html" class="nav-logo">withchen</a>
+    <a href="theater.html" class="nav-back">← 心理探险家</a>
+  </nav>
+
+  <section class="hero">
+    <p class="hero-tag">心理探险家 · 书单 1.0版</p>
+    <h1 class="hero-title">存在<span class="accent">人本</span>主义<br>书单</h1>
+    <p class="hero-sub">16 位作者 · 9 位心理学家 · 7 位文学与哲学家<br>跨越美国、奥地利、德国、英国、法国、俄国、丹麦</p>
+    <div class="view-toggle">
+      <button class="toggle-btn active" id="btn-map" onclick="switchView('map')">🗺 地图</button>
+      <button class="toggle-btn" id="btn-list" onclick="switchView('list')">📚 书单</button>
+    </div>
+  </section>
+
+  <!-- Map view -->
+  <section class="view-section active" id="map-view">
+    <div class="map-wrap">
+      <svg id="map-svg"></svg>
+      <div class="map-hint" id="map-hint">点击地图上的圆点查看作者书单</div>
+      <div class="map-controls">
+        <button class="map-ctrl" id="ctrl-in"  title="放大">+</button>
+        <button class="map-ctrl" id="ctrl-out" title="缩小">−</button>
+        <button class="map-ctrl" id="ctrl-home" title="复位">⌂</button>
+      </div>
+      <div class="map-legend">
+        <div class="legend-item"><span class="legend-dot blue"></span>心理学家</div>
+        <div class="legend-item"><span class="legend-dot coral"></span>文学 · 哲学</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- List view -->
+  <section class="view-section" id="list-view">
+    <div class="list-wrap">
+      <!-- Filters -->
+      <div class="filter-group">
+        <span class="filter-label">类型</span>
+        <div class="chip-row" id="filter-type">
+          <button class="chip active ink" data-val="">全部</button>
+          <button class="chip" data-val="psychology">心理学</button>
+          <button class="chip" data-val="literary">文学 · 哲学</button>
+        </div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">难度</span>
+        <div class="chip-row" id="filter-diff">
+          <button class="chip active ink" data-val="">全部</button>
+          <button class="chip" data-val="入门">入门</button>
+          <button class="chip" data-val="进阶">进阶</button>
+          <button class="chip" data-val="专业">专业</button>
+        </div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">书类</span>
+        <div class="chip-row" id="filter-genre">
+          <button class="chip active ink" data-val="">全部</button>
+          <button class="chip" data-val="小说">小说 · 故事</button>
+          <button class="chip" data-val="理论">理论 · 教材</button>
+          <button class="chip" data-val="哲学">哲学原典</button>
+        </div>
+      </div>
+      <div class="filter-divider"></div>
+      <p class="book-count" id="book-count"></p>
+      <div class="book-grid" id="book-grid"></div>
+    </div>
+  </section>
+
+  <!-- Author panel overlay -->
+  <div class="panel-overlay" id="panel-overlay" onclick="closePanel()"></div>
+
+  <!-- Author panel -->
+  <div class="author-panel" id="author-panel">
+    <div class="panel-header">
+      <button class="panel-close" onclick="closePanel()">✕</button>
+    </div>
+    <div class="panel-body" id="panel-body"></div>
+  </div>
+
+  <nav class="site-nav">
+    <a href="index.html">首页</a>
+    <a href="about.html">我</a>
+    <a href="articles.html">文章</a>
+    <a href="podcast.html">播客</a>
+    <a href="theater.html" class="active">思考</a>
+    <a href="consult.html">咨询</a>
+  </nav>
+
+  <script>
+  /* ══════════════════════════════════════════
+     DATA
+  ══════════════════════════════════════════ */
+  const AUTHORS = [
+    // ── 心理学家 ──────────────────────────────
+    {
+      id: 'yalom', name: '欧文·亚隆', nameEn: 'Irvin D. Yalom',
+      country: '🇺🇸 美国', dates: '1931—',
+      type: 'psychology', coords: [-122.1, 37.4],
+      quote: '我们都是行走在大海上的孤舟，而咨询，是两条小船靠近、并肩航行的一段时间。',
+      books: [
+        { title: '当尼采哭泣', year: 1992, genre: '小说', difficulty: '入门', douban: 'https://book.douban.com/subject/1061043/', weread: 'https://weread.qq.com/web/search/books?keyword=当尼采哭泣', cover: 'https://img1.doubanio.com/view/subject/l/public/s1673090.jpg' },
+        { title: '爱情刽子手', year: 1989, genre: '小说', difficulty: '入门', douban: 'https://book.douban.com/subject/35513203/', weread: 'https://weread.qq.com/web/search/books?keyword=爱情刽子手', cover: 'https://img1.doubanio.com/view/subject/l/public/s33935539.jpg' },
+        { title: '妈妈及生命的意义', year: 1999, genre: '小说', difficulty: '入门', douban: 'https://book.douban.com/subject/5999507/', weread: 'https://weread.qq.com/web/search/books?keyword=妈妈及生命的意义', cover: 'https://img3.doubanio.com/view/subject/l/public/s4655313.jpg' },
+        { title: '凝视太阳', year: 2008, genre: '理论', difficulty: '入门', douban: 'https://book.douban.com/subject/26660579/', weread: 'https://weread.qq.com/web/search/books?keyword=凝视太阳+亚隆', cover: 'https://img3.doubanio.com/view/subject/l/public/s28358542.jpg' },
+        { title: '诊疗椅上的谎言', year: 1996, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/27018914/', weread: 'https://weread.qq.com/web/search/books?keyword=诊疗椅上的谎言', cover: 'https://img1.doubanio.com/view/subject/l/public/s35240418.jpg' },
+        { title: '叔本华的治疗', year: 2005, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/3684193/', weread: 'https://weread.qq.com/web/search/books?keyword=叔本华的治疗', cover: 'https://img3.doubanio.com/view/subject/l/public/s3756843.jpg' },
+        { title: '破茧而出', year: 2015, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/26368422/', weread: 'https://weread.qq.com/web/search/books?keyword=破茧而出+亚隆', cover: 'https://img3.doubanio.com/view/subject/l/public/s28131657.jpg' },
+        { title: '成为我自己', year: 2017, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/33460827/', weread: 'https://weread.qq.com/web/search/books?keyword=成为我自己+亚隆', cover: 'https://img9.doubanio.com/view/subject/l/public/s33491495.jpg' },
+        { title: '存在主义心理治疗', year: 1980, genre: '理论', difficulty: '专业', douban: 'https://book.douban.com/subject/26304954/', weread: 'https://weread.qq.com/web/search/books?keyword=存在主义心理治疗', cover: 'https://img1.doubanio.com/view/subject/l/public/s28113560.jpg' },
+      ]
+    },
+    {
+      id: 'rogers', name: '卡尔·罗杰斯', nameEn: 'Carl R. Rogers',
+      country: '🇺🇸 美国', dates: '1902—1987',
+      type: 'psychology', coords: [-117.3, 32.8],
+      quote: '好奇怪的悖论——当我接受自己本来的样子，我才能改变。',
+      books: [
+        { title: '成为一个人', year: 1961, genre: '理论', difficulty: '入门', douban: 'https://book.douban.com/subject/1218321/', weread: '', cover: 'https://img3.doubanio.com/view/subject/l/public/s6002743.jpg' },
+        { title: '当事人中心治疗', year: 1951, genre: '理论', difficulty: '专业', douban: 'https://book.douban.com/subject/1043104/', weread: '', cover: 'https://img9.doubanio.com/view/subject/l/public/s1194834.jpg' },
+      ]
+    },
+    {
+      id: 'may', name: '罗洛·梅', nameEn: 'Rollo May',
+      country: '🇺🇸 美国', dates: '1909—1994',
+      type: 'psychology', coords: [-74.1, 40.8],
+      quote: '焦虑是人类意识到自己存在的代价。',
+      books: [
+        { title: '爱与意志', year: 1969, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/4839255/', weread: 'https://weread.qq.com/web/search/books?keyword=爱与意志+罗洛梅', cover: 'https://img2.doubanio.com/view/subject/l/public/s4461651.jpg' },
+        { title: '创造的勇气', year: 1975, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/4100348/', weread: '', cover: 'https://img9.doubanio.com/view/subject/l/public/s6083086.jpg' },
+        { title: '焦虑的意义', year: 1950, genre: '理论', difficulty: '专业', douban: 'https://book.douban.com/subject/26878224/', weread: '', cover: 'https://img9.doubanio.com/view/subject/l/public/s29053436.jpg' },
+      ]
+    },
+    {
+      id: 'frankl', name: '维克多·弗兰克尔', nameEn: 'Viktor E. Frankl',
+      country: '🇦🇹 奥地利', dates: '1905—1997',
+      type: 'psychology', coords: [16.2, 48.1],
+      quote: '人所拥有的任何东西，都可以被剥夺，唯独人性最后的自由——选择如何应对任何特定环境——不能被剥夺。',
+      books: [
+        { title: '活出生命的意义', year: 1946, genre: '小说', difficulty: '入门', douban: 'https://book.douban.com/subject/5330333/', weread: 'https://weread.qq.com/web/search/books?keyword=活出生命的意义', cover: 'https://img3.doubanio.com/view/subject/l/public/s6235123.jpg' },
+        { title: '追求意义的意志', year: 1969, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/26299708/', weread: '', cover: 'https://img9.doubanio.com/view/subject/l/public/s27981936.jpg' },
+      ]
+    },
+    {
+      id: 'buber', name: '马丁·布伯', nameEn: 'Martin Buber',
+      country: '🇦🇹 奥地利', dates: '1878—1965',
+      type: 'psychology', coords: [16.5, 48.35],
+      quote: '一切真实的生命都是相遇。',
+      books: [
+        { title: '我与你', year: 1923, genre: '哲学', difficulty: '进阶', douban: 'https://book.douban.com/subject/35110061/', weread: '', cover: 'https://img3.doubanio.com/view/subject/l/public/s34000583.jpg' },
+      ]
+    },
+    {
+      id: 'vandeurzen', name: 'Emmy van Deurzen', nameEn: 'Emmy van Deurzen',
+      country: '🇬🇧 英国', dates: '1951—',
+      type: 'psychology', coords: [-0.15, 51.5],
+      quote: '存在主义治疗不是要解决问题，而是要更好地理解生命的复杂性。',
+      books: [
+        { title: '存在性咨询与治疗实践', year: 2012, genre: '理论', difficulty: '专业', douban: 'https://book.douban.com/subject/10525282/', weread: '', cover: 'https://img3.doubanio.com/view/subject/l/public/s10182527.jpg' },
+        { title: '心理治疗中的存在主义挑战', year: 2015, genre: '理论', difficulty: '专业', douban: 'https://book.douban.com/subject/27013398/', weread: '', cover: 'https://img3.doubanio.com/view/subject/l/public/s29418792.jpg' },
+      ]
+    },
+    {
+      id: 'cooper', name: 'Mick Cooper', nameEn: 'Mick Cooper',
+      country: '🇬🇧 英国', dates: '1966—',
+      type: 'psychology', coords: [-4.3, 55.85],
+      quote: '人的存在根本上是关系性的——我们在与他人的相遇中成为自己。',
+      books: [
+        { title: '存在主义疗法', year: 2003, genre: '理论', difficulty: '专业', douban: 'https://book.douban.com/subject/6307806/', weread: '', cover: 'https://img9.doubanio.com/view/subject/l/public/s7027375.jpg' },
+      ]
+    },
+    {
+      id: 'maslow', name: '亚伯拉罕·马斯洛', nameEn: 'Abraham H. Maslow',
+      country: '🇺🇸 美国', dates: '1908—1970',
+      type: 'psychology', coords: [-73.9, 40.62],
+      quote: '如果你只能做锤子，你就会把所有东西都看成钉子。',
+      books: [
+        { title: '动机与人格', year: 1954, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/11516520/', weread: 'https://weread.qq.com/web/search/books?keyword=动机与人格+马斯洛', cover: 'https://img2.doubanio.com/view/subject/l/public/s11102651.jpg' },
+        { title: '存在心理学探索', year: 1962, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/1331792/', weread: '', cover: 'https://img3.doubanio.com/view/subject/l/public/s1354963.jpg' },
+      ]
+    },
+    {
+      id: 'fromm', name: '埃里希·弗洛姆', nameEn: 'Erich Fromm',
+      country: '🇩🇪 德国', dates: '1900—1980',
+      type: 'psychology', coords: [8.7, 50.1],
+      quote: '爱是主动的，是一种能力的施予，而不是被动的情感。',
+      books: [
+        { title: '爱的艺术', year: 1956, genre: '理论', difficulty: '入门', douban: 'https://book.douban.com/subject/30297159/', weread: 'https://weread.qq.com/web/search/books?keyword=爱的艺术+弗洛姆', cover: 'https://img1.doubanio.com/view/subject/l/public/s29880130.jpg' },
+        { title: '逃避自由', year: 1941, genre: '理论', difficulty: '进阶', douban: 'https://book.douban.com/subject/2049127/', weread: 'https://weread.qq.com/web/search/books?keyword=逃避自由+弗洛姆', cover: 'https://img9.doubanio.com/view/subject/l/public/s2376566.jpg' },
+      ]
+    },
+
+    // ── 文学 · 哲学 ───────────────────────────
+    {
+      id: 'nietzsche', name: '弗里德里希·尼采', nameEn: 'Friedrich Nietzsche',
+      country: '🇩🇪 德国', dates: '1844—1900',
+      type: 'literary', coords: [7.6, 47.55],
+      quote: '一个人知道自己为什么而活，就可以忍受任何一种生活。',
+      books: [
+        { title: '查拉图斯特拉如是说', year: 1883, genre: '哲学', difficulty: '进阶', douban: 'https://book.douban.com/subject/1012032/', weread: 'https://weread.qq.com/web/search/books?keyword=查拉图斯特拉如是说', cover: 'https://img3.doubanio.com/view/subject/l/public/s2236447.jpg' },
+        { title: '悲剧的诞生', year: 1872, genre: '哲学', difficulty: '进阶', douban: 'https://book.douban.com/subject/3765393/', weread: '', cover: 'https://img3.doubanio.com/view/subject/l/public/s3879777.jpg' },
+        { title: '善恶的彼岸', year: 1886, genre: '哲学', difficulty: '进阶', douban: 'https://book.douban.com/subject/26893391/', weread: '', cover: 'https://img9.doubanio.com/view/subject/l/public/s29101314.jpg' },
+      ]
+    },
+    {
+      id: 'heidegger', name: '马丁·海德格尔', nameEn: 'Martin Heidegger',
+      country: '🇩🇪 德国', dates: '1889—1976',
+      type: 'literary', coords: [7.85, 48.0],
+      quote: '语言是存在之家。',
+      books: [
+        { title: '存在与时间', year: 1927, genre: '哲学', difficulty: '专业', douban: 'https://book.douban.com/subject/1093742/', weread: '', cover: 'https://img1.doubanio.com/view/subject/l/public/s1590209.jpg' },
+      ]
+    },
+    {
+      id: 'camus', name: '阿尔贝·加缪', nameEn: 'Albert Camus',
+      country: '🇫🇷 法国', dates: '1913—1960',
+      type: 'literary', coords: [2.1, 48.8],
+      quote: '必须想象西西弗斯是幸福的。',
+      books: [
+        { title: '局外人', year: 1942, genre: '小说', difficulty: '入门', douban: 'https://book.douban.com/subject/4908885/', weread: 'https://weread.qq.com/web/search/books?keyword=局外人+加缪', cover: 'https://img9.doubanio.com/view/subject/l/public/s4468484.jpg' },
+        { title: '西西弗斯神话', year: 1942, genre: '哲学', difficulty: '进阶', douban: 'https://book.douban.com/subject/21324342/', weread: 'https://weread.qq.com/web/search/books?keyword=西西弗斯神话+加缪', cover: 'https://img9.doubanio.com/view/subject/l/public/s29412594.jpg' },
+      ]
+    },
+    {
+      id: 'sartre', name: '让-保罗·萨特', nameEn: 'Jean-Paul Sartre',
+      country: '🇫🇷 法国', dates: '1905—1980',
+      type: 'literary', coords: [2.45, 48.98],
+      quote: '存在先于本质。',
+      books: [
+        { title: '恶心', year: 1938, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/1092042/', weread: 'https://weread.qq.com/web/search/books?keyword=恶心+萨特', cover: 'https://img9.doubanio.com/view/subject/l/public/s9151884.jpg' },
+        { title: '存在与虚无', year: 1943, genre: '哲学', difficulty: '专业', douban: 'https://book.douban.com/subject/1074190/', weread: '', cover: 'https://img1.doubanio.com/view/subject/l/public/s9813520.jpg' },
+      ]
+    },
+    {
+      id: 'dostoevsky', name: '陀思妥耶夫斯基', nameEn: 'Fyodor Dostoevsky',
+      country: '🇷🇺 俄国', dates: '1821—1881',
+      type: 'literary', coords: [30.3, 59.9],
+      quote: '美将拯救世界。',
+      books: [
+        { title: '罪与罚', year: 1866, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/1084386/', weread: 'https://weread.qq.com/web/search/books?keyword=罪与罚+陀思妥耶夫斯基', cover: 'https://img9.doubanio.com/view/subject/l/public/s6482224.jpg' },
+        { title: '卡拉马佐夫兄弟', year: 1880, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/1084281/', weread: 'https://weread.qq.com/web/search/books?keyword=卡拉马佐夫兄弟', cover: 'https://img3.doubanio.com/view/subject/l/public/s1230953.jpg' },
+        { title: '地下室手记', year: 1864, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/1084390/', weread: 'https://weread.qq.com/web/search/books?keyword=地下室手记', cover: 'https://img9.doubanio.com/view/subject/l/public/s5688366.jpg' },
+      ]
+    },
+    {
+      id: 'tolstoy', name: '列夫·托尔斯泰', nameEn: 'Leo Tolstoy',
+      country: '🇷🇺 俄国', dates: '1828—1910',
+      type: 'literary', coords: [37.5, 54.15],
+      quote: '所有人都想改变世界，却没有人想改变自己。',
+      books: [
+        { title: '伊万·伊里奇之死', year: 1886, genre: '小说', difficulty: '入门', douban: 'https://book.douban.com/subject/1082940/', weread: 'https://weread.qq.com/web/search/books?keyword=伊万伊里奇之死', cover: 'https://img9.doubanio.com/view/subject/l/public/s1225194.jpg' },
+        { title: '安娜·卡列尼娜', year: 1878, genre: '小说', difficulty: '进阶', douban: 'https://book.douban.com/subject/1084286/', weread: 'https://weread.qq.com/web/search/books?keyword=安娜卡列尼娜', cover: 'https://img9.doubanio.com/view/subject/l/public/s1369685.jpg' },
+      ]
+    },
+    {
+      id: 'kierkegaard', name: '索伦·克尔凯郭尔', nameEn: 'Søren Kierkegaard',
+      country: '🇩🇰 丹麦', dates: '1813—1855',
+      type: 'literary', coords: [12.55, 55.68],
+      quote: '绝望是一种存在的疾病——对自我的失败。',
+      books: [
+        { title: '恐惧与颤抖', year: 1843, genre: '哲学', difficulty: '进阶', douban: 'https://book.douban.com/subject/1020296/', weread: '', cover: 'https://img3.doubanio.com/view/subject/l/public/s1013863.jpg' },
+        { title: '非此即彼', year: 1843, genre: '哲学', difficulty: '专业', douban: 'https://book.douban.com/subject/2027516/', weread: '', cover: 'https://img3.doubanio.com/view/subject/l/public/s34114063.jpg' },
+      ]
+    },
+  ];
+
+  // Flatten all books
+  const ALL_BOOKS = AUTHORS.flatMap(a =>
+    a.books.map(b => ({ ...b, authorId: a.id, authorName: a.name, authorType: a.type }))
+  );
+
+  // Cover placeholder colors by genre
+  const GENRE_COLORS = {
+    '小说': ['#2a4060', '#1e3050'],
+    '理论': ['#1a3a2a', '#163020'],
+    '哲学': ['#3a2060', '#2e1850'],
+  };
+  const TYPE_COLORS = { psychology: '#1e3a5a', literary: '#4a1e2a' };
+
+  /* ══════════════════════════════════════════
+     VIEW SWITCHING
+  ══════════════════════════════════════════ */
+  function switchView(view) {
+    document.getElementById('map-view').classList.toggle('active', view === 'map');
+    document.getElementById('list-view').classList.toggle('active', view === 'list');
+    document.getElementById('btn-map').classList.toggle('active', view === 'map');
+    document.getElementById('btn-list').classList.toggle('active', view === 'list');
+    if (view === 'list') renderBooks();
+  }
+
+  /* ══════════════════════════════════════════
+     MAP
+  ══════════════════════════════════════════ */
+  let mapZoom;
+  let mapG;
+  let currentProjection;
+
+  async function initMap() {
+    const container = document.querySelector('.map-wrap');
+    const W = container.clientWidth;
+    const H = container.clientHeight;
+
+    const svg = d3.select('#map-svg');
+    const defs = svg.append('defs');
+
+    // Ocean gradient
+    const grad = defs.append('linearGradient')
+      .attr('id', 'oceanGrad').attr('x1', '0%').attr('y1', '0%')
+      .attr('x2', '0%').attr('y2', '100%');
+    grad.append('stop').attr('offset', '0%').attr('stop-color', '#c8dcec');
+    grad.append('stop').attr('offset', '100%').attr('stop-color', '#d8eaf4');
+
+    svg.append('rect')
+      .attr('width', W).attr('height', H)
+      .attr('fill', 'url(#oceanGrad)');
+
+    const projection = d3.geoNaturalEarth1()
+      .scale(W / 6.3)
+      .translate([W / 2, H / 2]);
+    currentProjection = projection;
+
+    const path = d3.geoPath().projection(projection);
+
+    mapG = svg.append('g');
+
+    // Load world
+    try {
+      const world = await d3.json('https://unpkg.com/world-atlas@2.0.2/countries-110m.json');
+      const countries = topojson.feature(world, world.objects.countries);
+      const borders  = topojson.mesh(world, world.objects.countries, (a, b) => a !== b);
+
+      mapG.append('g').selectAll('path')
+        .data(countries.features)
+        .join('path')
+        .attr('d', path)
+        .attr('fill', '#eaeee6')
+        .attr('stroke', 'none');
+
+      mapG.append('path')
+        .datum(borders)
+        .attr('d', path)
+        .attr('fill', 'none')
+        .attr('stroke', 'rgba(180,200,180,0.5)')
+        .attr('stroke-width', 0.5);
+    } catch(e) {
+      // Offline fallback: plain rectangle
+      mapG.append('rect').attr('width', W).attr('height', H)
+        .attr('fill', '#eaeee6').attr('opacity', 0.4);
+    }
+
+    // Markers
+    const markerG = mapG.append('g').attr('class', 'markers');
+
+    const markerData = AUTHORS.map(a => {
+      const [x, y] = projection(a.coords);
+      return { ...a, mx: x, my: y };
+    });
+
+    // Outer glow ring on hover
+    markerG.selectAll('circle.glow')
+      .data(markerData)
+      .join('circle')
+      .attr('class', 'glow')
+      .attr('cx', d => d.mx).attr('cy', d => d.my)
+      .attr('r', 14)
+      .attr('fill', d => d.type === 'psychology' ? '#74B9E8' : '#E8734A')
+      .attr('opacity', 0)
+      .style('pointer-events', 'none');
+
+    const dots = markerG.selectAll('circle.dot')
+      .data(markerData)
+      .join('circle')
+      .attr('class', 'dot')
+      .attr('cx', d => d.mx).attr('cy', d => d.my)
+      .attr('r', 7)
+      .attr('fill', d => d.type === 'psychology' ? '#74B9E8' : '#E8734A')
+      .attr('stroke', '#fff')
+      .attr('stroke-width', 2)
+      .style('cursor', 'pointer')
+      .on('mouseover', function(event, d) {
+        d3.select(this.parentNode).select('.glow')
+          .filter(g => g.id === d.id)
+          .attr('opacity', 0.2);
+        d3.select(this).attr('r', 9);
+        showTooltip(event, d.name);
+      })
+      .on('mouseout', function(event, d) {
+        d3.select(this).attr('r', 7);
+        hideTooltip();
+      })
+      .on('click', function(event, d) {
+        event.stopPropagation();
+        hideTooltip();
+        showAuthor(d);
+        // Hide map hint
+        const hint = document.getElementById('map-hint');
+        hint && hint.classList.add('hidden');
+      });
+
+    // Name labels (hidden until zoom)
+    markerG.selectAll('text.label')
+      .data(markerData)
+      .join('text')
+      .attr('class', 'label')
+      .attr('x', d => d.mx + 10)
+      .attr('y', d => d.my + 4)
+      .text(d => d.name.split('·').pop().trim())
+      .attr('font-family', "'Noto Sans SC', sans-serif")
+      .attr('font-size', '9px')
+      .attr('font-weight', '300')
+      .attr('fill', '#2C2C2C')
+      .attr('opacity', 0)
+      .style('pointer-events', 'none');
+
+    // Tooltip
+    const tooltip = d3.select('body').append('div')
+      .attr('id', 'map-tooltip')
+      .style('position', 'fixed')
+      .style('background', 'rgba(247,243,236,0.95)')
+      .style('border', '1px solid rgba(44,44,44,0.12)')
+      .style('border-radius', '0.6rem')
+      .style('padding', '0.35rem 0.75rem')
+      .style('font-family', "'Noto Sans SC', sans-serif")
+      .style('font-size', '0.73rem')
+      .style('font-weight', '300')
+      .style('color', '#2C2C2C')
+      .style('pointer-events', 'none')
+      .style('opacity', '0')
+      .style('z-index', '1000')
+      .style('white-space', 'nowrap')
+      .style('box-shadow', '0 4px 16px rgba(0,0,0,0.1)');
+
+    function showTooltip(event, name) {
+      tooltip.text(name)
+        .style('left', (event.clientX + 14) + 'px')
+        .style('top',  (event.clientY - 10) + 'px')
+        .transition().duration(120).style('opacity', '1');
+    }
+    function hideTooltip() {
+      tooltip.transition().duration(80).style('opacity', '0');
+    }
+
+    // Zoom
+    mapZoom = d3.zoom()
+      .scaleExtent([1, 8])
+      .on('zoom', event => {
+        mapG.attr('transform', event.transform);
+        // Show labels at zoom > 2.5
+        const k = event.transform.k;
+        mapG.selectAll('text.label').attr('opacity', k > 2.5 ? 0.65 : 0);
+        mapG.selectAll('circle.dot').attr('r', 7 / Math.sqrt(k));
+        mapG.selectAll('circle.glow').attr('r', 14 / Math.sqrt(k));
+      });
+
+    svg.call(mapZoom);
+
+    // Zoom controls
+    document.getElementById('ctrl-in').onclick  = () => svg.transition().call(mapZoom.scaleBy, 1.6);
+    document.getElementById('ctrl-out').onclick = () => svg.transition().call(mapZoom.scaleBy, 0.65);
+    document.getElementById('ctrl-home').onclick = () => svg.transition().duration(500).call(mapZoom.transform, d3.zoomIdentity);
+
+    // Handle resize
+    window.addEventListener('resize', () => {
+      const nW = container.clientWidth;
+      const nH = container.clientHeight;
+      svg.select('rect').attr('width', nW).attr('height', nH);
+      projection.scale(nW / 6.3).translate([nW / 2, nH / 2]);
+    });
+  }
+
+  /* ══════════════════════════════════════════
+     AUTHOR PANEL
+  ══════════════════════════════════════════ */
+  function showAuthor(author) {
+    const isLit = author.type === 'literary';
+    const initials = author.name.split('·').pop().trim().slice(0, 1);
+
+    const booksHtml = author.books.map(b => {
+      const genreKey = b.genre;
+      const colors   = GENRE_COLORS[genreKey] || ['#333', '#222'];
+      const coverHtml = b.cover
+        ? `<img src="${b.cover}" alt="${b.title}" class="panel-book-cover" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />`
+        : '';
+      const phStyle = `background:linear-gradient(160deg,${colors[0]},${colors[1]})`;
+      const phHtml  = `<div class="panel-book-cover-ph" style="${phStyle};${b.cover ? 'display:none' : ''}">${b.title}</div>`;
+
+      return `
+        <div class="panel-book">
+          ${coverHtml}${phHtml}
+          <div class="panel-book-info">
+            <div class="panel-book-title">${b.title}</div>
+            <div class="panel-book-tags">
+              <span class="mini-tag tag-diff-${b.difficulty}">${b.difficulty}</span>
+              <span class="mini-tag tag-genre-${genreKey}">${genreKey === '小说' ? '小说·故事' : genreKey === '理论' ? '理论·教材' : '哲学原典'}</span>
+            </div>
+            <div class="panel-book-year">${b.year}</div>
+            <div class="panel-book-links">
+              <a href="${b.douban}" target="_blank" rel="noopener" class="book-link-btn douban-btn">豆瓣</a>
+              ${b.weread ? `<a href="${b.weread}" target="_blank" rel="noopener" class="book-link-btn weread-btn">微信读书</a>` : ''}
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+
+    document.getElementById('panel-body').innerHTML = `
+      <div class="author-meta">
+        <div class="author-avatar${isLit ? ' coral' : ''}">${initials}</div>
+        <div class="author-info">
+          <div class="author-name">${author.name}</div>
+          <div class="author-name-en">${author.nameEn}</div>
+          <div class="author-country">${author.country} &nbsp;${author.dates}</div>
+        </div>
+      </div>
+      <blockquote class="author-quote${isLit ? ' coral' : ''}">${author.quote}</blockquote>
+      <div class="panel-section-title">书单 · ${author.books.length} 本</div>
+      ${booksHtml}
+    `;
+
+    document.getElementById('author-panel').classList.add('open');
+    document.getElementById('panel-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePanel() {
+    document.getElementById('author-panel').classList.remove('open');
+    document.getElementById('panel-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  /* ══════════════════════════════════════════
+     LIST VIEW + FILTERS
+  ══════════════════════════════════════════ */
+  const filterState = { type: '', diff: '', genre: '' };
+
+  function setupFilters() {
+    function bindGroup(groupId, stateKey, activeClass) {
+      const el = document.getElementById(groupId);
+      el.querySelectorAll('.chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          el.querySelectorAll('.chip').forEach(c => c.classList.remove('active', 'blue', 'coral', 'green', 'purple', 'ink'));
+          chip.classList.add('active', 'ink');
+          filterState[stateKey] = chip.dataset.val;
+          renderBooks();
+        });
+      });
+    }
+    bindGroup('filter-type', 'type');
+    bindGroup('filter-diff', 'diff');
+    bindGroup('filter-genre', 'genre');
+  }
+
+  function renderBooks() {
+    const { type, diff, genre } = filterState;
+    const filtered = ALL_BOOKS.filter(b => {
+      if (type  && b.authorType !== type)  return false;
+      if (diff  && b.difficulty !== diff)  return false;
+      if (genre && b.genre !== genre)      return false;
+      return true;
+    });
+
+    const grid  = document.getElementById('book-grid');
+    const count = document.getElementById('book-count');
+    count.textContent = `${filtered.length} 本`;
+
+    if (!filtered.length) {
+      grid.innerHTML = '<div class="no-results">没有符合条件的书</div>';
+      return;
+    }
+
+    grid.innerHTML = filtered.map(b => {
+      const colors = GENRE_COLORS[b.genre] || ['#333', '#222'];
+      const phStyle = `background:linear-gradient(160deg,${colors[0]},${colors[1]})`;
+      const coverHtml = b.cover
+        ? `<img class="book-cover-img" src="${b.cover}" alt="${b.title}" referrerpolicy="no-referrer"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+           <div class="book-cover-ph" style="${phStyle};display:none">
+             <span class="book-cover-ph-title">${b.title}</span>
+           </div>`
+        : `<div class="book-cover-ph" style="${phStyle}">
+             <span class="book-cover-ph-title">${b.title}</span>
+           </div>`;
+
+      return `
+        <div class="book-card">
+          <a href="${b.douban}" target="_blank" rel="noopener">
+            <div class="book-cover-wrap">${coverHtml}</div>
+            <div class="book-card-title">${b.title}</div>
+            <div class="book-card-author">${b.authorName}</div>
+            <div class="book-card-tags">
+              <span class="book-tag tag-diff-${b.difficulty}">${b.difficulty}</span>
+              <span class="book-tag tag-genre-${b.genre}">${b.genre === '小说' ? '小说' : b.genre === '理论' ? '理论' : '哲学'}</span>
+            </div>
+          </a>
+        </div>`;
+    }).join('');
+  }
+
+  /* ══════════════════════════════════════════
+     INIT
+  ══════════════════════════════════════════ */
+  setupFilters();
+  initMap();
+
+  // Auto-hide map hint
+  setTimeout(() => {
+    const hint = document.getElementById('map-hint');
+    if (hint) hint.classList.add('hidden');
+  }, 4000);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closePanel();
+  });
+  </script>
+
+</body>
+</html>
