@@ -242,6 +242,11 @@
     }
     /* Theme row — slightly lighter bg */
     #themeRow .chip:not(.active) { background: transparent; }
+    /* City row (L2 — hidden until country selected) */
+    #cityRow { display: none; }
+    #cityRow.visible { display: flex; }
+    #cityRow .chip:not(.active) { background: transparent; }
+    #cityRow .chip.active { background: var(--blue-light); color: var(--blue-deep); border-color: var(--blue); }
 
     /* Article grid */
     .articles-wrap { max-width: 980px; margin: 0 auto; padding: 1.2rem 1.1rem 0; }
@@ -367,7 +372,7 @@
     <div class="hero-inner">
       <span class="chapter-tag">公众号文章</span>
       <h1 class="hero-title" id="typewriter" aria-label="星星与七便士"></h1>
-      <p class="hero-sub">旅行 · 艺术 · 人文 · 心理</p>
+      <p class="hero-sub">旅行 · 文化 · 美食 · 历史</p>
 
       <div class="carousel-wrap" aria-label="精选文章">
         <div class="carousel-stage" id="carouselStage"></div>
@@ -397,6 +402,8 @@
         <div class="filter-row" id="countryRow">
           <button class="chip active" data-country="">全部</button>
         </div>
+        <!-- Row 1b: Cities (L2, shown when country selected) -->
+        <div class="filter-row" id="cityRow"></div>
         <!-- Row 2: Themes -->
         <div class="filter-row" id="themeRow">
           <button class="chip active" data-theme="">全部</button>
@@ -599,11 +606,65 @@
       });
     }
 
+    /* 城市白名单（排除省份/跨国标签噪声） */
+    const CITY_MAP = {
+      '中国':       ['上海', '杭州', '昆明', '大理', '西双版纳', '南宁'],
+      '马来西亚':   ['吉隆坡', '槟城', '马六甲', '怡保', '太平', '亚庇', '古晋'],
+      '印度尼西亚': ['雅加达', '巴厘岛', '日惹', '万隆'],
+      '菲律宾':     ['马尼拉', '宿务', '薄荷岛'],
+      '老挝':       ['琅勃拉邦', '万象'],
+      '越南':       ['胡志明', '会安', '河内'],
+    };
+    /* 文莱、新加坡、韩国不展开城市行 */
+
+    let activeCity = "";
+
+    function buildCityRow(country) {
+      const row = document.getElementById("cityRow");
+      row.innerHTML = "";
+      const cities = (CITY_MAP[country] || []).filter(city =>
+        allArticles.some(a => a.country === country && a.city && a.city.includes(city))
+      );
+      if (!cities.length) { row.classList.remove("visible"); return; }
+
+      const allBtn = document.createElement("button");
+      allBtn.className = "chip active";
+      allBtn.dataset.city = "";
+      allBtn.textContent = "全部城市";
+      allBtn.addEventListener("click", () => setCity(""));
+      row.appendChild(allBtn);
+
+      cities.forEach(city => {
+        const btn = document.createElement("button");
+        btn.className = "chip";
+        btn.dataset.city = city;
+        btn.textContent = city;
+        btn.addEventListener("click", () => setCity(city));
+        row.appendChild(btn);
+      });
+      row.classList.add("visible");
+    }
+
+    function setCity(city) {
+      activeCity = city;
+      document.querySelectorAll("#cityRow .chip").forEach(b =>
+        b.classList.toggle("active", b.dataset.city === city)
+      );
+      applyFilter();
+    }
+
     function setCountry(c) {
       activeCountry = c;
+      activeCity = "";
       document.querySelectorAll("#countryRow .chip").forEach(b =>
         b.classList.toggle("active", b.dataset.country === c)
       );
+      if (c) {
+        buildCityRow(c);
+      } else {
+        const row = document.getElementById("cityRow");
+        row.innerHTML = ""; row.classList.remove("visible");
+      }
       applyFilter();
     }
 
@@ -615,14 +676,15 @@
       applyFilter();
     }
 
-    /* AND logic: both rows filter independently, combined when both set */
+    /* AND logic: country + city + theme 三层独立过滤 */
     function applyFilter() {
       const result = allArticles.filter(a => {
         const cOk = !activeCountry || a.country === activeCountry;
-        const tOk = !activeTheme   ||
+        const cityOk = !activeCity || (a.city && a.city.includes(activeCity));
+        const tOk = !activeTheme ||
           (a.themes  || []).includes(activeTheme) ||
           (a.subtags || []).includes(activeTheme);
-        return cOk && tOk;
+        return cOk && cityOk && tOk;
       });
       renderArticles(result);
     }
