@@ -12,8 +12,9 @@
     "subtags": [],
     "country": "老挝",
     "city": "",
-    "featured": true,
-    "representative": true
+    "featured": false,
+    "representative": true,
+    "hero_label": "一带一路"
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447500703&idx=1&sn=9af592e95c7bba7ffa1bdef9ba9ae738&chksm=b2e8c3ab859f4abd01de89707334fec5bfddafa60f7b8a5ca02fd277c4850bb6203022bd1094#rd",
@@ -182,7 +183,8 @@
     "country": "马来西亚",
     "city": "东马，亚庇",
     "featured": true,
-    "representative": true
+    "representative": true,
+    "hero_label": "10万+"
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447501295&idx=1&sn=952eb1fc5685f4d5f2a628f5b955e251&chksm=b2e8c1db859f48cd0abc469fd3b7f3af330cfaa5139e76a15f72a669fd9279c4412fd5be62ee#rd",
@@ -771,8 +773,9 @@
     ],
     "country": "越南",
     "city": "胡志明",
-    "featured": true,
-    "representative": true
+    "featured": false,
+    "representative": true,
+    "hero_label": "越南特调"
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447504531&idx=1&sn=e571172a11747aab8f47d660169f07bb&chksm=b2e8d2a7859f5bb123d3eb974315a8c3cd8d6df30395f8270afba1411b5cdd3fc9398f0dca41#rd",
@@ -1012,8 +1015,9 @@
     ],
     "country": "菲律宾",
     "city": "",
-    "featured": true,
-    "representative": true
+    "featured": false,
+    "representative": true,
+    "hero_label": "东南亚品牌"
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447505277&idx=1&sn=8327b3e28620adc5cd07aca2b47badab&chksm=b2e8d149859f585f2a78fc4f873eb9e7aa11b9a378eae79da8e7a4b5cad233eea1db3b14799b#rd",
@@ -1344,8 +1348,9 @@
     ],
     "country": "印度尼西亚",
     "city": "巴厘岛",
-    "featured": true,
-    "representative": true
+    "featured": false,
+    "representative": true,
+    "hero_label": "巴厘岛人文"
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447505762&idx=1&sn=a22c9cac51ca94f4726931fff8b3dc9f&chksm=b2e8df56859f56404efb0ead1398918616d9bdc9d22b2554d1d31cfe146b61e1ee5e2f62da17#rd",
@@ -2075,8 +2080,9 @@
     ],
     "country": "新加坡",
     "city": "",
-    "featured": true,
-    "representative": true
+    "featured": false,
+    "representative": true,
+    "hero_label": "文学现场"
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447502878&idx=1&sn=2168dffcee906964dde02807c21ee0cf&chksm=b2e8c82a859f413cd1756f4ef28e0c05c742a65a541eadb98f252ec89723a6d17dbb100e68df#rd",
@@ -2925,7 +2931,8 @@
     "country": "新加坡",
     "city": "马来西亚",
     "featured": true,
-    "representative": true
+    "representative": true,
+    "hero_label": "10万+"
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447499235&idx=1&sn=8857b8eb13a508518118c5eb9456d8ee&chksm=b2e8f9d7859f70c1494e383d553334082a3f0e48f88d3a232a9a5631c5526f7691da749cf754#rd",
@@ -3229,8 +3236,9 @@
     ],
     "country": "新加坡",
     "city": "",
-    "featured": true,
-    "representative": true
+    "featured": false,
+    "representative": true,
+    "hero_label": "新加坡观察"
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447498770&idx=1&sn=1e86f7a6b69eb83c941d97b50f51f19f&chksm=b2e8f826859f7130f16dad17db7b919d855a77d50714d4def72b714a2dba2473c6fc19661c3f#rd",
@@ -3318,7 +3326,8 @@
     "country": "新加坡",
     "city": "",
     "featured": true,
-    "representative": true
+    "representative": true,
+    "hero_label": "10万+"
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447498675&idx=1&sn=6a4d18dc4ef49101d1529d36b1460995&chksm=b2e8fb87859f72913fd053bb4548879e306436405ff1ef597394d32a0f8fc73a1585b6f28143#rd",
@@ -3944,7 +3953,8 @@
     "country": "文莱",
     "city": "",
     "featured": true,
-    "representative": true
+    "representative": true,
+    "hero_label": "10万+"
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447502047&idx=1&sn=c5ef77a863d92a58136d0974bec34e47&chksm=b2e8cceb859f45fdeee847dbe486a8934e8b3f2d1ca393cd0f03e8aaf53b83966fae04aff88b#rd",
@@ -4307,8 +4317,9 @@
     ],
     "country": "马来西亚",
     "city": "",
-    "featured": true,
-    "representative": true
+    "featured": false,
+    "representative": true,
+    "hero_label": "南洋华人"
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447500140&idx=1&sn=5dbdc308c437042bcb8fc643a3350252&chksm=b2e8c558859f4c4e14fa31a7c42085c50258165c912ad128030f0a36194b1c31bdd2ffef569e#rd",
@@ -4520,8 +4531,9 @@
     ],
     "country": "新加坡",
     "city": "",
-    "featured": true,
-    "representative": true
+    "featured": false,
+    "representative": true,
+    "hero_label": "印度文化&华人文化"
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447498462&idx=1&sn=03a831e19e669eb0ecd229fe3299aca3&chksm=b2e8faea859f73fcd8a7e79295261b191ce4d31bbdba4fcf2ab6bb03372e120d0c3c22a1cd7d#rd",
