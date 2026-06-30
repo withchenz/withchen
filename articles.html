@@ -466,7 +466,7 @@
     let autoTimer     = null;
 
     /* ════ Fetch ════ */
-    fetch("./articles.json")
+    fetch("./articles.json?v=1782782563")
       .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(data => {
         allArticles = Array.isArray(data) ? data : [];
