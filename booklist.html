@@ -377,7 +377,16 @@
     }
 
     /* Filters */
-    .filter-group { margin-bottom: 0.75rem; }
+    .filter-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.15rem 2.5rem;
+      margin-bottom: 0.8rem;
+    }
+    @media (max-width: 640px) {
+      .filter-grid { grid-template-columns: 1fr; }
+    }
+    .filter-group { margin-bottom: 0.45rem; }
     .filter-label {
       font-family: 'Noto Sans SC', sans-serif;
       font-size: 0.65rem; font-weight: 300;
@@ -386,7 +395,7 @@
       display: inline-block; margin-right: 0.6rem;
       vertical-align: middle;
     }
-    .chip-row { display: inline-flex; flex-wrap: wrap; gap: 0.4rem; }
+    .chip-row { display: inline-flex; flex-wrap: wrap; gap: 0.4rem; vertical-align: middle; }
     .chip {
       font-family: 'Noto Sans SC', sans-serif;
       font-size: 0.73rem; font-weight: 300;
@@ -407,7 +416,7 @@
     .chip.active.purple { background: var(--purple); }
     .chip.active.ink    { background: var(--ink); }
 
-    .filter-divider { height: 1px; background: rgba(44,44,44,0.07); margin: 1rem 0 1.2rem; }
+    .filter-divider { height: 1px; background: rgba(44,44,44,0.07); margin: 0.8rem 0 1.2rem; }
 
     /* Book grid */
     .book-grid {
@@ -540,9 +549,9 @@
   </nav>
 
   <section class="hero">
-    <p class="hero-tag">心理探险家 · 书单 1.0版</p>
+    <p class="hero-tag">心理探险家 · 书单</p>
     <h1 class="hero-title">存在<span class="accent">人本</span>主义<br>书单</h1>
-    <p class="hero-sub">16 位作者 · 9 位心理学家 · 7 位文学与哲学家<br>跨越美国、奥地利、德国、英国、法国、俄国、丹麦</p>
+    <p class="hero-sub">28 位作者 · 17 位心理学家 · 11 位文学与哲学家<br>跨越美国、奥地利、德国、英国、法国、俄国、丹麦、中国</p>
     <div class="view-toggle">
       <button class="toggle-btn active" id="btn-map" onclick="switchView('map')">🗺 地图</button>
       <button class="toggle-btn" id="btn-list" onclick="switchView('list')">📚 书单</button>
@@ -570,38 +579,56 @@
   <section class="view-section" id="list-view">
     <div class="list-wrap">
       <!-- Filters -->
-      <div class="filter-group">
-        <span class="filter-label">流派</span>
-        <div class="chip-row" id="filter-trad">
-          <button class="chip active ink" data-val="">全部</button>
-          <button class="chip" data-val="existential">存在取向</button>
-          <button class="chip" data-val="humanistic">人本取向</button>
+      <div class="filter-grid">
+        <div class="filter-group">
+          <span class="filter-label">流派</span>
+          <div class="chip-row" id="filter-trad">
+            <button class="chip active ink" data-val="">全部</button>
+            <button class="chip" data-val="existential">存在取向</button>
+            <button class="chip" data-val="humanistic">人本取向</button>
+          </div>
         </div>
-      </div>
-      <div class="filter-group">
-        <span class="filter-label">类型</span>
-        <div class="chip-row" id="filter-type">
-          <button class="chip active ink" data-val="">全部</button>
-          <button class="chip" data-val="psychology">心理学</button>
-          <button class="chip" data-val="literary">文学 · 哲学</button>
+        <div class="filter-group">
+          <span class="filter-label">类型</span>
+          <div class="chip-row" id="filter-type">
+            <button class="chip active ink" data-val="">全部</button>
+            <button class="chip" data-val="psychology">心理学</button>
+            <button class="chip" data-val="literary">文学 · 哲学</button>
+          </div>
         </div>
-      </div>
-      <div class="filter-group">
-        <span class="filter-label">难度</span>
-        <div class="chip-row" id="filter-diff">
-          <button class="chip active ink" data-val="">全部</button>
-          <button class="chip" data-val="入门">入门</button>
-          <button class="chip" data-val="进阶">进阶</button>
-          <button class="chip" data-val="专业">专业</button>
+        <div class="filter-group">
+          <span class="filter-label">难度</span>
+          <div class="chip-row" id="filter-diff">
+            <button class="chip active ink" data-val="">全部</button>
+            <button class="chip" data-val="入门">入门</button>
+            <button class="chip" data-val="进阶">进阶</button>
+            <button class="chip" data-val="专业">专业</button>
+          </div>
         </div>
-      </div>
-      <div class="filter-group">
-        <span class="filter-label">书类</span>
-        <div class="chip-row" id="filter-genre">
-          <button class="chip active ink" data-val="">全部</button>
-          <button class="chip" data-val="小说">小说 · 故事</button>
-          <button class="chip" data-val="理论">理论 · 教材</button>
-          <button class="chip" data-val="哲学">哲学原典</button>
+        <div class="filter-group">
+          <span class="filter-label">书类</span>
+          <div class="chip-row" id="filter-genre">
+            <button class="chip active ink" data-val="">全部</button>
+            <button class="chip" data-val="小说">小说 · 故事</button>
+            <button class="chip" data-val="理论">理论 · 教材</button>
+            <button class="chip" data-val="哲学">哲学原典</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">推荐来源</span>
+          <div class="chip-row" id="filter-rec">
+            <button class="chip active ink" data-val="">全部</button>
+            <button class="chip" data-val="school">学院推荐</button>
+            <button class="chip" data-val="dongfang">东方明见</button>
+            <button class="chip" data-val="weiyou">网友推荐</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">在线阅读</span>
+          <div class="chip-row" id="filter-online">
+            <button class="chip active ink" data-val="">全部</button>
+            <button class="chip" data-val="weread">微信读书</button>
+          </div>
         </div>
       </div>
       <div class="filter-divider"></div>
@@ -1202,7 +1229,7 @@
   /* ══════════════════════════════════════════
      LIST VIEW + FILTERS
   ══════════════════════════════════════════ */
-  const filterState = { trad: '', type: '', diff: '', genre: '' };
+  const filterState = { trad: '', type: '', diff: '', genre: '', rec: '', online: '' };
 
   function setupFilters() {
     function bindGroup(groupId, stateKey) {
@@ -1220,15 +1247,21 @@
     bindGroup('filter-type', 'type');
     bindGroup('filter-diff', 'diff');
     bindGroup('filter-genre', 'genre');
+    bindGroup('filter-rec', 'rec');
+    bindGroup('filter-online', 'online');
   }
 
   function renderBooks() {
-    const { trad, type, diff, genre } = filterState;
+    const { trad, type, diff, genre, rec, online } = filterState;
     const filtered = ALL_BOOKS.filter(b => {
-      if (trad  && b.authorTradition !== trad) return false;
-      if (type  && b.authorType !== type)      return false;
-      if (diff  && b.difficulty !== diff)      return false;
-      if (genre && b.genre !== genre)          return false;
+      if (trad   && b.authorTradition !== trad)  return false;
+      if (type   && b.authorType !== type)        return false;
+      if (diff   && b.difficulty !== diff)        return false;
+      if (genre  && b.genre !== genre)            return false;
+      if (rec === 'school'   && !b.schoolRec)              return false;
+      if (rec === 'dongfang' && !b.dongfang)               return false;
+      if (rec === 'weiyou'   && (b.schoolRec || b.dongfang)) return false;
+      if (online === 'weread' && !b.weread)       return false;
       return true;
     });
 
