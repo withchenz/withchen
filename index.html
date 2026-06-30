@@ -224,8 +224,10 @@
     const canvas = document.getElementById('spotlight');
     const ctx = canvas.getContext('2d');
     let mouse = { x: -999, y: -999 }, current = { x: -999, y: -999 };
-    function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
-    resize(); window.addEventListener('resize', resize);
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    resize();
+    window.addEventListener('resize', resize);
+    if (window.visualViewport) window.visualViewport.addEventListener('resize', resize);
     document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; canvas.classList.add('active'); });
     document.addEventListener('mouseleave', () => canvas.classList.remove('active'));
     document.addEventListener('touchmove', e => { const t = e.touches[0]; mouse.x = t.clientX; mouse.y = t.clientY; canvas.classList.add('active'); }, { passive: true });
