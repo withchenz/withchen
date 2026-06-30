@@ -139,10 +139,6 @@
     }
     .spotlight { position: fixed; inset: 0; pointer-events: none; z-index: 2; opacity: 0; transition: opacity 0.4s ease; }
     .spotlight.active { opacity: 1; }
-    /* 触控设备不需要探照灯效果（跟随鼠标设计，手机上会覆盖不匀） */
-    @media (hover: none) and (pointer: coarse) {
-      .spotlight { display: none !important; }
-    }
 
     /* ── bottom nav ── */
     .site-nav {
@@ -228,7 +224,7 @@
     const canvas = document.getElementById('spotlight');
     const ctx = canvas.getContext('2d');
     let mouse = { x: -999, y: -999 }, current = { x: -999, y: -999 };
-    function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
+    function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
     resize(); window.addEventListener('resize', resize);
     document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; canvas.classList.add('active'); });
     document.addEventListener('mouseleave', () => canvas.classList.remove('active'));
