@@ -144,8 +144,23 @@
     .site-nav a:hover { opacity: 0.85; }
     .site-nav a.active { background: var(--cream); color: var(--ink); opacity: 1; }
     @media (max-width: 480px) {
+      body { justify-content: flex-start; padding-top: 10vh; }
       .footer { white-space: normal; text-align: center; width: 90%; left: 5%; transform: none; line-height: 1.8; }
       .roles { line-height: 2.4; }
+      .page-nav {
+        flex-wrap: wrap;
+        gap: 0.65rem 1.1rem;
+        margin-top: 2rem;
+      }
+      .page-nav a {
+        white-space: nowrap;
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.25);
+        border-bottom: 1px solid rgba(255,255,255,0.25);
+        border-radius: 2rem;
+        padding: 0.38rem 0.9rem;
+        opacity: 0.8;
+      }
     }
     @media (max-width: 600px) {
       .site-nav { gap: 0.05rem; padding: 0.22rem 0.3rem; }
