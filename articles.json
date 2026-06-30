@@ -1,5 +1,18 @@
 [
   {
+    "url": "https://mp.weixin.qq.com/s/qG2PzCjADbc1JSNHwt9swQ",
+    "title": "越南吃饭故事（八）：一碗河内米粉，带我走进越南的千年层叠",
+    "pub_date": "2026年06月30日",
+    "cover_img": "./article-imgs/河内米粉.jpg",
+    "collection": "东南亚走走停停",
+    "themes": ["美食", "游记"],
+    "subtags": [],
+    "country": "越南",
+    "city": "河内",
+    "featured": false,
+    "representative": false
+  },
+  {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447500501&idx=1&sn=a89368fcad6abf92737f9ace2bff49c3&chksm=b2e8c2e1859f4bf7b381d8faa8e08734fd07a0058cd8c647c7c1554d070a195383d1f1692814#rd",
     "title": "乘坐中老铁路是一种什么样的体验？",
     "pub_date": "2025年08月11日",
