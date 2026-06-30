@@ -12,7 +12,7 @@
     "subtags": [],
     "country": "老挝",
     "city": "",
-    "featured": false,
+    "featured": true,
     "representative": true
   },
   {
@@ -87,7 +87,7 @@
     "country": "老挝",
     "city": "琅勃拉邦",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447500859&idx=1&sn=ce290b9a78df17c23cf471fbe01922b9&chksm=b2e8c00f859f49196d93092133345f9eadf7632786ecc7b6140072436d705a414d2d99ebbfac#rd",
@@ -235,7 +235,7 @@
     "country": "马来西亚",
     "city": "东马，亚庇",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447501434&idx=1&sn=767562b85ca65d4543f9deec514d1bdc&chksm=b2e8ce4e859f4758c7858fbc422b4965b9556e7ee94c1fbdbd44f7ac17c91446a57298c0e03f#rd",
@@ -366,7 +366,7 @@
     "country": "文莱",
     "city": "",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447502155&idx=1&sn=9630196c69ffa7670bf93ec8759a4326&chksm=b2e8cd7f859f44695ae73ecff0a14d91f1e58864a92a516f669493afc4fe8b943edd66bff2e7#rd",
@@ -566,7 +566,7 @@
     "country": "印度尼西亚",
     "city": "日惹",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447504074&idx=1&sn=8326482db368d8159361688f8f594c52&chksm=b2e8d4fe859f5de8ba4046fd7da22ae49da3775e2ea5301f7a2b077498a6cb4f176c166f72a4#rd",
@@ -586,7 +586,7 @@
     "country": "印度尼西亚",
     "city": "日惹",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447504112&idx=1&sn=d8304794fae5d0ebd7eeeb6723293db6&chksm=b2e8d4c4859f5dd22cd3dd0745b917f4ad5ca13b3e10a13d7de5bd4f83b5751104426243c4a6#rd",
@@ -771,7 +771,7 @@
     ],
     "country": "越南",
     "city": "胡志明",
-    "featured": false,
+    "featured": true,
     "representative": true
   },
   {
@@ -959,7 +959,7 @@
     "country": "马来西亚",
     "city": "吉隆坡",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447505083&idx=1&sn=72e1a6ff3532b7dc6eb26c75a3aad9bc&chksm=b2e8d08f859f5999c7734091273910505ac17bfc6a51cefc9d71b07052586fe341fe0e2802f6#rd",
@@ -977,7 +977,7 @@
     "country": "马来西亚",
     "city": "吉隆坡",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447505220&idx=1&sn=85ff8ce56942c195a09992c50bd002c4&chksm=b2e8d170859f58660a9613d3342c6c02fb1981860be6546d134ced4bd6e9b01b30b38bd1d128#rd",
@@ -1012,7 +1012,7 @@
     ],
     "country": "菲律宾",
     "city": "",
-    "featured": false,
+    "featured": true,
     "representative": true
   },
   {
@@ -1143,7 +1143,7 @@
     "country": "菲律宾",
     "city": "宿务",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447505431&idx=1&sn=2aaccc54eaca79885d1082f2fa3e5335&chksm=b2e8de23859f5735473c8ffed01855b9d7b91013182cc23a6faa282913c9fc6af6a156a86c50#rd",
@@ -1272,7 +1272,7 @@
     "country": "菲律宾",
     "city": "",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447505628&idx=1&sn=309b0571b119bd5d79fa4bf0ccc3a71e&chksm=b2e8dee8859f57febdc8b3b30ae18e886d1b5174252efeb2154e0f2815181d378178ed622143#rd",
@@ -1309,7 +1309,7 @@
     "country": "印度尼西亚",
     "city": "巴厘岛",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447505687&idx=1&sn=f1a3433aba625da511f34addb1d7c0ed&chksm=b2e8df23859f563539646476960c5d81eae59c400ec0844e892507f96420dabb29fcdc9baea6#rd",
@@ -1344,7 +1344,7 @@
     ],
     "country": "印度尼西亚",
     "city": "巴厘岛",
-    "featured": false,
+    "featured": true,
     "representative": true
   },
   {
@@ -1366,7 +1366,7 @@
     "country": "印度尼西亚",
     "city": "巴厘岛",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447505798&idx=1&sn=cec3c86989fa6f2542f4f715add7f4d6&chksm=b2e8dfb2859f56a405cffdffb5b1d5ceb89df7d70046c3f9c8d237e1d000a48298eae559f3db#rd",
@@ -1520,7 +1520,7 @@
     "country": "印度尼西亚",
     "city": "巴厘岛",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447506305&idx=1&sn=70c926f7e8b291047398457863fccd89&chksm=b2e8ddb5859f54a3dc35f4ad989d9844815702b8f275d553275bf73c8a6d6c4ec9a12d5cb22e#rd",
@@ -1573,7 +1573,7 @@
     "country": "印度尼西亚",
     "city": "雅加达",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447506392&idx=1&sn=7209c31a86bb2685d11f399d76feba98&chksm=b2e8ddec859f54faab4fe3d5213cf0ef0ce2d71a7c97442b49354656cee83748fd856a978413#rd",
@@ -1590,7 +1590,7 @@
     "country": "印度尼西亚",
     "city": "万隆",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447506422&idx=1&sn=e0e0d98ee96c7e95c6e48f5c99a9499d&chksm=b2e8ddc2859f54d4064eae3cedf673b66514927ac3915a6eb167a64e63d03b49d9816f49f5dc#rd",
@@ -1703,7 +1703,7 @@
     "country": "新加坡",
     "city": "",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447505946&idx=1&sn=2b6d99005d05ea208d59014a1e951670&chksm=b2e8dc2e859f553830479e33134dfb462332250eb4bbbea9cc097b711edef0641d94a35fb82d#rd",
@@ -1898,7 +1898,7 @@
     "country": "新加坡",
     "city": "",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447504383&idx=1&sn=f1d99213d182783ec8502146d53fa9cf&chksm=b2e8d5cb859f5cdd950387ebbf68a568dd0209a6a340be7e55b3968bffebb13605ec1ad0990f#rd",
@@ -2075,7 +2075,7 @@
     ],
     "country": "新加坡",
     "city": "",
-    "featured": false,
+    "featured": true,
     "representative": true
   },
   {
@@ -2361,7 +2361,7 @@
     "country": "新加坡",
     "city": "",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447502212&idx=1&sn=b1a20d13cc400a77e65daa0ef019ef41&chksm=b2e8cdb0859f44a669ade461ee46ec391f29a55d89417df782f85de6c93674b7f5eea6494b0f#rd",
@@ -2724,7 +2724,7 @@
     "country": "新加坡",
     "city": "",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447500000&idx=1&sn=33b634d8c610e61b7df238cb19be52b7&chksm=b2e8c4d4859f4dc209a9db2614135e9c2f5652948eccfd645325669ee70d1e9fdc674c8a080d#rd",
@@ -3112,7 +3112,7 @@
     "country": "新加坡",
     "city": "",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447498926&idx=1&sn=62696c350c0d856ad2b654d56bd0863e&chksm=b2e8f89a859f718cb7bc8d57b5f4b87857b5b7b36548b406e679fedc2d5b3917937fb0d7695d#rd",
@@ -3165,7 +3165,7 @@
     "country": "新加坡",
     "city": "马来西亚",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447498857&idx=1&sn=5cf2239be0295c6ccd15db22a9942578&chksm=b2e8f85d859f714bdcdb57e7cd89d113e782a644fe7ff62f26859c609b65d40c1a42e5abe0d9#rd",
@@ -3229,7 +3229,7 @@
     ],
     "country": "新加坡",
     "city": "",
-    "featured": false,
+    "featured": true,
     "representative": true
   },
   {
@@ -3517,7 +3517,7 @@
     "country": "中国",
     "city": "",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447502454&idx=1&sn=0fd4b4e6a2bd692683c7ece3fd6f9e29&chksm=b2e8ca42859f4354bb98482d5ae2eeb6a4021936258da83b6be3007839acbb73e27423eb9c3d#rd",
@@ -3593,7 +3593,7 @@
     "country": "中国",
     "city": "云南，昆明",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447503152&idx=1&sn=be96424bd1ef3db03209b1b6f4400add&chksm=b2e8c904859f401236b6c544abd8c48ddadd4544f1814e4b2c591900da04a69caa24f7116cf7#rd",
@@ -3719,7 +3719,7 @@
     "country": "中国",
     "city": "浙江，杭州",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447504973&idx=1&sn=3c5a2f4325878cda7830e15623eef426&chksm=b2e8d079859f596f10cfa7f25da1ab04313032496441cd67a29a9f5ed0cd258d060f0b982c05#rd",
@@ -3738,7 +3738,7 @@
     "country": "中国",
     "city": "浙江，杭州",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447505007&idx=1&sn=6918942820475b4e863b0d8f694b7a78&chksm=b2e8d05b859f594d3985eacb3de3a106bf5fb85c18718ae747ae99fa24c17d49373f7c8d7b69#rd",
@@ -3893,7 +3893,7 @@
     "country": "中国",
     "city": "广西，南宁",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447503259&idx=1&sn=4b848584e3eb881966c3eeedc4f75c49&chksm=b2e8c9af859f40b9d5ba84a0fa24c67cedc9ed458d7c8ba8ca397a5785bf0f789efa976122b9#rd",
@@ -4081,7 +4081,7 @@
     "country": "老挝",
     "city": "琅勃拉邦",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447500382&idx=1&sn=7359d6a4c6525c98a72750d39afc9126&chksm=b2e8c26a859f4b7c4dc3363f90a7757fe58e521d9f27c62ae6731887e4d263f1c345ef528ae9#rd",
@@ -4255,7 +4255,7 @@
     "country": "韩国",
     "city": "",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447498245&idx=1&sn=a0094c14e7ebd2bee2a104b2c5c99250&chksm=b2e8fa31859f7327d74e963e9b06292850593c21b3ce90c8b770c38854e8b0e4bf0f2d3b9436#rd",
@@ -4307,7 +4307,7 @@
     ],
     "country": "马来西亚",
     "city": "",
-    "featured": false,
+    "featured": true,
     "representative": true
   },
   {
@@ -4361,7 +4361,7 @@
     "country": "马来西亚",
     "city": "槟城",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447500042&idx=1&sn=a184841f6acb52ff644ac28d667fcccb&chksm=b2e8c53e859f4c28052c63a21a04bb97399ef966ae4388cd5dfe43e470c236c4efa8d6b37f4e#rd",
@@ -4413,7 +4413,7 @@
     "country": "马来西亚",
     "city": "怡保",
     "featured": false,
-    "representative": true
+    "representative": false
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447499918&idx=1&sn=f0b0b8a4ed83302ca6553eebe864fb03&chksm=b2e8c4ba859f4dac6381ee4a566fc108ba492e4bc9250193f3dc10d3e1d92ef2aad86de91e3c#rd",
@@ -4521,7 +4521,7 @@
     "country": "新加坡",
     "city": "",
     "featured": true,
-    "representative": false
+    "representative": true
   },
   {
     "url": "http://mp.weixin.qq.com/s?__biz=MjM5NTEwNzY3NQ==&mid=2447498462&idx=1&sn=03a831e19e669eb0ecd229fe3299aca3&chksm=b2e8faea859f73fcd8a7e79295261b191ce4d31bbdba4fcf2ab6bb03372e120d0c3c22a1cd7d#rd",
@@ -4539,6 +4539,6 @@
     "country": "新加坡",
     "city": "",
     "featured": false,
-    "representative": true
+    "representative": false
   }
 ]

@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>星星与七便士 · 东南亚旅行游记美食文化 | withchen</title>
-  <meta name="description" content="郑忱的东南亚旅行游记、美食探索与文化观察，涵盖新加坡生活、马来西亚、印尼、老挝、越南、菲律宾等目的地攻略与人文故事" />
+  <title>星星与七便士 · 东南亚旅行地图 · withchen</title>
+  <meta name="description" content="东南亚旅行游记、美食探索与文化观察，涵盖新加坡生活、马来西亚、印尼、老挝、越南、菲律宾等目的地攻略与人文故事" />
   <meta property="og:title" content="星星与七便士 · withchen" />
-  <meta property="og:description" content="东南亚旅行 · 美食 · 文化 · 南洋生活" />
+  <meta property="og:description" content="东南亚旅行攻略，涵盖目的地、美食、文化、历史、生活。跟着走，就对了" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://withchen.com/articles.html" />
-  <meta property="og:image" content="https://withchen.com/og-cover.jpg" />
+  <meta property="og:image" content="https://withchen.com/星星与七便士.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="referrer" content="no-referrer" />
@@ -479,10 +479,10 @@
 
     /* ════ Carousel ════ */
     function buildCarousel(articles) {
-      // Featured (10万+) + 国家代表作，合并展示，最多10张
+      // Featured 精选，合并展示，最多12张
       const featured = articles.filter(a => a.featured);
       const reps     = articles.filter(a => a.representative && !a.featured);
-      let pool = [...featured, ...reps].slice(0, 10);
+      let pool = [...featured, ...reps].slice(0, 12);
       if (!pool.length) pool = articles.slice(0, 8);
       carouselItems = pool;
 

@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>存在人本主义书单 2.0 · withchen</title>
-  <meta name="description" content="一份关于存在人本主义心理治疗的书单，涵盖心理学、哲学与文学，30余位作者，含学院推荐书目。" />
+  <title>存在人本主义书单 · withchen</title>
+  <meta name="description" content="一份关于存在人本主义心理治疗的书单，涵盖心理学、哲学与文学，28位作者，含学院推荐书目。" />
   <meta property="og:title" content="存在人本主义书单" />
-  <meta property="og:description" content="一个有趣的书单" />
+  <meta property="og:description" content="一份可以放进微信收藏夹的有趣的书单" />
   <meta property="og:image" content="https://withchen.com/og-booklist.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -385,6 +385,8 @@
     }
     @media (max-width: 640px) {
       .filter-grid { grid-template-columns: 1fr; }
+      .chip-row { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .chip-row::-webkit-scrollbar { display: none; }
     }
     .filter-group { margin-bottom: 0.45rem; }
     .filter-label {
@@ -597,25 +599,7 @@
           </div>
         </div>
         <div class="filter-group">
-          <span class="filter-label">难度</span>
-          <div class="chip-row" id="filter-diff">
-            <button class="chip active ink" data-val="">全部</button>
-            <button class="chip" data-val="入门">入门</button>
-            <button class="chip" data-val="进阶">进阶</button>
-            <button class="chip" data-val="专业">专业</button>
-          </div>
-        </div>
-        <div class="filter-group">
-          <span class="filter-label">书类</span>
-          <div class="chip-row" id="filter-genre">
-            <button class="chip active ink" data-val="">全部</button>
-            <button class="chip" data-val="小说">小说 · 故事</button>
-            <button class="chip" data-val="理论">理论 · 教材</button>
-            <button class="chip" data-val="哲学">哲学原典</button>
-          </div>
-        </div>
-        <div class="filter-group">
-          <span class="filter-label">推荐来源</span>
+          <span class="filter-label">推荐</span>
           <div class="chip-row" id="filter-rec">
             <button class="chip active ink" data-val="">全部</button>
             <button class="chip" data-val="school">学院推荐</button>
@@ -624,7 +608,7 @@
           </div>
         </div>
         <div class="filter-group">
-          <span class="filter-label">在线阅读</span>
+          <span class="filter-label">阅读</span>
           <div class="chip-row" id="filter-online">
             <button class="chip active ink" data-val="">全部</button>
             <button class="chip" data-val="weread">微信读书</button>
@@ -1245,8 +1229,6 @@
     }
     bindGroup('filter-trad', 'trad');
     bindGroup('filter-type', 'type');
-    bindGroup('filter-diff', 'diff');
-    bindGroup('filter-genre', 'genre');
     bindGroup('filter-rec', 'rec');
     bindGroup('filter-online', 'online');
   }
