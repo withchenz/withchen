@@ -340,6 +340,57 @@
     }
 
     /* ══════════════════════════════════════
+       INTRO
+    ══════════════════════════════════════ */
+    .intro-section {
+      padding: 2rem 1.1rem 1.6rem;
+    }
+    .intro-inner {
+      max-width: 600px; margin: 0 auto;
+    }
+    .intro-deco {
+      display: flex; align-items: center; gap: 0.75rem;
+      justify-content: center; margin-bottom: 1.5rem;
+    }
+    .intro-deco-star { font-size: 0.5rem; color: var(--blue); opacity: 0.45; }
+    .intro-deco-line { width: 32px; height: 1px; background: rgba(44,44,44,0.14); }
+    .intro-p {
+      font-size: 0.87rem; font-weight: 300;
+      color: var(--ink); opacity: 0.68;
+      line-height: 2.1; letter-spacing: 0.03em;
+      margin-bottom: 0.85rem; text-align: left;
+    }
+    .intro-p:last-child { margin-bottom: 0; }
+    .intro-p em { font-style: normal; font-weight: 400; opacity: 1; }
+
+    /* ══════════════════════════════════════
+       LOAD MORE
+    ══════════════════════════════════════ */
+    .load-more-wrap {
+      padding: 2rem 0 1.5rem;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .load-more-btn {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.8rem; font-weight: 300;
+      color: var(--ink); opacity: 0.55;
+      background: #fff;
+      border: 1px solid rgba(44,44,44,0.12);
+      border-radius: 2rem; padding: 0.6rem 2.2rem;
+      cursor: pointer; letter-spacing: 0.1em;
+      transition: all 0.2s;
+      box-shadow: 0 2px 12px rgba(44,44,44,0.06);
+    }
+    .load-more-btn:hover {
+      opacity: 0.88; transform: translateY(-1px);
+      box-shadow: 0 4px 18px rgba(44,44,44,0.1);
+    }
+    .load-more-hint {
+      font-size: 0.68rem; color: var(--ink); opacity: 0.24;
+      margin-top: 0.5rem; letter-spacing: 0.06em;
+    }
+
+    /* ══════════════════════════════════════
        BOTTOM NAV
     ══════════════════════════════════════ */
     .site-nav {
@@ -414,6 +465,23 @@
   <!-- ═══════════ CONTENT ═══════════ -->
   <section class="content">
 
+    <!-- ═══════════ INTRO ═══════════ -->
+    <div class="intro-section">
+      <div class="intro-inner">
+        <div class="intro-deco">
+          <span class="intro-deco-line"></span>
+          <span class="intro-deco-star">✦</span>
+          <span class="intro-deco-line"></span>
+        </div>
+        <p class="intro-p">「星星与七便士」，是在致敬英国作家<em>威廉·萨默塞特·毛姆</em>（William Somerset Maugham）。</p>
+        <p class="intro-p">他说过，自己在二流作家里能排第一。这大概是真的，但我觉得，能做到这一步，人生已经没什么遗憾了。我给自己定的目标是成为十九流作家——网络时代，好歹给这个理想留了一点实现的余地。</p>
+        <p class="intro-p">毛姆的书里，我最喜欢《月亮与六便士》。从初中开始，它就是我的人生之书，尽管现在头把交椅已经让给了《百年孤独》。书里的画家斯特里克兰德抛下伦敦的一切，只为追那轮月亮。十多年前在英国读书的日子，就是我追月亮的时候。</p>
+        <p class="intro-p">毕业之后，人生自然进入了攒六便士的轨道——和这世上大多数人一样，逃不开的。</p>
+        <p class="intro-p">重新拾起公众号，是去了新加坡之后的事。因为签证原因没法工作，便成了无所事事的"东南亚街溜子"。恰好，毛姆年轻时也有一段游荡东南亚的经历。于是顺理成章，我开始在「星星与七便士」写东南亚的观察与记录。不同的是，时代变了——西方人俯瞰东方的那个位置，我换成了中国人平视东南亚的角度。</p>
+        <p class="intro-p">以下就是这些文章，希望你喜欢。</p>
+      </div>
+    </div>
+
     <div class="filter-bar">
       <div class="filter-inner">
         <!-- Row 1: Countries -->
@@ -437,6 +505,10 @@
         <div class="skel"><div class="skel-sq"></div><div class="skel-body"><div class="skel-line"></div><div class="skel-line w70"></div><div class="skel-line w45"></div></div></div>
         <div class="skel"><div class="skel-sq"></div><div class="skel-body"><div class="skel-line"></div><div class="skel-line w70"></div><div class="skel-line w45"></div></div></div>
         <div class="skel"><div class="skel-sq"></div><div class="skel-body"><div class="skel-line"></div><div class="skel-line w70"></div><div class="skel-line w45"></div></div></div>
+      </div>
+      <div class="load-more-wrap" id="loadMoreWrap" style="display:none;">
+        <button class="load-more-btn" id="loadMoreBtn">加载更多</button>
+        <p class="load-more-hint" id="loadMoreHint"></p>
       </div>
     </div>
 
@@ -480,6 +552,11 @@
     let carouselIdx   = 0;
     let carouselItems = [];
     let autoTimer     = null;
+
+    /* Pagination */
+    const PAGE_SIZE = 9;
+    let visibleCount = PAGE_SIZE;
+    let filteredArticles = [];
 
     /* ════ Fetch ════ */
     fetch("./articles.json?v=1782782563")
@@ -714,13 +791,37 @@
 
     /* ════ Render ════ */
     function renderArticles(articles) {
+      filteredArticles = articles;
+      visibleCount = PAGE_SIZE;
+      renderVisible();
+    }
+
+    function renderVisible() {
       const grid = document.getElementById("articlesGrid");
-      if (!articles.length) {
+      const wrap = document.getElementById("loadMoreWrap");
+      const hint = document.getElementById("loadMoreHint");
+
+      if (!filteredArticles.length) {
         grid.innerHTML = '<p class="state-msg">暂无相关文章</p>';
+        wrap.style.display = "none";
         return;
       }
-      grid.innerHTML = articles.map(cardHTML).join("");
+
+      grid.innerHTML = filteredArticles.slice(0, visibleCount).map(cardHTML).join("");
+
+      const remaining = filteredArticles.length - visibleCount;
+      if (remaining > 0) {
+        wrap.style.display = "flex";
+        hint.textContent = "还有 " + remaining + " 篇";
+      } else {
+        wrap.style.display = "none";
+      }
     }
+
+    document.getElementById("loadMoreBtn").addEventListener("click", () => {
+      visibleCount += PAGE_SIZE;
+      renderVisible();
+    });
 
     function cardHTML(a) {
       const dateStr = (a.pub_date || "").replace(/\s\d{1,2}:\d{2}.*$/, "").trim();

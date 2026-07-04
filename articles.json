@@ -3,9 +3,12 @@
     "url": "https://mp.weixin.qq.com/s/LkdYx8yd9ELO9t2lzLFvvQ",
     "title": "给游客看的水上木偶，藏着越南最深的水",
     "pub_date": "2026年07月03日",
-    "cover_img": "./article-imgs/shuishangmuou.jpg",
+    "cover_img": "./article-imgs/shuishangmuou.JPG",
     "collection": "东南亚走走停停",
-    "themes": ["游记", "文化"],
+    "themes": [
+      "游记",
+      "文化"
+    ],
     "subtags": [],
     "country": "越南",
     "city": "河内",
@@ -18,7 +21,11 @@
     "pub_date": "2026年07月02日",
     "cover_img": "./article-imgs/chenxingdao.jpg",
     "collection": "东南亚走走停停",
-    "themes": ["游记", "文化", "名人"],
+    "themes": [
+      "游记",
+      "文化",
+      "名人"
+    ],
     "subtags": [],
     "country": "越南",
     "city": "河内",
@@ -31,7 +38,10 @@
     "pub_date": "2026年06月30日",
     "cover_img": "./article-imgs/河内米粉.jpg",
     "collection": "东南亚走走停停",
-    "themes": ["美食", "游记"],
+    "themes": [
+      "美食",
+      "游记"
+    ],
     "subtags": [],
     "country": "越南",
     "city": "河内",
