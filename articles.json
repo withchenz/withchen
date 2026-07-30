@@ -1,5 +1,31 @@
 [
   {
+    "url": "https://mp.weixin.qq.com/s/gWGXUHIIBpQ7ZLXibyeKDA",
+    "title": "花三十元，用一张通票游览越南会安的前世今生",
+    "pub_date": "2026年07月30日",
+    "cover_img": "./article-imgs/tongpiao.jpg",
+    "collection": "东南亚走走停停",
+    "themes": ["历史", "攻略", "citywalk"],
+    "subtags": [],
+    "country": "越南",
+    "city": "会安",
+    "featured": false,
+    "representative": false
+  },
+  {
+    "url": "https://mp.weixin.qq.com/s/8p2JxFUKfl--mgxQgQ5Rlg",
+    "title": "为什么越南美山，藏着一座印度教圣地？",
+    "pub_date": "2026年07月29日",
+    "cover_img": "./article-imgs/meishan.jpg",
+    "collection": "东南亚走走停停",
+    "themes": ["历史", "占婆", "印度教"],
+    "subtags": [],
+    "country": "越南",
+    "city": "会安",
+    "featured": false,
+    "representative": false
+  },
+  {
     "url": "https://mp.weixin.qq.com/s/--i1z5nElFGZA-TapTdF2g",
     "title": "在会安，走进秋盆河边的一轮竹月亮",
     "pub_date": "2026年07月24日",
