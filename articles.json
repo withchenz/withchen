@@ -1,5 +1,18 @@
 [
   {
+    "url": "https://mp.weixin.qq.com/s/MCFuj5zr4AsaC9svqHDMvw",
+    "title": "CHÀO Show：我愿称之为越南版流动的盛宴",
+    "pub_date": "2026年08月12日",
+    "cover_img": "./article-imgs/chaoshow.jpg",
+    "collection": "东南亚走走停停",
+    "themes": ["表演", "音乐", "美食"],
+    "subtags": [],
+    "country": "越南",
+    "city": "胡志明市",
+    "featured": false,
+    "representative": false
+  },
+  {
     "url": "https://mp.weixin.qq.com/s/NKp-Z11gwCW82QXL9RRacQ",
     "title": "越南吃饭故事（十五）：神似《青木瓜之味》的岘港咖啡馆",
     "pub_date": "2026年08月11日",
