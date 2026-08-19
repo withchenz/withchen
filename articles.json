@@ -1,5 +1,31 @@
 [
   {
+    "url": "https://mp.weixin.qq.com/s/s2mOcyI_fFFRIT7YH8XBAg",
+    "title": "胡志明市有座PHỞ博物馆，门票七十五万盾",
+    "pub_date": "2026年08月19日",
+    "cover_img": "./article-imgs/pho.jpg",
+    "collection": "东南亚走走停停",
+    "themes": ["景点", "历史", "pho"],
+    "subtags": [],
+    "country": "越南",
+    "city": "胡志明市",
+    "featured": false,
+    "representative": false
+  },
+  {
+    "url": "https://mp.weixin.qq.com/s/MhrjSzkyTRKX94xyIoEZsA",
+    "title": "越南吃饭故事（十八）：西贡这条巷子，一头是米其林，一头是「道明寺」",
+    "pub_date": "2026年08月18日",
+    "cover_img": "./article-imgs/daomingsi.jpg",
+    "collection": "亚洲吃饭故事",
+    "themes": ["美食", "米其林"],
+    "subtags": [],
+    "country": "越南",
+    "city": "胡志明市",
+    "featured": false,
+    "representative": false
+  },
+  {
     "url": "https://mp.weixin.qq.com/s/idL-fMuwL5EpUdyTJ978Ww",
     "title": "越南吃饭故事（十七）：西贡同一条街上，有两家\"94号\"蟹肉炒粉丝",
     "pub_date": "2026年08月17日",
