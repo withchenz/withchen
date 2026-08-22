@@ -1,5 +1,31 @@
 [
   {
+    "url": "https://mp.weixin.qq.com/s/HxXKLF-oj9HzkYuIrqzQFA",
+    "title": "顺着汉字往里走，才看见西贡的“堤岸”",
+    "pub_date": "2026年08月21日",
+    "cover_img": "./article-imgs/huarenqu.jpg",
+    "collection": "东南亚走走停停",
+    "themes": ["南洋华人", "历史"],
+    "subtags": [],
+    "country": "越南",
+    "city": "胡志明市",
+    "featured": false,
+    "representative": false
+  },
+  {
+    "url": "https://mp.weixin.qq.com/s/3ZomPirE11ta1aDgQJdqNQ",
+    "title": "越南也有自己的中医吗？",
+    "pub_date": "2026年08月20日",
+    "cover_img": "./article-imgs/zhongyao.jpg",
+    "collection": "东南亚走走停停",
+    "themes": ["南药", "中医药"],
+    "subtags": [],
+    "country": "越南",
+    "city": "胡志明市",
+    "featured": false,
+    "representative": false
+  },
+  {
     "url": "https://mp.weixin.qq.com/s/s2mOcyI_fFFRIT7YH8XBAg",
     "title": "胡志明市有座PHỞ博物馆，门票七十五万盾",
     "pub_date": "2026年08月19日",
